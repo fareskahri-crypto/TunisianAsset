@@ -446,6 +446,44 @@
             font-size: 0.95rem;
             line-height: 1.8;
         }
+        
+        /* NEW: Showcase Section */
+        .showcase-section {
+            background: var(--white);
+            position: relative;
+        }
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .showcase-item {
+            background: var(--bg-cream);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .showcase-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(44, 24, 16, 0.08);
+        }
+        .showcase-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .showcase-item-wide {
+            grid-column: span 3;
+        }
+        @media (max-width: 900px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+            .showcase-item-wide {
+                grid-column: span 1;
+            }
+        }
+
         .importance-section {
             background: var(--white);
             position: relative;
@@ -990,6 +1028,31 @@
         </div>
     </section>
 
+    <!-- NEW: Visual Showcase Section -->
+    <section id="showcase" class="showcase-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label" data-i18n="showcase.label">Exemples de Livrables</span>
+                <h2 data-i18n="showcase.title">Ce Que Vous Obtenez</h2>
+                <p data-i18n="showcase.desc">Des assets 3D précis et des vues 2D détaillées, prêts à être intégrés dans les flux de travail professionnels.</p>
+            </div>
+            <div class="showcase-grid">
+                <div class="showcase-item">
+                    <img src="https://z-cdn-media.chatglm.cn/files/57906c63-87f8-4baa-b09d-23ed127040ec.png?auth_key=1886647944-9204a4128f3a4d208ff9174121b58a1b-0-7a1a2b7149640e65f0364ba9a371fe38" alt="Vue de Face Colorisée" loading="lazy">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://z-cdn-media.chatglm.cn/files/a1a9644c-9f46-49e1-b0c0-c50ba4aebfe4.png?auth_key=1886647944-075ad781638341e7b14f4bf7a004842d-0-f0b176db6d2d769e8d049d7f33a6e102" alt="Vue de Dessus Colorisée" loading="lazy">
+                </div>
+                <div class="showcase-item">
+                    <img src="https://z-cdn-media.chatglm.cn/files/3db21541-b207-4822-bc6d-4cb155eb758f.png?auth_key=1886647944-13a668bc8a934f6ab6ca75fc8e55f6a5-0-d317fb2f0f5db4fe1f54c6024754c242" alt="Vue de Droite Colorisée" loading="lazy">
+                </div>
+                <div class="showcase-item showcase-item-wide">
+                    <img src="https://z-cdn-media.chatglm.cn/files/4288d056-d62c-4280-abcc-bfb350d745fb.png?auth_key=1886647944-12d63c2e7c5f483c8eedf0ce0ffffa19-0-5fcfac4e322440f0ad46ca78fc6d9796" alt="Mobilier Original et Assets CAD 2D" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="about" class="importance-section">
         <div class="container">
             <div class="importance-content">
@@ -1132,7 +1195,7 @@
 
             <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4);">
                 <span data-i18n="demo.alt">Ou écrivez directement à</span> 
-                <a href="mailto:info@tunisianasset.com" style="color: var(--accent);">info@tunisianasset.com</a>
+                <a href="mailto:contact@tunisianasset.com" style="color: var(--accent);">contact@tunisianasset.com</a>
             </p>
         </div>
     </section>
@@ -1204,6 +1267,9 @@
                 'value.card2.desc': "Les architectes et designers qui peuvent intégrer votre produit exact dans un rendu en temps réel concluent des affaires plus rapidement. Vos assets 3D deviennent des vendeurs silencieux au sein de leurs présentations, montrant aux clients comment vos pièces subliment un espace avant même qu'un seul échantillon ne soit commandé.",
                 'value.card3.title': 'Cohérence de Marque Évolutive',
                 'value.card3.desc': "Une bibliothèque numérique centralisée garantit que chaque distributeur, chaque fiche marketplace et chaque article de presse utilise la même représentation méticuleusement exacte de votre produit. Aucune dérive. Aucune photo obsolète. Une seule source de vérité visuelle.",
+                'showcase.label': 'Exemples de Livrables',
+                'showcase.title': 'Ce Que Vous Obtenez',
+                'showcase.desc': 'Des assets 3D précis et des vues 2D détaillées, prêts à être intégrés dans les flux de travail professionnels.',
                 'about.label': 'Notre Approche',
                 'about.title': 'Chaque Produit Mérite un Jumeau Numérique Parfait',
                 'about.p1': "L'industrie du mobilier et de la décoration connaît un changement fondamental. Les acheteurs — qu'ils s'agissent d'architectes spécifiant pour des projets commerciaux ou de propriétaires visualisant leur salon — s'attendent à voir les produits en contexte avant de s'engager.",
@@ -1289,6 +1355,9 @@
                 'value.card2.desc': 'Architects and designers who can drop your exact product into a live render close deals faster. Your 3D assets become silent salespeople inside their presentations, showing clients exactly how your pieces elevate a space before a single sample is ordered.',
                 'value.card3.title': 'Scalable Brand Consistency',
                 'value.card3.desc': 'A centralized digital library ensures that every distributor, every marketplace listing, and every press feature uses the same meticulously accurate representation of your product. No drift. No outdated photography. One source of visual truth.',
+                'showcase.label': 'Deliverables Showcase',
+                'showcase.title': 'What You Receive',
+                'showcase.desc': 'Precise 3D assets and detailed 2D views, ready to be integrated into professional workflows.',
                 'about.label': 'Our Approach',
                 'about.title': 'Every Product Deserves a Perfect Digital Twin',
                 'about.p1': 'The furniture and décor industry is undergoing a fundamental shift. Buyers — whether they are architects specifying for commercial projects or homeowners visualizing their living rooms — expect to see products in context before committing.',
@@ -1374,6 +1443,9 @@
                 'value.card2.desc': 'Architecten en ontwerpers die uw exacte product in een live render kunnen plaatsen, sluiten deals sneller. Uw 3D assets worden stille verkopers in hun presentaties, die klanten laten zien hoe uw stukken een ruimte verheffen voordat er ook maar één sample wordt besteld.',
                 'value.card3.title': 'Schaalbare Merkconsistentie',
                 'value.card3.desc': 'Een gecentraliseerde digitale bibliotheek zorgt ervoor dat elke distributeur, elke marketplace-vermelding en elk persartikel dezelfde nauwkeurige weergave van uw product gebruikt. Geen afwijking. Geen verouderde fotografie. Eén bron van visuele waarheid.',
+                'showcase.label': 'Leveringen Showroom',
+                'showcase.title': 'Wat U Ontvangt',
+                'showcase.desc': 'Nauwkeurige 3D assets en gedetailleerde 2D-weergaven, klaar om te worden geïntegreerd in professionele workflows.',
                 'about.label': 'Onze Aanpak',
                 'about.title': 'Elk Product Verdient een Perfecte Digitale Tegenhanger',
                 'about.p1': 'De meubel- en decoratie-industrie ondergaat een fundamentele verschuiving. Kopers — of het nu architecten zijn die specificeren voor commerciële projecten of huiseigenaren die hun woonkamer visualiseren — verwachten producten in context te zien voordat ze zich engageren.',
