@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tunisian Asset — 3D Models for Furniture Brands</title>
-    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.png" type="image /x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -1113,10 +1113,9 @@
             <span class="section-label" style="color: var(--accent);" data-i18n="demo.label">Commencer</span>
             <h2 data-i18n="demo.title">Prêt à Numériser Votre Collection ?</h2>
             <p data-i18n="demo.desc">Envoyez-nous vos coordonnées et nous vous contacterons pour planifier une démo gratuite. Voyez exactement comment vos produits se présentent en assets 3D de précision avant de vous engager dans un forfait.</p>
-            <form class="demo-form" action="https://formsubmit.co/info@tunisianasset.com" method="POST">
-                <input type="hidden" name="_subject" value="Nouvelle demande de démo - Tunisian Asset">
-                <input type="hidden" name="_next" value="https://tunisianasset.com">
-                <input type="text" name="_honey" style="display:none">
+            
+            <!-- FORM MODIFIED FOR EMAILJS -->
+            <form class="demo-form" id="demo-form">
                 <div class="form-row">
                     <input type="email" name="email" placeholder="votre@entreprise.com" required data-i18n-placeholder="demo.placeholder_email">
                     <input type="text" name="business_name" placeholder="Nom de votre entreprise" required data-i18n-placeholder="demo.placeholder_business">
@@ -1130,6 +1129,7 @@
                 </select>
                 <button type="submit" data-i18n="demo.submit">Demander la Démo</button>
             </form>
+
             <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4);">
                 <span data-i18n="demo.alt">Ou écrivez directement à</span> 
                 <a href="mailto:info@tunisianasset.com" style="color: var(--accent);">info@tunisianasset.com</a>
@@ -1175,6 +1175,10 @@
     </footer>
 
     <div class="toast" id="toast"></div>
+    
+    <!-- ADDED EMAILJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
     <script>
         // ========================
         // TRANSLATIONS
@@ -1385,7 +1389,7 @@
                 'process.step3.title': 'Multi-Formaat Levering',
                 'process.step3.desc': 'Assets worden geëxporteerd in de formaten die uw klanten gebruiken — van BIM-ready bestanden tot web-geoptimaliseerde GLB modellen.',
                 'process.step4.title': 'Beoordeling & Verfijning',
-                'process.step4.desc': 'U beoordeelt de assets en vraagt revisies aan. Wij verfijnen totdat elk detail overeenkomt met uw fysieke product.',
+                'process.step4.desc': 'U beoordeelt de assets en vraagt revisies aan. Wij verfijnen totdat elk detail overeenkomt met uw fysiek product.',
                 'pricing.label': 'Abonnementsplannen',
                 'pricing.title': 'Kies het Juiste Plan voor Uw Catalogus',
                 'pricing.desc': 'Jaarlijkse abonnementen ontworpen om mee te schalen met uw productreleasecyclus. Begin met een gratis demo om de kwaliteit te evalueren.',
@@ -1537,6 +1541,59 @@
         function toggleMenu() {
             const nav = document.querySelector('.nav-links');
             nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // ========================
+        // EMAILJS INTEGRATION
+        // ========================
+        
+        // 1. Initialize EmailJS with your Public Key
+        emailjs.init({
+            publicKey: "UGxWCf26plP4BYqg-", 
+        });
+
+        // 2. Handle Form Submission
+        const demoForm = document.getElementById('demo-form');
+        demoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Disable button and change text to show it's loading
+            const submitBtn = demoForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = '...';
+
+            // EmailJS Service ID and Template ID
+            const serviceID = "service_weherzz"; // IMPORTANT: REPLACE THIS with your actual EmailJS Service ID
+            const templateID = "template_4ndhxt7"; // Your provided Template ID
+
+            emailjs.sendForm(serviceID, templateID, demoForm)
+                .then(() => {
+                    showToast(currentLang === 'fr' ? 'Demande envoyée avec succès ! Nous vous contacterons bientôt.' : 
+                              currentLang === 'en' ? 'Request sent successfully! We will contact you soon.' : 
+                              'Aanvraag succesvol verzonden! We nemen spoedig contact met u op.');
+                    demoForm.reset(); // Clear form fields
+                }, (err) => {
+                    console.error('EmailJS error:', err);
+                    showToast(currentLang === 'fr' ? 'Une erreur est survenue. Veuillez réessayer.' : 
+                              currentLang === 'en' ? 'An error occurred. Please try again.' : 
+                              'Er is een fout opgetreden. Probeer het opnieuw.');
+                })
+                .finally(() => {
+                    // Restore button state
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                });
+        });
+
+        // 3. Toast Notification Function
+        function showToast(message, duration = 5000) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duration);
         }
 
         document.addEventListener('DOMContentLoaded', detectLanguage);
