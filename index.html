@@ -4,110 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tunisian Asset — 3D Models for Furniture Brands</title>
-    <link rel="shortcut icon" href="logo.png" type="image /x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary: #A65E2E;
-            --primary-dark: #8B4A20;
-            --primary-light: #C47A4A;
+            --primary: #C8381A;
+            --primary-dark: #A0260D;
+            --primary-light: #E05436;
             --accent: #D4A574;
-            --bg-warm: #FDF8F3;
-            --bg-cream: #F5EDE4;
-            --text-dark: #2C1810;
-            --text-medium: #5C4033;
-            --text-light: #8B7355;
+            --bg-warm: #F4F1EA;
+            --bg-cream: #EAE5DB;
+            --bg-dark: #121212;
+            --text-dark: #1A1A1A;
+            --text-medium: #4A4A4A;
+            --text-light: #7A7A7A;
             --white: #FFFFFF;
-            --border: #E8D5C4;
+            --border: #D8D2C5;
+            --border-dark: #2A2A2A;
+            --maroon: #6B1D1D;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --font-mono: 'Space Grotesk', monospace;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--font-sans);
             color: var(--text-dark);
             background: var(--bg-warm);
             line-height: 1.7;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* Technical Background Grid Lines */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: 
+                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
         h1, h2, h3, h4 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: var(--font-serif);
             font-weight: 300;
             letter-spacing: 0.02em;
         }
+
+        .mono {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+        }
+
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(253, 248, 243, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(244, 241, 234, 0.92);
+            backdrop-filter: blur(12px);
             z-index: 1000;
             border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
         }
+
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: 1.2rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
         .logo {
             display: flex;
             align-items: center;
             gap: 1rem;
             text-decoration: none;
         }
+
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             position: relative;
+            border: 1px solid var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .logo-icon::before {
             content: '';
-            position: absolute;
             width: 12px;
             height: 12px;
             background: var(--primary);
             transform: rotate(45deg);
-            top: 50%;
-            left: 50%;
-            margin: -6px 0 0 -6px;
-            box-shadow: 
-                0 -18px 0 -3px var(--primary),
-                0 18px 0 -3px var(--primary),
-                -18px 0 0 -3px var(--primary),
-                18px 0 0 -3px var(--primary),
-                0 -32px 0 -5px var(--primary),
-                0 32px 0 -5px var(--primary);
         }
+
         .logo-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            color: var(--primary);
-            font-weight: 300;
-            letter-spacing: 0.05em;
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
+
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
         }
+
         .nav-links {
             display: flex;
             gap: 2.5rem;
             list-style: none;
         }
+
         .nav-links a {
             text-decoration: none;
             color: var(--text-medium);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
         }
+
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -118,38 +158,43 @@
             background: var(--primary);
             transition: width 0.3s;
         }
+
         .nav-links a:hover { color: var(--primary); }
         .nav-links a:hover::after { width: 100%; }
+
         .nav-cta {
-            background: var(--primary);
+            background: var(--text-dark);
             color: var(--white) !important;
             padding: 0.7rem 1.8rem;
-            border-radius: 2px;
+            border-radius: 0px;
             transition: all 0.3s !important;
         }
+
         .nav-cta::after { display: none !important; }
         .nav-cta:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+            background: var(--primary) !important;
+            transform: translateY(-2px);
         }
+
+        /* Language Switcher */
         .lang-switcher {
             position: relative;
             font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
         }
+
         .lang-current {
             cursor: pointer;
             padding: 0.4rem 0.8rem;
             border: 1px solid var(--border);
             background: var(--white);
-            color: var(--primary);
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 0.4rem;
             transition: all 0.3s;
         }
-        .lang-current:hover { border-color: var(--primary); }
+
         .lang-dropdown {
             position: absolute;
             top: 100%;
@@ -157,7 +202,7 @@
             margin-top: 0.5rem;
             background: var(--white);
             border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(44,24,16,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             opacity: 0;
             visibility: hidden;
             transform: translateY(-10px);
@@ -165,11 +210,13 @@
             min-width: 120px;
             z-index: 1001;
         }
+
         .lang-dropdown.active {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+
         .lang-dropdown button {
             display: block;
             width: 100%;
@@ -177,1498 +224,1179 @@
             border: none;
             background: none;
             text-align: left;
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--font-sans);
             font-size: 0.8rem;
             color: var(--text-medium);
             cursor: pointer;
-            transition: all 0.2s;
         }
-        .lang-dropdown button:hover {
+
+        .lang-dropdown button:hover, .lang-dropdown button.active-lang {
             background: var(--bg-cream);
             color: var(--primary);
         }
-        .lang-dropdown button.active-lang {
-            color: var(--primary);
-            font-weight: 600;
-            background: rgba(166,94,46,0.05);
-        }
+
+        /* HERO SECTION */
         .hero {
             min-height: 100vh;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            position: relative;
+            padding-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            background: var(--bg-warm);
+            padding: 6rem 4rem 4rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-right {
+            background: var(--maroon);
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            padding: 8rem 2rem 4rem;
             overflow: hidden;
-            background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE4 50%, #FDF8F3 100%);
         }
-        .hero::before {
-            content: '';
+
+        .hero-watermark {
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(166,94,46,0.08) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(212,165,116,0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(166,94,46,0.05) 0%, transparent 50%);
-            animation: meshMove 20s ease-in-out infinite;
-            z-index: 0;
-        }
-        @keyframes meshMove {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(5%, 5%) scale(1.1); }
-            66% { transform: translate(-5%, -3%) scale(0.95); }
-        }
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
+            font-family: var(--font-sans);
+            font-weight: 900;
+            font-size: 22vw;
+            color: rgba(0,0,0,0.04);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
             pointer-events: none;
+            user-select: none;
+            z-index: 0;
         }
-        .particle {
+
+        .accent-circle {
             position: absolute;
+            width: 420px;
+            height: 420px;
             background: var(--primary);
             border-radius: 50%;
-            opacity: 0.15;
-            animation: floatParticle linear infinite;
-        }
-        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; top: 100%; animation-duration: 15s; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 6px; height: 6px; left: 20%; top: 100%; animation-duration: 18s; animation-delay: 2s; opacity: 0.1; }
-        .particle:nth-child(3) { width: 10px; height: 10px; left: 35%; top: 100%; animation-duration: 22s; animation-delay: 4s; opacity: 0.08; }
-        .particle:nth-child(4) { width: 5px; height: 5px; left: 50%; top: 100%; animation-duration: 16s; animation-delay: 1s; opacity: 0.12; }
-        .particle:nth-child(5) { width: 7px; height: 7px; left: 65%; top: 100%; animation-duration: 20s; animation-delay: 3s; opacity: 0.1; }
-        .particle:nth-child(6) { width: 9px; height: 9px; left: 80%; top: 100%; animation-duration: 17s; animation-delay: 5s; opacity: 0.08; }
-        .particle:nth-child(7) { width: 4px; height: 4px; left: 90%; top: 100%; animation-duration: 19s; animation-delay: 0s; opacity: 0.15; }
-        .particle:nth-child(8) { width: 6px; height: 6px; left: 15%; top: 100%; animation-duration: 21s; animation-delay: 6s; opacity: 0.1; }
-        .particle:nth-child(9) { width: 8px; height: 8px; left: 45%; top: 100%; animation-duration: 14s; animation-delay: 2s; opacity: 0.12; }
-        .particle:nth-child(10) { width: 5px; height: 5px; left: 75%; top: 100%; animation-duration: 23s; animation-delay: 4s; opacity: 0.1; }
-        @keyframes floatParticle {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.15; }
-            90% { opacity: 0.15; }
-            100% { transform: translateY(-110vh) rotate(720deg); opacity: 0; }
-        }
-        .hero-bg-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.04;
-            background-image: 
-                radial-gradient(circle at 25% 25%, var(--primary) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, var(--primary) 2px, transparent 2px);
-            background-size: 60px 60px;
-            z-index: 0;
-        }
-        .hero-content {
-            max-width: 900px;
-            text-align: center;
-            position: relative;
+            top: 50%;
+            left: -120px;
+            transform: translateY(-50%);
             z-index: 1;
+            opacity: 0.9;
         }
+
+        .vertical-metadata {
+            position: absolute;
+            left: 2.5rem;
+            bottom: 4rem;
+            transform: rotate(-90deg);
+            transform-origin: left bottom;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .vertical-metadata::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--text-light);
+        }
+
         .hero-badge {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
             font-size: 0.75rem;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--primary);
             border: 1px solid var(--border);
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1.2rem;
             margin-bottom: 2rem;
-            background: rgba(166, 94, 46, 0.05);
-            animation: fadeInUp 1s ease-out;
+            background: var(--white);
+            width: fit-content;
         }
+
         .hero h1 {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
-            line-height: 1.1;
+            font-size: clamp(3.2rem, 5.5vw, 5.2rem);
+            line-height: 1.02;
             color: var(--text-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-weight: 300;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            position: relative;
+            z-index: 2;
         }
+
         .hero h1 span {
             font-style: italic;
             color: var(--primary);
+            font-weight: 400;
         }
+
         .hero-subtitle {
             font-size: 1.15rem;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            color: var(--text-medium);
+            max-width: 520px;
+            margin-bottom: 3rem;
             font-weight: 300;
             line-height: 1.8;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            position: relative;
+            z-index: 2;
         }
+
         .hero-cta-group {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            gap: 1.5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+
         .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.1rem 2.5rem;
             text-decoration: none;
             font-size: 0.8rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.4s ease;
             border: 1px solid transparent;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--font-sans);
         }
+
         .btn-primary {
             background: var(--primary);
             color: var(--white);
             border-color: var(--primary);
         }
+
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(166, 94, 46, 0.2);
+            box-shadow: 0 10px 25px rgba(200, 56, 26, 0.25);
         }
+
         .btn-outline {
             background: transparent;
-            color: var(--primary);
-            border-color: var(--primary);
+            color: var(--text-dark);
+            border-color: var(--text-dark);
         }
+
         .btn-outline:hover {
-            background: var(--primary);
+            background: var(--text-dark);
             color: var(--white);
         }
-        .hero-scroll {
+
+        .hero-right-content {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-right-title {
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            color: var(--white);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .dashed-scroll-ring {
             position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            z-index: 1;
+            bottom: 3rem;
+            right: 3rem;
+            width: 90px;
+            height: 90px;
+            border: 1px dashed rgba(255,255,255,0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: rotateRing 20s linear infinite;
+            cursor: pointer;
+            z-index: 10;
         }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+
+        .dashed-scroll-ring::before {
+            content: '↓';
+            color: var(--white);
+            font-size: 1.2rem;
         }
-        section { padding: 6rem 2rem; }
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
+
+        @keyframes rotateRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
+
+        /* SECTIONS COMMON */
+        section { padding: 7rem 2rem; position: relative; }
+        .container { max-width: 1250px; margin: 0 auto; }
+
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 5rem;
         }
+
         .section-label {
-            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
             letter-spacing: 0.25em;
             text-transform: uppercase;
             color: var(--primary);
             margin-bottom: 1rem;
             display: block;
         }
+
         .section-header h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
             color: var(--text-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             font-weight: 300;
         }
+
         .section-header p {
-            color: var(--text-light);
-            max-width: 600px;
+            color: var(--text-medium);
+            max-width: 650px;
             margin: 0 auto;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            font-weight: 300;
         }
+
+        /* VALUE SECTION */
         .value-section {
             background: var(--bg-cream);
-            position: relative;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
         }
+
         .value-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            align-items: start;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
+
         .value-card {
             background: var(--white);
-            padding: 3rem 2.5rem;
+            padding: 3.5rem 3rem;
             border: 1px solid var(--border);
             transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
         }
+
         .value-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
+            top: 0; left: 0; width: 100%; height: 3px;
             background: var(--primary);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
         }
+
         .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(44, 24, 16, 0.08);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
         }
+
         .value-card:hover::before { transform: scaleX(1); }
-        .value-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(166, 94, 46, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
+        .value-num {
+            font-family: var(--font-mono);
+            color: var(--primary);
+            font-size: 0.9rem;
             margin-bottom: 1.5rem;
-            font-size: 1.5rem;
+            display: block;
         }
+
         .value-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
             color: var(--text-dark);
         }
+
         .value-card p {
-            color: var(--text-light);
-            font-size: 0.95rem;
+            color: var(--text-medium);
+            font-size: 0.98rem;
             line-height: 1.8;
+            font-weight: 300;
         }
-        
-        /* NEW: Showcase Section */
-        .showcase-section {
-            background: var(--white);
-            position: relative;
-        }
+
+        /* SHOWCASE GRID SECTION */
+        .showcase-section { background: var(--white); }
+
         .showcase-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
         }
+
         .showcase-item {
-            background: var(--bg-cream);
+            background: var(--bg-warm);
             border: 1px solid var(--border);
+            position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
         }
+
         .showcase-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(44, 24, 16, 0.08);
-        }
-        .showcase-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .showcase-item-wide {
-            grid-column: span 3;
-        }
-        @media (max-width: 900px) {
-            .showcase-grid {
-                grid-template-columns: 1fr;
-            }
-            .showcase-item-wide {
-                grid-column: span 1;
-            }
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
 
-        .importance-section {
-            background: var(--white);
+        .showcase-img-holder {
+            width: 100%;
+            height: 320px;
+            background: #E0DAD0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
-            overflow: hidden;
         }
-        .importance-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+
+        .showcase-img-holder img {
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 90% 10%, rgba(166,94,46,0.03) 0%, transparent 50%);
-            pointer-events: none;
+            object-fit: cover;
         }
+
+        .showcase-caption {
+            padding: 1.8rem;
+            background: var(--white);
+            border-top: 1px solid var(--border);
+        }
+
+        .showcase-caption h4 {
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .showcase-item-wide { grid-column: span 3; }
+
+        /* INTERACTIVE 3D DEMO LAB */
+        .product-lab-section {
+            background: var(--bg-dark);
+            color: var(--white);
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .product-lab-section .section-header h2 { color: var(--white); }
+        .product-lab-section .section-header p { color: #A0A0A0; }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .lab-card {
+            background: #181818;
+            border: 1px solid var(--border-dark);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 520px;
+        }
+
+        .lab-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .lab-card-title {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .viewport-container {
+            flex: 1;
+            width: 100%;
+            position: relative;
+            background: #101010;
+            border: 1px solid #252525;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .real-product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .viewport-container:hover .real-product-img {
+            transform: scale(1.05);
+        }
+
+        #webgl-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .loader-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #101010;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .progress-bar-bg {
+            width: 140px;
+            height: 3px;
+            background: #252525;
+            margin-top: 0.8rem;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .cad-viewport {
+            background-image: 
+                radial-gradient(rgba(212, 165, 116, 0.15) 1px, transparent 1px),
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px, 40px 40px, 40px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        .cad-svg-drawing {
+            width: 85%;
+            height: auto;
+            stroke: var(--accent);
+            stroke-width: 1.2;
+            fill: none;
+        }
+
+        .lab-card-footer {
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.6;
+        }
+
+        .controls-hint-3d {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        /* IMPORTANCE SECTION */
+        .importance-section {
+            background: var(--white);
+            border-top: 1px solid var(--border);
+        }
+
         .importance-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
             align-items: center;
-            position: relative;
-            z-index: 1;
         }
+
         .importance-text h2 {
-            font-size: clamp(1.8rem, 3vw, 2.5rem);
-            margin-bottom: 1.5rem;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            margin-bottom: 1.8rem;
             color: var(--text-dark);
-            line-height: 1.2;
+            line-height: 1.15;
         }
+
         .importance-text p {
             color: var(--text-medium);
             margin-bottom: 1.5rem;
             font-size: 1.05rem;
             line-height: 1.9;
+            font-weight: 300;
         }
+
         .importance-visual {
-            position: relative;
-            height: 500px;
+            height: 480px;
             background: var(--bg-cream);
+            border: 1px solid var(--border);
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-        .geometric-showcase {
-            position: relative;
-            width: 300px;
-            height: 300px;
-        }
+
         .geo-shape {
             position: absolute;
             background: var(--primary);
-            opacity: 0.9;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.85;
+            animation: floatShape 8s ease-in-out infinite alternate;
         }
-        .geo-shape:nth-child(1) { width: 80px; height: 80px; transform: rotate(45deg); top: 50%; left: 50%; margin: -40px 0 0 -40px; animation-delay: 0s; }
-        .geo-shape:nth-child(2) { width: 50px; height: 50px; transform: rotate(45deg); top: 20%; left: 50%; margin: -25px 0 0 -25px; opacity: 0.7; animation-delay: 0.5s; }
-        .geo-shape:nth-child(3) { width: 50px; height: 50px; transform: rotate(45deg); bottom: 20%; left: 50%; margin: 0 0 -25px -25px; opacity: 0.7; animation-delay: 1s; }
-        .geo-shape:nth-child(4) { width: 50px; height: 50px; transform: rotate(45deg); top: 50%; left: 20%; margin: -25px 0 0 -25px; opacity: 0.7; animation-delay: 1.5s; }
-        .geo-shape:nth-child(5) { width: 50px; height: 50px; transform: rotate(45deg); top: 50%; right: 20%; margin: -25px -25px 0 0; opacity: 0.7; animation-delay: 2s; }
-        .geo-shape:nth-child(6) { width: 30px; height: 30px; transform: rotate(45deg); top: 10%; left: 30%; opacity: 0.5; animation-delay: 2.5s; }
-        .geo-shape:nth-child(7) { width: 30px; height: 30px; transform: rotate(45deg); bottom: 10%; right: 30%; opacity: 0.5; animation-delay: 3s; }
-        @keyframes float {
-            0%, 100% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(-15px); }
+
+        @keyframes floatShape {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(10deg); }
         }
-        .process-section {
-            background: var(--bg-warm);
-            position: relative;
-        }
-        .process-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 10% 90%, rgba(166,94,46,0.03) 0%, transparent 50%);
-            pointer-events: none;
-        }
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            position: relative;
-        }
-        .process-step {
-            text-align: center;
-            position: relative;
-            padding: 2rem;
-        }
-        .step-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.2;
-            line-height: 1;
-            margin-bottom: 1rem;
-            font-weight: 300;
-        }
-        .step-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.8rem;
-            color: var(--text-dark);
-        }
-        .step-content p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-        .pricing-section {
-            background: var(--bg-cream);
-            position: relative;
-            overflow: hidden;
-        }
-        .pricing-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(166,94,46,0.04) 0%, transparent 70%);
-            animation: pulseSlow 10s ease-in-out infinite;
-            pointer-events: none;
-        }
-        @keyframes pulseSlow {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
-        }
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-        .pricing-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            padding: 3rem 2rem;
-            text-align: center;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        .pricing-card.featured {
-            border-color: var(--primary);
-            transform: scale(1.05);
-            box-shadow: 0 20px 50px rgba(166, 94, 46, 0.1);
-            z-index: 2;
-        }
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(44, 24, 16, 0.1);
-        }
-        .pricing-card.featured:hover { transform: scale(1.05) translateY(-5px); }
-        .pricing-badge {
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: var(--white);
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            padding: 0.4rem 1.5rem;
-            font-weight: 500;
-        }
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-        .pricing-card .price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            color: var(--primary);
-            line-height: 1;
-            margin: 1.5rem 0;
-            font-weight: 300;
-        }
-        .pricing-card .price span {
-            font-size: 1rem;
-            color: var(--text-light);
-            font-family: 'Montserrat', sans-serif;
-        }
-        .pricing-features {
-            list-style: none;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        .pricing-features li {
-            padding: 0.7rem 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--text-medium);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-        .pricing-features li::before {
-            content: '◆';
-            color: var(--primary);
-            font-size: 0.6rem;
-        }
-        .pricing-features li.disabled {
-            color: var(--text-light);
-            opacity: 0.5;
-        }
-        .pricing-features li.disabled::before {
-            content: '○';
-            color: var(--text-light);
-        }
-        .demo-section {
+
+        /* FOOTER */
+        footer {
             background: var(--text-dark);
             color: var(--white);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 5rem 2rem 2rem;
+            border-top: 1px solid var(--border-dark);
         }
-        .demo-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(166, 94, 46, 0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-        .demo-content {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .demo-section h2 {
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 1rem;
-            color: var(--white);
-        }
-        .demo-section p {
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 2.5rem;
-            font-size: 1.1rem;
-        }
-        .demo-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            max-width: 500px;
-            margin: 0 auto;
-        }
-        .demo-form .form-row {
-            display: flex;
-            gap: 1rem;
-        }
-        .demo-form input,
-        .demo-form select {
-            flex: 1;
-            min-width: 0;
-            padding: 1rem 1.5rem;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.05);
-            color: var(--white);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .demo-form input::placeholder { color: rgba(255,255,255,0.4); }
-        .demo-form input:focus,
-        .demo-form select:focus {
-            border-color: var(--primary);
-            background: rgba(255,255,255,0.1);
-        }
-        .demo-form select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.4)' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-        }
-        /* FIX: Ensure dropdown options are readable on all browsers */
-        .demo-form select option {
-            background: var(--white);
-            color: var(--text-dark);
-        }
-        .demo-form button {
-            padding: 1rem 2.5rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .demo-form button:hover {
-            background: var(--primary-light);
-            transform: translateY(-2px);
-        }
-        .demo-form button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .ta-footer {
-            background: #8B4A20;
-            color: #E8D5C4;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            padding: 64px 24px 0;
-            border-top: 4px solid #E8D5C4;
-        }
-        .ta-footer-content {
-            max-width: 1200px;
+
+        .footer-container {
+            max-width: 1250px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 48px;
-            padding-bottom: 48px;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
         }
-        .ta-footer-brand .logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: #E8D5C4;
-            display: block;
-            margin-bottom: 16px;
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 1rem;
         }
-        .ta-footer-brand p {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: rgba(232, 213, 196, 0.85);
-            max-width: 320px;
+
+        .footer-brand p {
+            color: #888;
+            max-width: 400px;
+            font-weight: 300;
         }
-        .ta-footer-col h4 {
+
+        .footer-links h4 {
+            font-family: var(--font-mono);
             font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: #E8D5C4;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid rgba(232, 213, 196, 0.25);
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
         }
-        .ta-footer-col ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .ta-footer-col li {
-            margin-bottom: 12px;
-        }
-        .ta-footer-col a {
-            color: rgba(232, 213, 196, 0.8);
+
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-links a {
+            color: #AAA;
             text-decoration: none;
+            transition: color 0.3s;
             font-size: 0.9rem;
-            transition: all 0.2s ease;
-            position: relative;
-            display: inline-block;
         }
-        .ta-footer-col a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #E8D5C4;
-            transition: width 0.3s ease;
-        }
-        .ta-footer-col a:hover {
-            color: #E8D5C4;
-        }
-        .ta-footer-col a:hover::after {
-            width: 100%;
-        }
-        .ta-footer-bottom {
-            max-width: 1200px;
+        .footer-links a:hover { color: var(--white); }
+
+        .footer-bottom {
+            max-width: 1250px;
             margin: 0 auto;
-            border-top: 1px solid rgba(232, 213, 196, 0.2);
-            padding: 24px 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-dark);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #666;
             font-size: 0.8rem;
-            color: rgba(232, 213, 196, 0.6);
         }
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1002;
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 1024px) {
+            .hero { grid-template-columns: 1fr; }
+            .hero-left { padding: 8rem 3rem 4rem; }
+            .hero-right { min-height: 400px; }
+            .lab-grid { grid-template-columns: 1fr; }
+            .importance-content { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
         }
-        .mobile-menu-btn span {
-            display: block;
-            width: 25px;
-            height: 2px;
-            background: var(--primary);
-            margin: 5px 0;
-            transition: 0.3s;
-        }
-        .toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--primary);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 9999;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        @media (max-width: 900px) {
-            .importance-content { grid-template-columns: 1fr; }
-            .importance-visual { height: 300px; order: -1; }
-            .process-steps { grid-template-columns: repeat(2, 1fr); }
-            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
-            .pricing-card.featured { transform: scale(1); order: -1; }
-            .pricing-card.featured:hover { transform: scale(1) translateY(-5px); }
-            .ta-footer-content { grid-template-columns: 1fr 1fr; gap: 36px; }
-            .ta-footer-brand { grid-column: 1 / -1; }
+
+        @media (max-width: 768px) {
             .nav-links { display: none; }
-            .mobile-menu-btn { display: block; }
-            .demo-form .form-row { flex-direction: column; }
-        }
-        @media (max-width: 600px) {
-            .process-steps { grid-template-columns: 1fr; }
-            .ta-footer-content { grid-template-columns: 1fr; gap: 32px; }
-            .ta-footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-            .nav-right { gap: 1rem; }
+            .showcase-grid { grid-template-columns: 1fr; }
+            .showcase-item-wide { grid-column: span 1; }
+            .hero h1 { font-size: 2.8rem; }
         }
     </style>
-    <base target="_blank">
 </head>
 <body>
-    <nav id="navbar">
+
+    <!-- NAVIGATION -->
+    <nav>
         <div class="nav-container">
             <a href="#" class="logo">
                 <div class="logo-icon"></div>
                 <span class="logo-text">Tunisian Asset</span>
             </a>
+
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="#about" data-i18n="nav.about">À propos</a></li>
-                    <li><a href="#value" data-i18n="nav.services">Services</a></li>
-                    <li><a href="#process" data-i18n="nav.process">Processus</a></li>
-                    <li><a href="#pricing" data-i18n="nav.pricing">Tarifs</a></li>
-                    <li><a href="#demo" class="nav-cta" data-i18n="nav.cta">Demander une Démo</a></li>
+                    <li><a href="#value" data-i18n="nav_value">Valeur</a></li>
+                    <li><a href="#showcase" data-i18n="nav_showcase">Réalisations</a></li>
+                    <li><a href="#interactive-3d" data-i18n="nav_3d">Studio 3D</a></li>
+                    <li><a href="#importance" data-i18n="nav_importance">Vision</a></li>
                 </ul>
+
+                <!-- Language Switcher -->
                 <div class="lang-switcher">
-                    <div class="lang-current" onclick="toggleLangDropdown()">
-                        <span id="current-lang">FR</span>
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5"/></svg>
+                    <div class="lang-current" id="langToggle">
+                        <span id="currentLangLabel">FR</span> ▼
                     </div>
-                    <div class="lang-dropdown" id="lang-dropdown">
-                        <button onclick="setLanguage('fr')" data-lang="fr">Français</button>
-                        <button onclick="setLanguage('en')" data-lang="en">English</button>
-                        <button onclick="setLanguage('nl')" data-lang="nl">Nederlands</button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="active-lang" onclick="switchLanguage('fr')">Français (FR)</button>
+                        <button onclick="switchLanguage('en')">English (EN)</button>
                     </div>
                 </div>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+
+                <a href="#contact" class="nav-cta btn" data-i18n="nav_cta">Contact</a>
             </div>
         </div>
     </nav>
+
+    <!-- HERO SECTION -->
     <section class="hero">
-        <div class="hero-bg-pattern"></div>
-        <div class="particles">
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div><div class="particle"></div><div class="particle"></div>
-            <div class="particle"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-badge" data-i18n="hero.badge">Solutions B2B d'Assets 3D</div>
-            <h1 data-i18n="hero.title">Transformez Votre Collection de Mobilier en <span>Expériences 3D Immersives</span></h1>
-            <p class="hero-subtitle" data-i18n="hero.subtitle">Nous collaborons avec les marques de mobilier et de décoration pour numériser l'ensemble de leurs gammes en assets 2D et 3D haute fidélité — conçus pour les architectes, les décorateurs d'intérieur et le commerce moderne.</p>
+        <div class="hero-watermark">TUNISIAN</div>
+        
+        <div class="hero-left">
+            <div class="hero-badge mono">
+                <span>●</span> <span data-i18n="hero_badge">Studio 3D Modélisation // 2026</span>
+            </div>
+            
+            <h1 data-i18n-html="hero_title">
+                L'excellence 3D pour vos <span>collections de mobilier</span>.
+            </h1>
+            
+            <p class="hero-subtitle" data-i18n="hero_subtitle">
+                Nous transformons vos produits physiques en assets 3D photoréalistes, visuels interactifs et livrables techniques pour les marques de design exigeantes.
+            </p>
+            
             <div class="hero-cta-group">
-                <a href="#demo" class="btn btn-primary" data-i18n="hero.cta1">Demander une Démo Gratuite</a>
-                <a href="#pricing" class="btn btn-outline" data-i18n="hero.cta2">Voir les Forfaits</a>
+                <a href="#interactive-3d" class="btn btn-primary" data-i18n="hero_btn_primary">Explorer le Studio 3D</a>
+                <a href="#showcase" class="btn btn-outline" data-i18n="hero_btn_secondary">Voir Portfolio</a>
+            </div>
+
+            <div class="vertical-metadata mono">
+                <span>CRAFTED IN TUNISIA</span>
+                <span>LAT: 36.8065° N</span>
             </div>
         </div>
-        <div class="hero-scroll">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A65E2E" stroke-width="1.5">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-            </svg>
+
+        <div class="hero-right">
+            <div class="accent-circle"></div>
+            <div class="hero-right-content">
+                <div class="mono" style="margin-bottom: 1rem; color: var(--accent);">SPEC: ARCH-3D-2026</div>
+                <div class="hero-right-title">MOBILIER<br>DESIGN</div>
+            </div>
+
+            <div class="dashed-scroll-ring" onclick="document.getElementById('value').scrollIntoView({behavior: 'smooth'})"></div>
         </div>
     </section>
 
+    <!-- VALUE SECTION -->
     <section id="value" class="value-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label" data-i18n="value.label">Pourquoi les Assets 3D Comptent</span>
-                <h2 data-i18n="value.title">L'Avantage Stratégique des Bibliothèques de Produits Numériques</h2>
-                <p data-i18n="value.desc">Dans un secteur où la visualisation guide la prise de décision, disposer de l'ensemble de votre catalogue en assets 3D précis n'est plus optionnel — c'est un impératif compétitif.</p>
+                <span class="section-label">VALEUR AJOUTÉE</span>
+                <h2 data-i18n="value_title">Pourquoi numériser votre catalogue ?</h2>
+                <p data-i18n="value_subtitle">Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.</p>
             </div>
+
             <div class="value-grid">
                 <div class="value-card">
-                    <div class="value-icon">◆</div>
-                    <h3 data-i18n="value.card1.title">Accessibilité Architecturale</h3>
-                    <p data-i18n="value.card1.desc">Lorsque vos produits existent en assets 3D natifs dans les formats que les architectes utilisent réellement — SketchUp, Revit, 3ds Max, Blender — votre marque devient partie intégrante de leur vocabulaire de design. Vous passez du statut de fournisseur qu'ils envisagent à celui de matériau qu'ils spécifient.</p>
+                    <span class="value-num">// 01</span>
+                    <h3 data-i18n="value_1_title">Photoréalisme Absolu</h3>
+                    <p data-i18n="value_1_desc">Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.</p>
                 </div>
+
                 <div class="value-card">
-                    <div class="value-icon">◆</div>
-                    <h3 data-i18n="value.card2.title">Conversion Client Accélérée</h3>
-                    <p data-i18n="value.card2.desc">Les architectes et designers qui peuvent intégrer votre produit exact dans un rendu en temps réel concluent des affaires plus rapidement. Vos assets 3D deviennent des vendeurs silencieux au sein de leurs présentations, montrant aux clients comment vos pièces subliment un espace avant même qu'un seul échantillon ne soit commandé.</p>
+                    <span class="value-num">// 02</span>
+                    <h3 data-i18n="value_2_title">Intégration WebGL / AR</h3>
+                    <p data-i18n="value_2_desc">Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.</p>
                 </div>
+
                 <div class="value-card">
-                    <div class="value-icon">◆</div>
-                    <h3 data-i18n="value.card3.title">Cohérence de Marque Évolutive</h3>
-                    <p data-i18n="value.card3.desc">Une bibliothèque numérique centralisée garantit que chaque distributeur, chaque fiche marketplace et chaque article de presse utilise la même représentation méticuleusement exacte de votre produit. Aucune dérive. Aucune photo obsolète. Une seule source de vérité visuelle.</p>
+                    <span class="value-num">// 03</span>
+                    <h3 data-i18n="value_3_title">Conformité CAD & DWG</h3>
+                    <p data-i18n="value_3_desc">Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW: Visual Showcase Section -->
+    <!-- SHOWCASE SECTION -->
     <section id="showcase" class="showcase-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-label" data-i18n="showcase.label">Exemples de Livrables</span>
-                <h2 data-i18n="showcase.title">Ce Que Vous Obtenez</h2>
-                <p data-i18n="showcase.desc">Des assets 3D précis et des vues 2D détaillées, prêts à être intégrés dans les flux de travail professionnels.</p>
+                <span class="section-label">RÉALISATIONS</span>
+                <h2 data-i18n="showcase_title">Galerie de Produits Numérisés</h2>
+                <p data-i18n="showcase_subtitle">Aperçu de nos intégrations 3D et rendus haute définition pour les marques éditeurs.</p>
             </div>
+
             <div class="showcase-grid">
                 <div class="showcase-item">
-                    <img src="https://z-cdn-media.chatglm.cn/files/57906c63-87f8-4baa-b09d-23ed127040ec.png?auth_key=1886647944-9204a4128f3a4d208ff9174121b58a1b-0-7a1a2b7149640e65f0364ba9a371fe38" alt="Vue de Face Colorisée" loading="lazy">
+                    <div class="showcase-img-holder">
+                        <img src="assets/product-real.jpg" alt="Mobilier Design" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'mono\' style=\'color:#666;\'>[ IMAGE_PRODUCT_1 ]</div>'">
+                    </div>
+                    <div class="showcase-caption">
+                        <h4>Fauteuil Lounge Velvet</h4>
+                        <p class="mono" style="color: var(--primary);">Modélisation 3D & PBR</p>
+                    </div>
                 </div>
+
                 <div class="showcase-item">
-                    <img src="https://z-cdn-media.chatglm.cn/files/a1a9644c-9f46-49e1-b0c0-c50ba4aebfe4.png?auth_key=1886647944-075ad781638341e7b14f4bf7a004842d-0-f0b176db6d2d769e8d049d7f33a6e102" alt="Vue de Dessus Colorisée" loading="lazy">
+                    <div class="showcase-img-holder">
+                        <div class="mono" style="color:#666;">[ IMAGE_PRODUCT_2 ]</div>
+                    </div>
+                    <div class="showcase-caption">
+                        <h4>Table En Chêne Massif</h4>
+                        <p class="mono" style="color: var(--primary);">Asset AR-Ready</p>
+                    </div>
                 </div>
+
                 <div class="showcase-item">
-                    <img src="https://z-cdn-media.chatglm.cn/files/3db21541-b207-4822-bc6d-4cb155eb758f.png?auth_key=1886647944-13a668bc8a934f6ab6ca75fc8e55f6a5-0-d317fb2f0f5db4fe1f54c6024754c242" alt="Vue de Droite Colorisée" loading="lazy">
-                </div>
-                <div class="showcase-item showcase-item-wide">
-                    <img src="https://z-cdn-media.chatglm.cn/files/7d0128d2-4555-4c87-a1e4-2532feeb01e6.png?auth_key=1886649069-f9d9ab0c40d6467681c98069d438968a-0-243d3f7e5c8fb86645ccccadb5bbfc94" alt="Interface AutoCAD avec Assets 2D" loading="lazy">
+                    <div class="showcase-img-holder">
+                        <div class="mono" style="color:#666;">[ IMAGE_PRODUCT_3 ]</div>
+                    </div>
+                    <div class="showcase-caption">
+                        <h4>Luminaire Minimaliste</h4>
+                        <p class="mono" style="color: var(--primary);">Studio Lighting Render</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="about" class="importance-section">
+    <!-- INTERACTIVE 3D DEMO LAB -->
+    <section id="interactive-3d" class="product-lab-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label" style="color: var(--accent);">STUDIO DEMO INTERACTIF</span>
+                <h2>Triple Représentation Produit</h2>
+                <p>Découvrez l'interaction synchronisée entre le produit réel, son modèle 3D temps réel et son schéma technique 2D.</p>
+            </div>
+
+            <div class="lab-grid">
+                
+                <!-- 1. Physical Product Photo -->
+                <div class="lab-card">
+                    <div class="lab-card-header">
+                        <span class="lab-card-title">01. Produit Réel</span>
+                        <span class="mono" style="color: #666;">PHOTO</span>
+                    </div>
+                    <div class="viewport-container">
+                        <img src="assets/product-real.jpg" alt="Produit Réel" class="real-product-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'mono\' style=\'color:#888; text-align:center;\'>[ VISUEL PRODUIT RÉEL ]<br><br><small>Placez votre image dans assets/product-real.jpg</small></div>'">
+                    </div>
+                    <div class="lab-card-footer">
+                        Rendu photographique haute résolution servant de référence esthétique et matérielle.
+                    </div>
+                </div>
+
+                <!-- 2. Interactive Asynchronous 3D Viewport -->
+                <div class="lab-card" style="border-color: rgba(200, 56, 26, 0.4);">
+                    <div class="lab-card-header">
+                        <span class="lab-card-title" style="color: var(--primary-light);">02. Modèle 3D Interactif</span>
+                        <span class="mono" style="color: var(--primary);">WEBGL 3D</span>
+                    </div>
+                    <div class="viewport-container" id="3d-viewport-wrapper">
+                        <!-- Loading Indicator Placeholder -->
+                        <div class="loader-overlay" id="3d-loader">
+                            <div class="spinner"></div>
+                            <div class="mono" style="font-size: 0.75rem; color: #AAA;">CHARGEMENT 3D ASYNCHRONE...</div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- WebGL Canvas Mount -->
+                        <canvas id="webgl-canvas"></canvas>
+                    </div>
+                    <div class="lab-card-footer">
+                        Modèle 3D chargé de manière asynchrone sans bloquer l'affichage initial du site.
+                        <div class="controls-hint-3d">
+                            <span>◄ Rotation: Clic Gauche</span>
+                            <span>▲ Zoom: Molette</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 2D Technical Blueprint Drawing -->
+                <div class="lab-card">
+                    <div class="lab-card-header">
+                        <span class="lab-card-title">03. Dessin Technique 2D</span>
+                        <span class="mono" style="color: #666;">CAD / DWG</span>
+                    </div>
+                    <div class="viewport-container cad-viewport">
+                        <svg class="cad-svg-drawing" viewBox="0 0 200 200">
+                            <rect x="40" y="40" width="120" height="120" stroke-dasharray="3,3" />
+                            <circle cx="100" cy="100" r="50" />
+                            <line x1="20" y1="100" x2="180" y2="100" />
+                            <line x1="100" y1="20" x2="100" y2="180" />
+                            <line x1="40" y1="25" x2="160" y2="25" stroke="#E05436" />
+                            <polyline points="45,20 40,25 45,30" stroke="#E05436" />
+                            <polyline points="155,20 160,25 155,30" stroke="#E05436" />
+                            <text x="85" y="20" fill="#E05436" font-size="8" font-family="monospace">850 mm</text>
+                        </svg>
+                    </div>
+                    <div class="lab-card-footer">
+                        Représentation vectorielle conforme aux standards d'architecture d'intérieur.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VISION SECTION -->
+    <section id="importance" class="importance-section">
         <div class="container">
             <div class="importance-content">
                 <div class="importance-text">
-                    <span class="section-label" data-i18n="about.label">Notre Approche</span>
-                    <h2 data-i18n="about.title">Chaque Produit Mérite un Jumeau Numérique Parfait</h2>
-                    <p data-i18n="about.p1">L'industrie du mobilier et de la décoration connaît un changement fondamental. Les acheteurs — qu'ils s'agissent d'architectes spécifiant pour des projets commerciaux ou de propriétaires visualisant leur salon — s'attendent à voir les produits en contexte avant de s'engager.</p>
-                    <p data-i18n="about.p2">Sans assets 3D de haute qualité, vos produits sont invisibles dans les outils de design où les décisions d'achat sont réellement prises. Nous comblons cette lacune en transformant vos collections physiques en assets numériques prêts pour l'architecture qui stimulent la spécification, réduisent les taux de retour et étendent votre portée dans les flux de travail de design.</p>
-                    <p data-i18n="about.p3">Notre équipe travaille directement avec vos données produit — dimensions, matériaux, finitions — pour garantir que chaque jumeau numérique est dimensionnellement exact et matériellement fidèle. Le résultat n'est pas seulement un modèle. C'est un canal de vente.</p>
-                    <a href="#demo" class="btn btn-primary" style="margin-top: 1rem;" data-i18n="about.cta">Commencer par une Démo</a>
+                    <span class="section-label">NOTRE VISION</span>
+                    <h2 data-i18n="importance_title">Le pont entre conception physique et univers virtuel.</h2>
+                    <p data-i18n="importance_p1">Dans un marché du meuble de plus en plus numérisé, la précision visuelle est le facteur clé de décision d'achat pour les architectes et clients finaux.</p>
+                    <p data-i18n="importance_p2">Nous combinons l'artisanat du design tunisien avec les technologies de rendu 3D temps réel les plus avancées.</p>
+                    <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;" data-i18n="importance_btn">Travailler ensemble</a>
                 </div>
+
                 <div class="importance-visual">
-                    <div class="geometric-showcase">
-                        <div class="geo-shape"></div><div class="geo-shape"></div><div class="geo-shape"></div>
-                        <div class="geo-shape"></div><div class="geo-shape"></div><div class="geo-shape"></div>
-                        <div class="geo-shape"></div>
-                    </div>
+                    <div class="geo-shape" style="width: 200px; height: 200px; border-radius: 50%;"></div>
+                    <div class="geo-shape" style="width: 140px; height: 140px; background: var(--text-dark); animation-delay: -2s;"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="process" class="process-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" data-i18n="process.label">Comment Ça Marche</span>
-                <h2 data-i18n="process.title">Du Produit Physique à l'Asset Numérique</h2>
+    <!-- FOOTER -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>Tunisian Asset</h3>
+                <p>Création d'assets 3D premium, visuels interactifs et intégrations WebGL pour l'industrie du mobilier.</p>
             </div>
-            <div class="process-steps">
-                <div class="process-step">
-                    <div class="step-number">01</div>
-                    <div class="step-content">
-                        <h3 data-i18n="process.step1.title">Audit de Collection</h3>
-                        <p data-i18n="process.step1.desc">Nous examinons votre catalogue produit, vos dessins techniques et vos spécifications matérielles pour planifier la portée de la numérisation.</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">02</div>
-                    <div class="step-content">
-                        <h3 data-i18n="process.step2.title">Modélisation 3D</h3>
-                        <p data-i18n="process.step2.desc">Notre équipe construit des assets 3D haute fidélité optimisés pour la visualisation architecturale et le rendu en temps réel.</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">03</div>
-                    <div class="step-content">
-                        <h3 data-i18n="process.step3.title">Livraison Multi-Formats</h3>
-                        <p data-i18n="process.step3.desc">Les assets sont exportés dans les formats que vos clients utilisent — des fichiers BIM aux modèles GLB optimisés pour le web.</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="step-number">04</div>
-                    <div class="step-content">
-                        <h3 data-i18n="process.step4.title">Révision et Affinage</h3>
-                        <p data-i18n="process.step4.desc">Vous examinez les assets et demandez des révisions. Nous peaufinons jusqu'à ce que chaque détail corresponde à votre produit physique.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <section id="pricing" class="pricing-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" data-i18n="pricing.label">Forfaits d'Abonnement</span>
-                <h2 data-i18n="pricing.title">Choisissez le Forfait Adapté à Votre Catalogue</h2>
-                <p data-i18n="pricing.desc">Abonnements annuels conçus pour évoluer avec votre cycle de lancement produit. Commencez par une démo gratuite pour évaluer la qualité.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3 data-i18n="pricing.demo.title">Démo</h3>
-                    <div class="price" data-i18n="pricing.demo.price">Gratuit</div>
-                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;" data-i18n="pricing.demo.subtitle">Évaluez notre qualité sans engagement</p>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.demo.f1">1 produit numérisé en échantillon</li>
-                        <li data-i18n="pricing.demo.f2">Modèle 3D en format standard</li>
-                        <li data-i18n="pricing.demo.f3">Jeu de rendus 2D inclus</li>
-                        <li data-i18n="pricing.demo.f4">Une round de révision</li>
-                        <li class="disabled" data-i18n="pricing.demo.f5">Pas d'hébergement</li>
-                        <li class="disabled" data-i18n="pricing.demo.f6">Pas d'intégration scène</li>
-                    </ul>
-                    <a href="#demo" class="btn btn-outline" style="width: 100%;" data-i18n="pricing.demo.cta">Demander la Démo</a>
-                </div>
-                <div class="pricing-card">
-                    <h3 data-i18n="pricing.basic.title">Basique</h3>
-                    <div class="price" data-i18n="pricing.basic.price">Annuel</div>
-                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;" data-i18n="pricing.basic.subtitle">Pour les marques émergentes construisant leur présence numérique</p>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.basic.f1">Jusqu'à 50 produits en 2D/an</li>
-                        <li data-i18n="pricing.basic.f2">Jusqu'à 150 produits en 3D/an</li>
-                        <li data-i18n="pricing.basic.f3">Formats optimisés architectes</li>
-                        <li data-i18n="pricing.basic.f4">Assets 3D haute qualité</li>
-                        <li data-i18n="pricing.basic.f5">5 rounds de révision gratuits</li>
-                        <li class="disabled" data-i18n="pricing.basic.f6">Pas de vitrine hébergée</li>
-                        <li class="disabled" data-i18n="pricing.basic.f7">Pas d'intégration scène</li>
-                    </ul>
-                    <a href="#demo" class="btn btn-outline" style="width: 100%;" data-i18n="pricing.basic.cta">Commencer</a>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="pricing-badge" data-i18n="pricing.premium.badge">Recommandé</div>
-                    <h3 data-i18n="pricing.premium.title">Premium</h3>
-                    <div class="price" data-i18n="pricing.premium.price">Annuel</div>
-                    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;" data-i18n="pricing.premium.subtitle">Pour les marques établies prêtes pour l'intégration numérique complète</p>
-                    <ul class="pricing-features">
-                        <li data-i18n="pricing.premium.f1">Jusqu'à 300 produits/an</li>
-                        <li data-i18n="pricing.premium.f2">2D + 3D dans tous les formats</li>
-                        <li data-i18n="pricing.premium.f3">Site web hébergé personnalisable</li>
-                        <li data-i18n="pricing.premium.f4">Intégration scène 3D & mise en scène</li>
-                        <li data-i18n="pricing.premium.f5">Révisions illimitées</li>
-                        <li data-i18n="pricing.premium.f6">Support prioritaire</li>
-                        <li data-i18n="pricing.premium.f7">Plateforme de découverte architectes</li>
-                    </ul>
-                    <a href="#demo" class="btn btn-primary" style="width: 100%;" data-i18n="pricing.premium.cta">Nous Contacter</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section id="demo" class="demo-section">
-        <div class="demo-content">
-            <span class="section-label" style="color: var(--accent);" data-i18n="demo.label">Commencer</span>
-            <h2 data-i18n="demo.title">Prêt à Numériser Votre Collection ?</h2>
-            <p data-i18n="demo.desc">Envoyez-nous vos coordonnées et nous vous contacterons pour planifier une démo gratuite. Voyez exactement comment vos produits se présentent en assets 3D de précision avant de vous engager dans un forfait.</p>
-            
-            <!-- FORM MODIFIED FOR EMAILJS -->
-            <form class="demo-form" id="demo-form">
-                <div class="form-row">
-                    <input type="email" name="email" placeholder="votre@entreprise.com" required data-i18n-placeholder="demo.placeholder_email">
-                    <input type="text" name="business_name" placeholder="Nom de votre entreprise" required data-i18n-placeholder="demo.placeholder_business">
-                </div>
-                <select name="business_type" required>
-                    <option value="" disabled selected data-i18n="demo.select_default">Type d'activité...</option>
-                    <option value="furniture_brand" data-i18n="demo.option1">Marque de Mobilier</option>
-                    <option value="interior_design" data-i18n="demo.option2">Studio de Design d'Intérieur</option>
-                    <option value="architecture" data-i18n="demo.option3">Bureau d'Architecture</option>
-                    <option value="other" data-i18n="demo.option4">Autre</option>
-                </select>
-                <button type="submit" data-i18n="demo.submit">Demander la Démo</button>
-            </form>
+            <div class="footer-links">
+                <h4>NAVIGATION</h4>
+                <ul>
+                    <li><a href="#value">Valeur</a></li>
+                    <li><a href="#showcase">Réalisations</a></li>
+                    <li><a href="#interactive-3d">Studio 3D</a></li>
+                    <li><a href="#importance">Vision</a></li>
+                </ul>
+            </div>
 
-            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4);">
-                <span data-i18n="demo.alt">Ou écrivez directement à</span> 
-                <a href="mailto:contact@tunisianasset.com" style="color: var(--accent);">contact@tunisianasset.com</a>
-            </p>
+            <div class="footer-links">
+                <h4>CONTACT</h4>
+                <ul>
+                    <li><a href="mailto:contact@tunisianasset.com">contact@tunisianasset.com</a></li>
+                    <li><a href="#">Tunis, Tunisie</a></li>
+                    <li><a href="#">+216 71 000 000</a></li>
+                </ul>
+            </div>
         </div>
-    </section>
 
-    <footer class="ta-footer">
-      <div class="ta-footer-content">
-        <div class="ta-footer-brand ta-footer-col">
-          <span class="logo-text">Tunisian Asset</span>
-          <p>Numérisation 3D de précision pour les marques de mobilier et de décoration. Aidant les architectes à découvrir et spécifier vos produits grâce à des expériences numériques immersives.</p>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Tunisian Asset. Tous droits réservés.</span>
+            <span class="mono">DESIGNED WITH HIGH-PERFORMANCE ASYNC 3D</span>
         </div>
-        <div class="ta-footer-col">
-          <h4>Entreprise</h4>
-          <ul>
-            <li><a href="#about">À propos</a></li>
-            <li><a href="#process">Processus</a></li>
-            <li><a href="#pricing">Tarifs</a></li>
-          </ul>
-        </div>
-        <div class="ta-footer-col">
-          <h4>Services</h4>
-          <ul>
-            <li><a href="#">Modélisation 3D</a></li>
-            <li><a href="#">Rendu 2D</a></li>
-            <li><a href="#">Hébergement d'Assets</a></li>
-            <li><a href="#">Intégration Scène</a></li>
-          </ul>
-        </div>
-        <div class="ta-footer-col">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="mailto:contact@tunisianasset.com">contact@tunisianasset.com</a></li>
-            <li><a href="https://tunisianasset.com">tunisianasset.com</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="ta-footer-bottom">
-        <span>© 2026 Tunisian Asset. Tous droits réservés.</span>
-        <span>Conçu pour les marques de mobilier du monde entier.</span>
-      </div>
     </footer>
 
-    <div class="toast" id="toast"></div>
-    
-    <!-- ADDED EMAILJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
+    <!-- INTERACTION & ASYNCHRONOUS 3D ENGINE -->
     <script>
-        // ========================
-        // TRANSLATIONS
-        // ========================
+        /* i18n Dictionary */
         const translations = {
             fr: {
-                'nav.about': 'À propos',
-                'nav.services': 'Services',
-                'nav.process': 'Processus',
-                'nav.pricing': 'Tarifs',
-                'nav.cta': 'Demander une Démo',
-                'hero.badge': "Solutions B2B d'Assets 3D",
-                'hero.title': "Transformez Votre Collection de Mobilier en <span>Expériences 3D Immersives</span>",
-                'hero.subtitle': "Nous collaborons avec les marques de mobilier et de décoration pour numériser l'ensemble de leurs gammes en assets 2D et 3D haute fidélité — conçus pour les architectes, les décorateurs d'intérieur et le commerce moderne.",
-                'hero.cta1': 'Demander une Démo Gratuite',
-                'hero.cta2': 'Voir les Forfaits',
-                'value.label': "Pourquoi les Assets 3D Comptent",
-                'value.title': "L'Avantage Stratégique des Bibliothèques de Produits Numériques",
-                'value.desc': "Dans un secteur où la visualisation guide la prise de décision, disposer de l'ensemble de votre catalogue en assets 3D précis n'est plus optionnel — c'est un impératif compétitif.",
-                'value.card1.title': 'Accessibilité Architecturale',
-                'value.card1.desc': "Lorsque vos produits existent en assets 3D natifs dans les formats que les architectes utilisent réellement — SketchUp, Revit, 3ds Max, Blender — votre marque devient partie intégrante de leur vocabulaire de design. Vous passez du statut de fournisseur qu'ils envisagent à celui de matériau qu'ils spécifient.",
-                'value.card2.title': 'Conversion Client Accélérée',
-                'value.card2.desc': "Les architectes et designers qui peuvent intégrer votre produit exact dans un rendu en temps réel concluent des affaires plus rapidement. Vos assets 3D deviennent des vendeurs silencieux au sein de leurs présentations, montrant aux clients comment vos pièces subliment un espace avant même qu'un seul échantillon ne soit commandé.",
-                'value.card3.title': 'Cohérence de Marque Évolutive',
-                'value.card3.desc': "Une bibliothèque numérique centralisée garantit que chaque distributeur, chaque fiche marketplace et chaque article de presse utilise la même représentation méticuleusement exacte de votre produit. Aucune dérive. Aucune photo obsolète. Une seule source de vérité visuelle.",
-                'showcase.label': 'Exemples de Livrables',
-                'showcase.title': 'Ce Que Vous Obtenez',
-                'showcase.desc': 'Des assets 3D précis et des vues 2D détaillées, prêts à être intégrés dans les flux de travail professionnels.',
-                'about.label': 'Notre Approche',
-                'about.title': 'Chaque Produit Mérite un Jumeau Numérique Parfait',
-                'about.p1': "L'industrie du mobilier et de la décoration connaît un changement fondamental. Les acheteurs — qu'ils s'agissent d'architectes spécifiant pour des projets commerciaux ou de propriétaires visualisant leur salon — s'attendent à voir les produits en contexte avant de s'engager.",
-                'about.p2': "Sans assets 3D de haute qualité, vos produits sont invisibles dans les outils de design où les décisions d'achat sont réellement prises. Nous comblons cette lacune en transformant vos collections physiques en assets numériques prêts pour l'architecture qui stimulent la spécification, réduisent les taux de retour et étendent votre portée dans les flux de travail de design.",
-                'about.p3': "Notre équipe travaille directement avec vos données produit — dimensions, matériaux, finitions — pour garantir que chaque jumeau numérique est dimensionnellement exact et matériellement fidèle. Le résultat n'est pas seulement un modèle. C'est un canal de vente.",
-                'about.cta': 'Commencer par une Démo',
-                'process.label': 'Comment Ça Marche',
-                'process.title': "Du Produit Physique à l'Asset Numérique",
-                'process.step1.title': 'Audit de Collection',
-                'process.step1.desc': "Nous examinons votre catalogue produit, vos dessins techniques et vos spécifications matérielles pour planifier la portée de la numérisation.",
-                'process.step2.title': 'Modélisation 3D',
-                'process.step2.desc': 'Notre équipe construit des assets 3D haute fidélité optimisés pour la visualisation architecturale et le rendu en temps réel.',
-                'process.step3.title': 'Livraison Multi-Formats',
-                'process.step3.desc': "Les assets sont exportés dans les formats que vos clients utilisent — des fichiers BIM aux modèles GLB optimisés pour le web.",
-                'process.step4.title': 'Révision et Affinage',
-                'process.step4.desc': "Vous examinez les assets et demandez des révisions. Nous peaufinons jusqu'à ce que chaque détail corresponde à votre produit physique.",
-                'pricing.label': "Forfaits d'Abonnement",
-                'pricing.title': 'Choisissez le Forfait Adapté à Votre Catalogue',
-                'pricing.desc': 'Abonnements annuels conçus pour évoluer avec votre cycle de lancement produit. Commencez par une démo gratuite pour évaluer la qualité.',
-                'pricing.demo.title': 'Démo',
-                'pricing.demo.price': 'Gratuit',
-                'pricing.demo.subtitle': 'Évaluez notre qualité sans engagement',
-                'pricing.demo.f1': '1 produit numérisé en échantillon',
-                'pricing.demo.f2': 'Modèle 3D en format standard',
-                'pricing.demo.f3': 'Jeu de rendus 2D inclus',
-                'pricing.demo.f4': 'Une round de révision',
-                'pricing.demo.f5': "Pas d'hébergement",
-                'pricing.demo.f6': "Pas d'intégration scène",
-                'pricing.demo.cta': 'Demander la Démo',
-                'pricing.basic.title': 'Basique',
-                'pricing.basic.price': 'Annuel',
-                'pricing.basic.subtitle': 'Pour les marques émergentes construisant leur présence numérique',
-                'pricing.basic.f1': "Jusqu'à 50 produits en 2D/an",
-                'pricing.basic.f2': "Jusqu'à 150 produits en 3D/an",
-                'pricing.basic.f3': 'Formats optimisés architectes',
-                'pricing.basic.f4': 'Assets 3D haute qualité',
-                'pricing.basic.f5': '5 rounds de révision gratuits',
-                'pricing.basic.f6': 'Pas de vitrine hébergée',
-                'pricing.basic.f7': "Pas d'intégration scène",
-                'pricing.basic.cta': 'Commencer',
-                'pricing.premium.badge': 'Recommandé',
-                'pricing.premium.title': 'Premium',
-                'pricing.premium.price': 'Annuel',
-                'pricing.premium.subtitle': "Pour les marques établies prêtes pour l'intégration numérique complète",
-                'pricing.premium.f1': "Jusqu'à 300 produits/an",
-                'pricing.premium.f2': '2D + 3D dans tous les formats',
-                'pricing.premium.f3': 'Site web hébergé personnalisable',
-                'pricing.premium.f4': 'Intégration scène 3D & mise en scène',
-                'pricing.premium.f5': 'Révisions illimitées',
-                'pricing.premium.f6': 'Support prioritaire',
-                'pricing.premium.f7': 'Plateforme de découverte architectes',
-                'pricing.premium.cta': 'Nous Contacter',
-                'demo.label': 'Commencer',
-                'demo.title': 'Prêt à Numériser Votre Collection ?',
-                'demo.desc': "Envoyez-nous vos coordonnées et nous vous contacterons pour planifier une démo gratuite. Voyez exactement comment vos produits se présentent en assets 3D de précision avant de vous engager dans un forfait.",
-                'demo.placeholder_email': 'votre@entreprise.com',
-                'demo.placeholder_business': 'Nom de votre entreprise',
-                'demo.select_default': "Type d'activité...",
-                'demo.option1': 'Marque de Mobilier',
-                'demo.option2': "Studio de Design d'Intérieur",
-                'demo.option3': "Bureau d'Architecture",
-                'demo.option4': 'Autre',
-                'demo.submit': 'Demander la Démo',
-                'demo.alt': 'Ou écrivez directement à'
+                nav_value: "Valeur",
+                nav_showcase: "Réalisations",
+                nav_3d: "Studio 3D",
+                nav_importance: "Vision",
+                nav_cta: "Contact",
+                hero_badge: "Studio 3D Modélisation // 2026",
+                hero_title: "L'excellence 3D pour vos <span>collections de mobilier</span>.",
+                hero_subtitle: "Nous transformons vos produits physiques en assets 3D photoréalistes, visuels interactifs et livrables techniques pour les marques de design exigeantes.",
+                hero_btn_primary: "Explorer le Studio 3D",
+                hero_btn_secondary: "Voir Portfolio",
+                value_title: "Pourquoi numériser votre catalogue ?",
+                value_subtitle: "Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.",
+                value_1_title: "Photoréalisme Absolu",
+                value_1_desc: "Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.",
+                value_2_title: "Intégration WebGL / AR",
+                value_2_desc: "Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.",
+                value_3_title: "Conformité CAD & DWG",
+                value_3_desc: "Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.",
+                showcase_title: "Galerie de Produits Numérisés",
+                showcase_subtitle: "Aperçu de nos intégrations 3D et rendus haute définition pour les marques éditeurs.",
+                importance_title: "Le pont entre conception physique et univers virtuel.",
+                importance_p1: "Dans un marché du meuble de plus en plus numérisé, la précision visuelle est le facteur clé de décision d'achat pour les architectes et clients finaux.",
+                importance_p2: "Nous combinons l'artisanat du design tunisien avec les technologies de rendu 3D temps réel les plus avancées.",
+                importance_btn: "Travailler ensemble"
             },
             en: {
-                'nav.about': 'About',
-                'nav.services': 'Services',
-                'nav.process': 'Process',
-                'nav.pricing': 'Pricing',
-                'nav.cta': 'Request a Demo',
-                'hero.badge': 'B2B 3D Asset Solutions',
-                'hero.title': 'Transform Your Furniture Collection Into <span>Immersive 3D Experiences</span>',
-                'hero.subtitle': 'We partner with furniture and décor brands to digitize entire product lines into high-fidelity 2D and 3D assets — built for architects, interior designers, and modern commerce.',
-                'hero.cta1': 'Request a Free Demo',
-                'hero.cta2': 'View Plans',
-                'value.label': 'Why 3D Assets Matter',
-                'value.title': 'The Strategic Advantage of Digital Product Libraries',
-                'value.desc': 'In an industry where visualization drives decision-making, having your entire catalog available as precision 3D assets is no longer optional — it is a competitive imperative.',
-                'value.card1.title': 'Architect Accessibility',
-                'value.card1.desc': 'When your products exist as native 3D assets in formats architects actually use — SketchUp, Revit, 3ds Max, Blender — your brand becomes part of their design vocabulary. You move from a supplier they consider to a material they specify.',
-                'value.card2.title': 'Accelerated Client Conversion',
-                'value.card2.desc': 'Architects and designers who can drop your exact product into a live render close deals faster. Your 3D assets become silent salespeople inside their presentations, showing clients exactly how your pieces elevate a space before a single sample is ordered.',
-                'value.card3.title': 'Scalable Brand Consistency',
-                'value.card3.desc': 'A centralized digital library ensures that every distributor, every marketplace listing, and every press feature uses the same meticulously accurate representation of your product. No drift. No outdated photography. One source of visual truth.',
-                'showcase.label': 'Deliverables Showcase',
-                'showcase.title': 'What You Receive',
-                'showcase.desc': 'Precise 3D assets and detailed 2D views, ready to be integrated into professional workflows.',
-                'about.label': 'Our Approach',
-                'about.title': 'Every Product Deserves a Perfect Digital Twin',
-                'about.p1': 'The furniture and décor industry is undergoing a fundamental shift. Buyers — whether they are architects specifying for commercial projects or homeowners visualizing their living rooms — expect to see products in context before committing.',
-                'about.p2': 'Without high-quality 3D assets, your products are invisible in the design tools where purchasing decisions are actually made. We bridge that gap by transforming your physical collections into architect-ready digital assets that drive specification, reduce return rates, and expand your reach into design workflows.',
-                'about.p3': 'Our team works directly with your product data — dimensions, materials, finishes — to ensure every digital twin is dimensionally accurate and materially faithful. The result is not just a model. It is a sales channel.',
-                'about.cta': 'Start With a Demo',
-                'process.label': 'How It Works',
-                'process.title': 'From Physical Product to Digital Asset',
-                'process.step1.title': 'Collection Audit',
-                'process.step1.desc': 'We review your product catalog, technical drawings, and material specifications to plan the digitization scope.',
-                'process.step2.title': '3D Modeling',
-                'process.step2.desc': 'Our team builds high-fidelity 3D assets optimized for architectural visualization and real-time rendering.',
-                'process.step3.title': 'Format Delivery',
-                'process.step3.desc': 'Assets are exported in the formats your clients use — from BIM-ready files to web-optimized GLB models.',
-                'process.step4.title': 'Review & Refine',
-                'process.step4.desc': 'You review the assets and request revisions. We refine until every detail matches your physical product.',
-                'pricing.label': 'Subscription Plans',
-                'pricing.title': 'Choose the Right Plan for Your Catalog',
-                'pricing.desc': 'Yearly subscriptions designed to scale with your product release cycle. Start with a free demo to evaluate quality.',
-                'pricing.demo.title': 'Demo',
-                'pricing.demo.price': 'Free',
-                'pricing.demo.subtitle': 'Evaluate our quality with zero commitment',
-                'pricing.demo.f1': '1 product digitized as sample',
-                'pricing.demo.f2': '3D model in standard format',
-                'pricing.demo.f3': '2D render set included',
-                'pricing.demo.f4': 'Single revision round',
-                'pricing.demo.f5': 'No hosting',
-                'pricing.demo.f6': 'No scene integration',
-                'pricing.demo.cta': 'Request Demo',
-                'pricing.basic.title': 'Basic',
-                'pricing.basic.price': 'Yearly',
-                'pricing.basic.subtitle': 'For emerging brands building their digital presence',
-                'pricing.basic.f1': 'Up to 50 products in 2D per year',
-                'pricing.basic.f2': 'Up to 150 products in 3D per year',
-                'pricing.basic.f3': 'Architect-optimized formats',
-                'pricing.basic.f4': 'High-quality 3D assets',
-                'pricing.basic.f5': '5 free revision rounds',
-                'pricing.basic.f6': 'No hosted showcase',
-                'pricing.basic.f7': 'No scene integration',
-                'pricing.basic.cta': 'Get Started',
-                'pricing.premium.badge': 'Recommended',
-                'pricing.premium.title': 'Premium',
-                'pricing.premium.price': 'Yearly',
-                'pricing.premium.subtitle': 'For established brands ready for full digital integration',
-                'pricing.premium.f1': 'Up to 300 products per year',
-                'pricing.premium.f2': '2D + 3D in all available formats',
-                'pricing.premium.f3': 'Customizable hosted website',
-                'pricing.premium.f4': '3D scene integration & staging',
-                'pricing.premium.f5': 'Unlimited revisions',
-                'pricing.premium.f6': 'Priority support',
-                'pricing.premium.f7': 'Architect discovery platform',
-                'pricing.premium.cta': 'Contact Us',
-                'demo.label': 'Get Started',
-                'demo.title': 'Ready to Digitize Your Collection?',
-                'demo.desc': 'Send us your details and we will reach out to schedule a free demo. See exactly how your products look as precision 3D assets before you commit to a plan.',
-                'demo.placeholder_email': 'your@company.com',
-                'demo.placeholder_business': 'Your business name',
-                'demo.select_default': 'Business type...',
-                'demo.option1': 'Furniture Brand',
-                'demo.option2': 'Interior Design Studio',
-                'demo.option3': 'Architecture Firm',
-                'demo.option4': 'Other',
-                'demo.submit': 'Request Demo',
-                'demo.alt': 'Or write directly to'
-            },
-            nl: {
-                'nav.about': 'Over ons',
-                'nav.services': 'Diensten',
-                'nav.process': 'Proces',
-                'nav.pricing': 'Prijzen',
-                'nav.cta': 'Demo Aanvragen',
-                'hero.badge': 'B2B 3D Asset Oplossingen',
-                'hero.title': 'Transformeer Uw Meubelcollectie In <span>Meeslepende 3D Ervaringen</span>',
-                'hero.subtitle': 'Wij werken samen met meubel- en decoratiemerken om complete productlijnen te digitaliseren naar high-fidelity 2D en 3D assets — gebouwd voor architecten, interieurontwerpers en moderne handel.',
-                'hero.cta1': 'Vraag een Gratis Demo Aan',
-                'hero.cta2': 'Bekijk Plannen',
-                'value.label': 'Waarom 3D Assets Belangrijk Zijn',
-                'value.title': 'Het Strategische Voordeel van Digitale Productbibliotheken',
-                'value.desc': 'In een branche waar visualisatie de besluitvorming stuurt, is het hebben van uw volledige catalogus als precisie 3D assets niet langer optioneel — het is een competitieve noodzaak.',
-                'value.card1.title': 'Toegankelijkheid voor Architecten',
-                'value.card1.desc': 'Wanneer uw producten bestaan als native 3D assets in formaten die architecten daadwerkelijk gebruiken — SketchUp, Revit, 3ds Max, Blender — wordt uw merk onderdeel van hun ontwerpvocabulaire. U verandert van een leverancier die ze overwegen naar een materiaal dat ze specificeren.',
-                'value.card2.title': 'Versnelde Klantconversie',
-                'value.card2.desc': 'Architecten en ontwerpers die uw exacte product in een live render kunnen plaatsen, sluiten deals sneller. Uw 3D assets worden stille verkopers in hun presentaties, die klanten laten zien hoe uw stukken een ruimte verheffen voordat er ook maar één sample wordt besteld.',
-                'value.card3.title': 'Schaalbare Merkconsistentie',
-                'value.card3.desc': 'Een gecentraliseerde digitale bibliotheek zorgt ervoor dat elke distributeur, elke marketplace-vermelding en elk persartikel dezelfde nauwkeurige weergave van uw product gebruikt. Geen afwijking. Geen verouderde fotografie. Eén bron van visuele waarheid.',
-                'showcase.label': 'Leveringen Showroom',
-                'showcase.title': 'Wat U Ontvangt',
-                'showcase.desc': 'Nauwkeurige 3D assets en gedetailleerde 2D-weergaven, klaar om te worden geïntegreerd in professionele workflows.',
-                'about.label': 'Onze Aanpak',
-                'about.title': 'Elk Product Verdient een Perfecte Digitale Tegenhanger',
-                'about.p1': 'De meubel- en decoratie-industrie ondergaat een fundamentele verschuiving. Kopers — of het nu architecten zijn die specificeren voor commerciële projecten of huiseigenaren die hun woonkamer visualiseren — verwachten producten in context te zien voordat ze zich engageren.',
-                'about.p2': 'Zonder hoogwaardige 3D assets zijn uw producten onzichtbaar in de ontwerptools waar aankoopbeslissingen daadwerkelijk worden genomen. Wij overbruggen die kloof door uw fysieke collecties te transformeren in architect-klare digitale assets die specificatie stimuleren, retourpercentages verlagen en uw bereik in ontwerpworkflows vergroten.',
-                'about.p3': 'Ons team werkt rechtstreeks met uw productgegevens — afmetingen, materialen, afwerkingen — om ervoor te zorgen dat elke digitale tegenhanger dimensioneel nauwkeurig en materieel getrouw is. Het resultaat is niet zomaar een model. Het is een verkoopkanaal.',
-                'about.cta': 'Begin Met een Demo',
-                'process.label': 'Hoe Het Werkt',
-                'process.title': 'Van Fysiek Product naar Digitaal Asset',
-                'process.step1.title': 'Collectie Audit',
-                'process.step1.desc': 'Wij beoordelen uw productcatalogus, technische tekeningen en materiaalspecificaties om de scope van de digitalisering te plannen.',
-                'process.step2.title': '3D Modellering',
-                'process.step2.desc': 'Ons team bouwt high-fidelity 3D assets geoptimaliseerd voor architecturale visualisatie en real-time rendering.',
-                'process.step3.title': 'Multi-Formaat Levering',
-                'process.step3.desc': 'Assets worden geëxporteerd in de formaten die uw klanten gebruiken — van BIM-ready bestanden tot web-geoptimaliseerde GLB modellen.',
-                'process.step4.title': 'Beoordeling & Verfijning',
-                'process.step4.desc': 'U beoordeelt de assets en vraagt revisies aan. Wij verfijnen totdat elk detail overeenkomt met uw fysiek product.',
-                'pricing.label': 'Abonnementsplannen',
-                'pricing.title': 'Kies het Juiste Plan voor Uw Catalogus',
-                'pricing.desc': 'Jaarlijkse abonnementen ontworpen om mee te schalen met uw productreleasecyclus. Begin met een gratis demo om de kwaliteit te evalueren.',
-                'pricing.demo.title': 'Demo',
-                'pricing.demo.price': 'Gratis',
-                'pricing.demo.subtitle': 'Evalueer onze kwaliteit zonder verplichting',
-                'pricing.demo.f1': '1 product gedigitaliseerd als sample',
-                'pricing.demo.f2': '3D model in standaardformaat',
-                'pricing.demo.f3': '2D render set inbegrepen',
-                'pricing.demo.f4': 'Enkele revisieronde',
-                'pricing.demo.f5': 'Geen hosting',
-                'pricing.demo.f6': 'Geen scène-integratie',
-                'pricing.demo.cta': 'Demo Aanvragen',
-                'pricing.basic.title': 'Basis',
-                'pricing.basic.price': 'Jaarlijks',
-                'pricing.basic.subtitle': 'Voor opkomende merken die hun digitale aanwezigheid opbouwen',
-                'pricing.basic.f1': 'Tot 50 producten in 2D per jaar',
-                'pricing.basic.f2': 'Tot 150 producten in 3D per jaar',
-                'pricing.basic.f3': 'Architect-geoptimaliseerde formaten',
-                'pricing.basic.f4': 'Hoogwaardige 3D assets',
-                'pricing.basic.f5': '5 gratis revisierondes',
-                'pricing.basic.f6': 'Geen gehoste showcase',
-                'pricing.basic.f7': 'Geen scène-integratie',
-                'pricing.basic.cta': 'Aan de Slag',
-                'pricing.premium.badge': 'Aanbevolen',
-                'pricing.premium.title': 'Premium',
-                'pricing.premium.price': 'Jaarlijks',
-                'pricing.premium.subtitle': 'Voor gevestigde merken die klaar zijn voor volledige digitale integratie',
-                'pricing.premium.f1': 'Tot 300 producten per jaar',
-                'pricing.premium.f2': '2D + 3D in alle beschikbare formaten',
-                'pricing.premium.f3': 'Aanpasbare gehoste website',
-                'pricing.premium.f4': '3D scène-integratie & staging',
-                'pricing.premium.f5': 'Onbeperkte revisies',
-                'pricing.premium.f6': 'Prioriteitsondersteuning',
-                'pricing.premium.f7': 'Architect ontdekkingsplatform',
-                'pricing.premium.cta': 'Neem Contact Op',
-                'demo.label': 'Aan de Slag',
-                'demo.title': 'Klaar om Uw Collectie te Digitaliseren?',
-                'demo.desc': 'Stuur ons uw gegevens en wij nemen contact op om een gratis demo in te plannen. Zie precies hoe uw producten eruitzien als precisie 3D assets voordat u zich committeert aan een plan.',
-                'demo.placeholder_email': 'uw@bedrijf.com',
-                'demo.placeholder_business': 'Uw bedrijfsnaam',
-                'demo.select_default': 'Bedrijfstype...',
-                'demo.option1': 'Meubelmerk',
-                'demo.option2': 'Interieurontwerpstudio',
-                'demo.option3': 'Architectenbureau',
-                'demo.option4': 'Overig',
-                'demo.submit': 'Demo Aanvragen',
-                'demo.alt': 'Of schrijf direct naar'
+                nav_value: "Value",
+                nav_showcase: "Portfolio",
+                nav_3d: "3D Studio",
+                nav_importance: "Vision",
+                nav_cta: "Contact",
+                hero_badge: "3D Modeling Studio // 2026",
+                hero_title: "3D Excellence for your <span>furniture collections</span>.",
+                hero_subtitle: "We convert physical furniture products into photorealistic 3D assets, interactive visuals, and technical deliverables for premium design brands.",
+                hero_btn_primary: "Explore 3D Studio",
+                hero_btn_secondary: "View Portfolio",
+                value_title: "Why digitize your catalog?",
+                value_subtitle: "A modern approach to product presentation that elevates engagement and streamlines visual production.",
+                value_1_title: "Absolute Photorealism",
+                value_1_desc: "High-precision PBR texturing capturing fine details of fabrics, polished wood, and brushed metals.",
+                value_2_title: "WebGL / AR Integration",
+                value_2_desc: "Optimized models for fluid web browser rendering and Augmented Reality try-out modules.",
+                value_3_title: "CAD & DWG Compliance",
+                value_3_desc: "Millimeter accuracy matching your manufacturing blueprints and architectural technical sheets.",
+                showcase_title: "Digitized Product Gallery",
+                showcase_subtitle: "A glance at our 3D integrations and high-definition renders for furniture editors.",
+                importance_title: "Bridging physical design and virtual worlds.",
+                importance_p1: "In a digital-first furniture market, visual accuracy is the deciding purchase factor for architects and clients.",
+                importance_p2: "We combine Tunisian craftsmanship with cutting-edge real-time 3D rendering technologies.",
+                importance_btn: "Work Together"
             }
         };
 
-        let currentLang = 'fr';
+        const langToggle = document.getElementById('langToggle');
+        const langDropdown = document.getElementById('langDropdown');
+        const currentLangLabel = document.getElementById('currentLangLabel');
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            localStorage.setItem('tunisianasset_lang', lang);
+        langToggle.addEventListener('click', () => langDropdown.classList.toggle('active'));
 
-            document.getElementById('current-lang').textContent = lang.toUpperCase();
-
-            document.querySelectorAll('.lang-dropdown button').forEach(btn => {
-                btn.classList.toggle('active-lang', btn.dataset.lang === lang);
-            });
+        function switchLanguage(lang) {
+            currentLangLabel.textContent = lang.toUpperCase();
+            langDropdown.classList.remove('active');
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) el.textContent = translations[lang][key];
             });
 
-            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-                const key = el.dataset.i18nPlaceholder;
-                if (translations[lang][key]) {
-                    el.placeholder = translations[lang][key];
-                }
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                const key = el.getAttribute('data-i18n-html');
+                if (translations[lang][key]) el.innerHTML = translations[lang][key];
             });
+        }
 
-            const select = document.querySelector('select[name="business_type"]');
-            if (select) {
-                const options = select.querySelectorAll('option');
-                options.forEach(opt => {
-                    const key = opt.dataset.i18n;
-                    if (key && translations[lang][key]) {
-                        opt.textContent = translations[lang][key];
+        /* Asynchronous 3D Loading Pipeline */
+        let scene, camera, renderer, productMesh;
+        let is3DInitialized = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const viewportWrapper = document.getElementById('3d-viewport-wrapper');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !is3DInitialized) {
+                        is3DInitialized = true;
+                        initAsync3DEngine();
                     }
                 });
-            }
+            }, { threshold: 0.1 });
 
-            document.getElementById('lang-dropdown').classList.remove('active');
-        }
-
-        function toggleLangDropdown() {
-            document.getElementById('lang-dropdown').classList.toggle('active');
-        }
-
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.lang-switcher')) {
-                document.getElementById('lang-dropdown').classList.remove('active');
-            }
+            observer.observe(viewportWrapper);
         });
 
-        // Set French as the default immediately on load
-        setLanguage('fr');
+        function initAsync3DEngine() {
+            updateLoadingProgress(30);
 
-        // Detect location to switch only for specific countries, keeping French as the default fallback
-        async function detectLanguage() {
-            const saved = localStorage.getItem('tunisianasset_lang');
-            if (saved) {
-                setLanguage(saved);
-                return;
-            }
-
-            try {
-                const res = await fetch('https://ipapi.co/json/');
-                const data = await res.json();
-                const cc = data.country_code;
-                if (cc === 'DE' || cc === 'NL') {
-                    setLanguage('nl'); // Netherlands and Germany get Dutch
-                } else if (cc === 'GB' || cc === 'US') {
-                    setLanguage('en'); // UK and US get English
-                } else {
-                    setLanguage('fr'); // Default to French for everyone else
-                }
-            } catch (e) {
-                setLanguage('fr'); // Default to French on API error
-            }
-        }
-
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 2px 20px rgba(44, 24, 16, 0.08)';
-            } else {
-                navbar.style.boxShadow = 'none';
-            }
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        function toggleMenu() {
-            const nav = document.querySelector('.nav-links');
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        // ========================
-        // EMAILJS INTEGRATION
-        // ========================
-        
-        // 1. Initialize EmailJS with your Public Key
-        emailjs.init({
-            publicKey: "UGxWCf26plP4BYqg-", 
-        });
-
-        // 2. Handle Form Submission
-        const demoForm = document.getElementById('demo-form');
-        demoForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            // Disable button and change text to show it's loading
-            const submitBtn = demoForm.querySelector('button[type="submit"]');
-            const originalBtnText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = '...';
-
-            // EmailJS Service ID and Template ID
-            const serviceID = "service_weherzz"; // IMPORTANT: REPLACE THIS with your actual EmailJS Service ID
-            const templateID = "template_4ndhxt7"; // Your provided Template ID
-
-            emailjs.sendForm(serviceID, templateID, demoForm)
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js')
                 .then(() => {
-                    showToast(currentLang === 'fr' ? 'Demande envoyée avec succès ! Nous vous contacterons bientôt.' : 
-                              currentLang === 'en' ? 'Request sent successfully! We will contact you soon.' : 
-                              'Aanvraag succesvol verzonden! We nemen spoedig contact met u op.');
-                    demoForm.reset(); // Clear form fields
-                }, (err) => {
-                    console.error('EmailJS error:', err);
-                    showToast(currentLang === 'fr' ? 'Une erreur est survenue. Veuillez réessayer.' : 
-                              currentLang === 'en' ? 'An error occurred. Please try again.' : 
-                              'Er is een fout opgetreden. Probeer het opnieuw.');
+                    updateLoadingProgress(70);
+                    build3DScene();
                 })
-                .finally(() => {
-                    // Restore button state
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = originalBtnText;
+                .catch(err => {
+                    console.warn("Failed to load Three.js via CDN. Displaying 3D Fallback.", err);
+                    show3DFallback();
                 });
-        });
-
-        // 3. Toast Notification Function
-        function showToast(message, duration = 5000) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
         }
 
-        document.addEventListener('DOMContentLoaded', detectLanguage);
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        function updateLoadingProgress(percent) {
+            const fill = document.getElementById('progress-fill');
+            if (fill) fill.style.width = percent + '%';
+        }
+
+        function build3DScene() {
+            const container = document.getElementById('3d-viewport-wrapper');
+            const canvas = document.getElementById('webgl-canvas');
+            const loaderOverlay = document.getElementById('3d-loader');
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x101010);
+
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.set(3, 2, 4);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            dirLight.position.set(5, 10, 7);
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0xC8381A, 2, 10);
+            pointLight.position.set(-3, -2, -2);
+            scene.add(pointLight);
+
+            const group = new THREE.Group();
+
+            const seatGeo = new THREE.BoxGeometry(1.6, 0.3, 1.6);
+            const fabricMat = new THREE.MeshStandardMaterial({ 
+                color: 0x6B1D1D, 
+                roughness: 0.6,
+                metalness: 0.1 
+            });
+            const seat = new THREE.Mesh(seatGeo, fabricMat);
+            group.add(seat);
+
+            const backGeo = new THREE.BoxGeometry(1.6, 1.2, 0.2);
+            const back = new THREE.Mesh(backGeo, fabricMat);
+            back.position.set(0, 0.75, -0.7);
+            group.add(back);
+
+            const legGeo = new THREE.CylinderGeometry(0.04, 0.02, 1);
+            const legMat = new THREE.MeshStandardMaterial({ color: 0xD4A574, metalness: 0.8, roughness: 0.2 });
+
+            const legPositions = [
+                [-0.7, -0.55, 0.7],
+                [0.7, -0.55, 0.7],
+                [-0.7, -0.55, -0.7],
+                [0.7, -0.55, -0.7]
+            ];
+
+            legPositions.forEach(pos => {
+                const leg = new THREE.Mesh(legGeo, legMat);
+                leg.position.set(...pos);
+                group.add(leg);
+            });
+
+            productMesh = group;
+            scene.add(productMesh);
+
+            updateLoadingProgress(100);
+
+            setTimeout(() => {
+                if (loaderOverlay) loaderOverlay.style.opacity = '0';
+                setTimeout(() => { if (loaderOverlay) loaderOverlay.style.display = 'none'; }, 500);
+            }, 300);
+
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const deltaX = e.clientX - previousMousePosition.x;
+                const deltaY = e.clientY - previousMousePosition.y;
+
+                productMesh.rotation.y += deltaX * 0.01;
+                productMesh.rotation.x += deltaY * 0.01;
+
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+
+            window.addEventListener('mouseup', () => { isDragging = false; });
+
+            window.addEventListener('resize', () => {
+                if (!renderer) return;
+                const newW = container.clientWidth;
+                const newH = container.clientHeight;
+                camera.aspect = newW / newH;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newW, newH);
+            });
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if (productMesh) {
+                productMesh.rotation.y += 0.003;
+            }
+            renderer.render(scene, camera);
+        }
+
+        function show3DFallback() {
+            const loaderOverlay = document.getElementById('3d-loader');
+            if (loaderOverlay) {
+                loaderOverlay.innerHTML = `
+                    <div class="mono" style="color:var(--accent); text-align:center; padding: 1rem;">
+                        [ RENDERER 2D FALLBACK ]<br><br>
+                        <small>Aperçu 3D non disponible sur cet appareil.<br>Consultez la fiche CAD 2D.</small>
+                    </div>
+                `;
+            }
+        }
     </script>
 </body>
 </html>
