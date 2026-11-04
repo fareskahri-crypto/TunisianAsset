@@ -1,1402 +1,1596 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tunisian Asset — 3D Models for Furniture Brands</title>
-    <link rel="shortcut icon" href="assets/logo.png" type="image/x-icon">
-    
-    <!-- Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --primary: #C8381A;
-            --primary-dark: #A0260D;
-            --primary-light: #E05436;
-            --accent: #D4A574;
-            --bg-warm: #F4F1EA;
-            --bg-cream: #EAE5DB;
-            --bg-dark: #121212;
-            --text-dark: #1A1A1A;
-            --text-medium: #4A4A4A;
-            --text-light: #7A7A7A;
-            --white: #FFFFFF;
-            --border: #D8D2C5;
-            --border-dark: #2A2A2A;
-            --maroon: #6B1D1D;
-            --font-serif: 'Cormorant Garamond', serif;
-            --font-sans: 'Montserrat', sans-serif;
-            --font-mono: 'Space Grotesk', monospace;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        
-        body {
-            font-family: var(--font-sans);
-            color: var(--text-dark);
-            background: var(--bg-warm);
-            line-height: 1.7;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Technical Background Grid Lines */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: 
-                linear-gradient(to right, rgba(0,0,0,0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0,0,0,0.03) 1px, transparent 1px);
-            background-size: 80px 80px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: var(--font-serif);
-            font-weight: 300;
-            letter-spacing: 0.02em;
-        }
-
-        .mono {
-            font-family: var(--font-mono);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(244, 241, 234, 0.92);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.2rem 2.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            position: relative;
-            border: 1px solid var(--text-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo-icon::before {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            transform: rotate(45deg);
-        }
-
-        .logo-text {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            font-weight: 400;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-medium);
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            transition: color 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover { color: var(--primary); }
-        .nav-links a:hover::after { width: 100%; }
-
-        .nav-cta {
-            background: var(--text-dark);
-            color: var(--white) !important;
-            padding: 0.7rem 1.8rem;
-            border-radius: 0px;
-            transition: all 0.3s !important;
-        }
-
-        .nav-cta::after { display: none !important; }
-        .nav-cta:hover {
-            background: var(--primary) !important;
-            transform: translateY(-2px);
-        }
-
-        /* Language Switcher */
-        .lang-switcher {
-            position: relative;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .lang-current {
-            cursor: pointer;
-            padding: 0.4rem 0.8rem;
-            border: 1px solid var(--border);
-            background: var(--white);
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s;
-        }
-
-        .lang-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 0.5rem;
-            background: var(--white);
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            min-width: 120px;
-            z-index: 1001;
-        }
-
-        .lang-dropdown.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .lang-dropdown button {
-            display: block;
-            width: 100%;
-            padding: 0.7rem 1rem;
-            border: none;
-            background: none;
-            text-align: left;
-            font-family: var(--font-sans);
-            font-size: 0.8rem;
-            color: var(--text-medium);
-            cursor: pointer;
-        }
-
-        .lang-dropdown button:hover, .lang-dropdown button.active-lang {
-            background: var(--bg-cream);
-            color: var(--primary);
-        }
-
-        /* HERO SECTION */
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 55% 45%;
-            position: relative;
-            padding-top: 80px;
-            overflow: hidden;
-        }
-
-        .hero-left {
-            background: var(--bg-warm);
-            padding: 6rem 4rem 4rem 6rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-right {
-            background: var(--maroon);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-watermark {
-            position: absolute;
-            font-family: var(--font-sans);
-            font-weight: 900;
-            font-size: 22vw;
-            color: rgba(0,0,0,0.04);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            white-space: nowrap;
-            pointer-events: none;
-            user-select: none;
-            z-index: 0;
-        }
-
-        .accent-circle {
-            position: absolute;
-            width: 420px;
-            height: 420px;
-            background: var(--primary);
-            border-radius: 50%;
-            top: 50%;
-            left: -120px;
-            transform: translateY(-50%);
-            z-index: 1;
-            opacity: 0.9;
-        }
-
-        .vertical-metadata {
-            position: absolute;
-            left: 2.5rem;
-            bottom: 4rem;
-            transform: rotate(-90deg);
-            transform-origin: left bottom;
-            color: var(--text-light);
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            z-index: 10;
-        }
-
-        .vertical-metadata::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--text-light);
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.8rem;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--primary);
-            border: 1px solid var(--border);
-            padding: 0.5rem 1.2rem;
-            margin-bottom: 2rem;
-            background: var(--white);
-            width: fit-content;
-        }
-
-        .hero h1 {
-            font-size: clamp(3.2rem, 5.5vw, 5.2rem);
-            line-height: 1.02;
-            color: var(--text-dark);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 span {
-            font-style: italic;
-            color: var(--primary);
-            font-weight: 400;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-medium);
-            max-width: 520px;
-            margin-bottom: 3rem;
-            font-weight: 300;
-            line-height: 1.8;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-cta-group {
-            display: flex;
-            gap: 1.5rem;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.1rem 2.5rem;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            font-weight: 600;
-            transition: all 0.4s ease;
-            border: 1px solid transparent;
-            cursor: pointer;
-            font-family: var(--font-sans);
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(200, 56, 26, 0.25);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-dark);
-            border-color: var(--text-dark);
-        }
-
-        .btn-outline:hover {
-            background: var(--text-dark);
-            color: var(--white);
-        }
-
-        .hero-right-content {
-            position: relative;
-            z-index: 3;
-            color: var(--white);
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .hero-right-title {
-            font-size: clamp(2.5rem, 4vw, 4.5rem);
-            color: var(--white);
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .dashed-scroll-ring {
-            position: absolute;
-            bottom: 3rem;
-            right: 3rem;
-            width: 90px;
-            height: 90px;
-            border: 1px dashed rgba(255,255,255,0.4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: rotateRing 20s linear infinite;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .dashed-scroll-ring::before {
-            content: '↓';
-            color: var(--white);
-            font-size: 1.2rem;
-        }
-
-        @keyframes rotateRing {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* SECTIONS COMMON */
-        section { padding: 7rem 2rem; position: relative; }
-        .container { max-width: 1250px; margin: 0 auto; }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-label {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .section-header h2 {
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            color: var(--text-dark);
-            margin-bottom: 1.2rem;
-            font-weight: 300;
-        }
-
-        .section-header p {
-            color: var(--text-medium);
-            max-width: 650px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        /* VALUE SECTION */
-        .value-section {
-            background: var(--bg-cream);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .value-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .value-card {
-            background: var(--white);
-            padding: 3.5rem 3rem;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .value-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 3px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .value-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        }
-
-        .value-card:hover::before { transform: scaleX(1); }
-
-        .value-num {
-            font-family: var(--font-mono);
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .value-card h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.2rem;
-            color: var(--text-dark);
-        }
-
-        .value-card p {
-            color: var(--text-medium);
-            font-size: 0.98rem;
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        /* SHOWCASE GRID SECTION */
-        .showcase-section { background: var(--white); }
-
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .showcase-item {
-            background: var(--bg-warm);
-            border: 1px solid var(--border);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .showcase-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        }
-
-        .showcase-img-holder {
-            width: 100%;
-            height: 320px;
-            background: #E0DAD0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .showcase-img-holder img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .showcase-caption {
-            padding: 1.8rem;
-            background: var(--white);
-            border-top: 1px solid var(--border);
-        }
-
-        .showcase-caption h4 {
-            font-size: 1.4rem;
-            color: var(--text-dark);
-            margin-bottom: 0.3rem;
-        }
-
-        .showcase-item-wide { grid-column: span 3; }
-
-        /* INTERACTIVE 3D DEMO LAB */
-        .product-lab-section {
-            background: var(--bg-dark);
-            color: var(--white);
-            padding: 8rem 2rem;
-            position: relative;
-        }
-
-        .product-lab-section .section-header h2 { color: var(--white); }
-        .product-lab-section .section-header p { color: #A0A0A0; }
-
-        .lab-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .lab-card {
-            background: #181818;
-            border: 1px solid var(--border-dark);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            min-height: 520px;
-        }
-
-        .lab-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .lab-card-title {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .viewport-container {
-            flex: 1;
-            width: 100%;
-            position: relative;
-            background: #101010;
-            border: 1px solid #252525;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .real-product-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .viewport-container:hover .real-product-img {
-            transform: scale(1.05);
-        }
-
-        #webgl-canvas {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .loader-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #101010;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: opacity 0.5s ease;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 1rem;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .progress-bar-bg {
-            width: 140px;
-            height: 3px;
-            background: #252525;
-            margin-top: 0.8rem;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .cad-viewport {
-            background-image: 
-                radial-gradient(rgba(212, 165, 116, 0.15) 1px, transparent 1px),
-                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 20px 20px, 40px 40px, 40px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .cad-svg-drawing {
-            width: 85%;
-            height: auto;
-            stroke: var(--accent);
-            stroke-width: 1.2;
-            fill: none;
-        }
-
-        .lab-card-footer {
-            margin-top: 1.5rem;
-            font-size: 0.85rem;
-            color: #888;
-            line-height: 1.6;
-        }
-
-        .controls-hint-3d {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.75rem;
-            color: var(--accent);
-        }
-
-        /* IMPORTANCE SECTION */
-        .importance-section {
-            background: var(--white);
-            border-top: 1px solid var(--border);
-        }
-
-        .importance-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .importance-text h2 {
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            margin-bottom: 1.8rem;
-            color: var(--text-dark);
-            line-height: 1.15;
-        }
-
-        .importance-text p {
-            color: var(--text-medium);
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.9;
-            font-weight: 300;
-        }
-
-        .importance-visual {
-            height: 480px;
-            background: var(--bg-cream);
-            border: 1px solid var(--border);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .geo-shape {
-            position: absolute;
-            background: var(--primary);
-            opacity: 0.85;
-            animation: floatShape 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes floatShape {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-20px) rotate(10deg); }
-        }
-
-        /* FOOTER */
-        footer {
-            background: var(--text-dark);
-            color: var(--white);
-            padding: 5rem 2rem 2rem;
-            border-top: 1px solid var(--border-dark);
-        }
-
-        .footer-container {
-            max-width: 1250px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand h3 {
-            font-size: 2rem;
-            color: var(--white);
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            color: #888;
-            max-width: 400px;
-            font-weight: 300;
-        }
-
-        .footer-links h4 {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.1em;
-        }
-
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
-        .footer-links a {
-            color: #AAA;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-        }
-        .footer-links a:hover { color: var(--white); }
-
-        .footer-bottom {
-            max-width: 1250px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 1024px) {
-            .hero { grid-template-columns: 1fr; }
-            .hero-left { padding: 8rem 3rem 4rem; }
-            .hero-right { min-height: 400px; }
-            .lab-grid { grid-template-columns: 1fr; }
-            .importance-content { grid-template-columns: 1fr; gap: 3rem; }
-            .footer-container { grid-template-columns: 1fr; gap: 2.5rem; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .showcase-grid { grid-template-columns: 1fr; }
-            .showcase-item-wide { grid-column: span 1; }
-            .hero h1 { font-size: 2.8rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tunisian Asset — 3D Models for Furniture Brands</title>
+<meta name="description" content="Tunisian Asset transforme vos produits physiques en assets 3D photoréalistes, visuels interactifs et livrables techniques pour les marques de design exigeantes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23050505'/%3E%3Ccircle cx='9' cy='22' r='2' fill='%23ff5a36'/%3E%3Ccircle cx='16' cy='14' r='2' fill='%23f2efe9'/%3E%3Ccircle cx='23' cy='22' r='2' fill='%23f2efe9'/%3E%3Ccircle cx='16' cy='23' r='2' fill='%23f2efe9'/%3E%3C/svg%3E">
+<!-- Typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TUNISIAN ASSET — v3 "photogram" edition
+   Dark point-cloud design; the hero chair is a dense relief computed
+   locally from the official renders (1.png..4.png) by a FastDepth AI.
+============================================================ */
+:root{
+  --bg:#050505; --bg2:#0b0b0a; --panel:#0e0e0d;
+  --ink:#f2efe9; --mut:#8f8c83; --dim:#57544d;
+  --line:rgba(242,239,233,.13); --line2:rgba(242,239,233,.07);
+  --accent:#ff5a36; --accent2:#ffb46a;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Space Grotesk','Segoe UI',sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gutter:clamp(20px,4vw,64px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{background:var(--bg)}
+body{color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.locked{overflow:hidden}
+::selection{background:var(--accent);color:#050505}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,svg,canvas{display:block;max-width:100%}
+.mono{font-family:var(--mono)}
+.wrap{width:min(1520px,100% - 2*var(--gutter));margin-inline:auto}
+
+.grain{position:fixed;inset:-60px;z-index:2000;pointer-events:none;opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 9s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-24px,18px)}40%{transform:translate(18px,-30px)}60%{transform:translate(-30px,-12px)}80%{transform:translate(24px,24px)}}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 55%,rgba(0,0,0,.55) 100%)}
+#pbar{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:1600}
+
+.cur-dot,.cur-ring{position:fixed;top:0;left:0;z-index:2100;pointer-events:none;border-radius:50%;display:none}
+.cur-dot{width:6px;height:6px;background:var(--ink);transform:translate(-50%,-50%)}
+.cur-ring{width:34px;height:34px;border:1px solid rgba(242,239,233,.4);transform:translate(-50%,-50%);
+  transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,background .3s}
+.cur-ring span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:8px;letter-spacing:.14em;opacity:0;transition:opacity .25s}
+body.c-hover .cur-ring{width:56px;height:56px;border-color:var(--accent)}
+body.c-drag .cur-ring{width:74px;height:74px;background:rgba(255,90,54,.08);border-color:var(--accent)}
+body.c-drag .cur-ring span{opacity:1}
+@media(pointer:fine){.cur-dot,.cur-ring{display:block}}
+
+#loader{position:fixed;inset:0;z-index:3000;background:var(--bg);display:grid;place-items:center}
+#loader .l-in{width:min(560px,86vw)}
+#loader .l-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--mut);margin-bottom:14px}
+#loader .l-num{font-family:var(--mono);font-size:clamp(44px,8vw,84px);font-weight:500;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+#loader .l-num i{font-style:normal;color:var(--accent)}
+#loader .l-bar{height:1px;background:var(--line);margin:26px 0 16px;position:relative;overflow:hidden}
+#loader .l-bar b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+#loader .l-status{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--dim);min-height:16px}
+#loader .curtain{position:absolute;left:0;width:100%;height:50.5%;background:var(--bg);z-index:2;transition:transform 1s var(--ease)}
+#loader .curtain.t{top:0}#loader .curtain.b{bottom:0}
+#loader.done .curtain.t{transform:translateY(-101%)}
+#loader.done .curtain.b{transform:translateY(101%)}
+#loader.done .l-in{opacity:0;transition:opacity .3s}
+#loader.gone{display:none}
+
+header{position:fixed;top:0;left:0;right:0;z-index:1500;transition:background .4s,border-color .4s,backdrop-filter .4s;border-bottom:1px solid transparent}
+header.scrolled{background:rgba(5,5,5,.72);backdrop-filter:blur(14px);border-color:var(--line2)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:.06em;font-size:14px}
+.brand .dotmark{width:26px;height:26px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;position:relative;overflow:hidden}
+.brand .dotmark::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(.55);opacity:.5}}
+.brand small{font-family:var(--mono);font-weight:400;font-size:9px;color:var(--mut);letter-spacing:.22em;display:block;margin-top:1px}
+.nav-links{display:flex;gap:6px}
+.nav-links a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--mut);padding:10px 14px;position:relative;transition:color .3s}
+.nav-links a::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang{display:flex;border:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.1em}
+.lang button{padding:7px 11px;color:var(--mut);transition:.3s}
+.lang button.on{background:var(--ink);color:#050505}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;padding:14px 22px;border:1px solid var(--line);border-radius:999px;position:relative;overflow:hidden;transition:color .35s,border-color .35s;isolation:isolate}
+.btn::before{content:"";position:absolute;inset:0;background:var(--ink);transform:translateY(101%);transition:transform .45s var(--ease);z-index:-1;border-radius:inherit}
+.btn:hover{color:#050505;border-color:var(--ink)}
+.btn:hover::before{transform:translateY(0)}
+.btn.solid{background:var(--ink);color:#050505;border-color:var(--ink)}
+.btn.solid::before{background:var(--accent)}
+.btn.solid:hover{border-color:var(--accent)}
+.btn i{font-style:normal;display:inline-block;transition:transform .4s var(--ease)}
+.btn:hover i{transform:translate(3px,-3px)}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;place-items:center;flex-direction:column;gap:5px}
+.burger b{width:16px;height:1px;background:var(--ink);transition:.35s var(--ease)}
+body.menu-open .burger b:first-child{transform:translateY(3px) rotate(45deg)}
+body.menu-open .burger b:last-child{transform:translateY(-3px) rotate(-45deg)}
+#mmenu{position:fixed;inset:0;z-index:1400;background:rgba(5,5,5,.96);backdrop-filter:blur(10px);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .45s}
+#mmenu.open{opacity:1;pointer-events:auto}
+#mmenu nav{display:grid;gap:8px;text-align:center}
+#mmenu a{font-size:clamp(30px,8vw,52px);font-weight:700;letter-spacing:-.01em;opacity:.85}
+@media(max-width:980px){.nav-links,.nav .btn{display:none}.burger{display:flex}}
+
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero .stage{position:absolute;inset:0;z-index:0;cursor:pointer}
+.hero .stage canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero .stage .tags{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.tag{position:absolute;top:0;left:0;font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:rgba(242,239,233,.85);white-space:nowrap;padding:5px 8px;opacity:0;will-change:transform}
+.tag::before,.tag::after{content:"";position:absolute;width:7px;height:7px;border:1px solid rgba(242,239,233,.55)}
+.tag::before{left:-4px;top:-4px;border-right:0;border-bottom:0}
+.tag::after{right:-4px;bottom:-4px;border-left:0;border-top:0}
+.hero .inner{position:relative;z-index:2;padding:120px 0 0}
+.kicker{display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--mut);text-transform:uppercase}
+.kicker::before{content:"";width:34px;height:1px;background:var(--accent)}
+.hero h1{font-size:clamp(56px,11.5vw,176px);line-height:.92;letter-spacing:-.03em;font-weight:700;text-transform:uppercase;margin:26px 0 30px}
+.hero h1 .hl{display:block}
+.hero h1 .ol{color:transparent;-webkit-text-stroke:1.5px rgba(242,239,233,.85)}
+.hero h1 sup{font-size:.18em;color:var(--accent);-webkit-text-stroke:0;vertical-align:super;letter-spacing:.1em}
+.hero-grid{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:34px;padding-bottom:110px}
+.hero-sub{max-width:440px;color:var(--mut);font-size:15px}
+.hero-sub b{color:var(--ink);font-weight:500}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+.hero-specs{position:absolute;left:var(--gutter);bottom:36px;z-index:2;display:grid;gap:7px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--dim)}
+.hero-specs span{display:flex;align-items:center;gap:9px}
+.hero-specs span::before{content:"";width:5px;height:5px;background:var(--accent)}
+.hero-meta{position:absolute;right:var(--gutter);bottom:36px;z-index:2;text-align:right;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;color:var(--dim);display:grid;gap:7px}
+#ph-status.rdy{color:var(--accent)}
+.scroll-cue{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);z-index:2;display:grid;justify-items:center;gap:10px;font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:var(--dim)}
+.scroll-cue .line{width:1px;height:44px;background:var(--line);overflow:hidden;position:relative}
+.scroll-cue .line::after{content:"";position:absolute;left:0;top:-50%;width:100%;height:50%;background:var(--accent);animation:drop 1.8s var(--ease) infinite}
+@keyframes drop{to{top:110%}}
+@media(max-width:760px){.hero-grid{padding-bottom:150px}.hero-specs{display:none}.hero-meta{left:var(--gutter);right:auto;text-align:left;bottom:32px}.scroll-cue{display:none}}
+
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+.wi{display:inline-block;transform:translateY(115%);transition:transform 1.1s var(--ease);transition-delay:var(--wd,0s)}
+.in .wi{transform:translateY(0)}
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1s var(--ease),transform 1s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+
+.marquee{border-block:1px solid var(--line2);overflow:hidden;padding:18px 0;background:var(--bg2)}
+.mq-track{display:flex;width:max-content;animation:mq 30s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track span{display:flex;align-items:center;gap:28px;padding-right:28px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--mut);white-space:nowrap}
+.mq-track span::after{content:"";width:6px;height:6px;background:var(--accent);flex:none}
+@keyframes mq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.mq-track{animation:none}}
+
+section{position:relative;z-index:2}
+.sec{padding:clamp(90px,11vw,170px) 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:clamp(40px,6vw,80px)}
+.sec-head h2{font-size:clamp(34px,5.4vw,74px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;font-weight:700;max-width:16ch}
+.sec-head h2 em{font-style:normal;color:var(--accent)}
+.sec-head .lead{max-width:360px;color:var(--mut);font-size:15px}
+.idx{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--accent);display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.idx::after{content:"";height:1px;flex:1;background:var(--line2)}
+
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line2)}
+.val-card{padding:clamp(26px,3vw,44px);border-right:1px solid var(--line2);position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;transition:background .5s}
+.val-card:last-child{border-right:0}
+.val-card::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 110%,rgba(255,90,54,.14),transparent 70%);opacity:0;transition:opacity .6s}
+.val-card:hover::before{opacity:1}
+.val-num{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.2em;transition:color .4s}
+.val-card:hover .val-num{color:var(--accent)}
+.val-card h3{font-size:clamp(21px,2vw,27px);line-height:1.15;letter-spacing:-.01em;margin:auto 0 14px;text-transform:uppercase}
+.val-card p{color:var(--mut);font-size:14px;max-width:34ch}
+.val-foot{margin-top:26px;padding-top:18px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--dim);display:flex;justify-content:space-between}
+.val-icon{width:44px;height:44px;margin-bottom:26px;color:var(--accent);opacity:.9}
+@media(max-width:900px){.val-grid{grid-template-columns:1fr}.val-card{border-right:0;border-bottom:1px solid var(--line2);min-height:0}.val-card:last-child{border-bottom:0}}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2);border-block:1px solid var(--line2)}
+.stat{background:var(--bg);padding:clamp(28px,3.4vw,52px) clamp(20px,2.4vw,40px)}
+.stat b{font-size:clamp(38px,4.6vw,64px);font-weight:700;letter-spacing:-.03em;line-height:1;display:block}
+.stat b i{font-style:normal;color:var(--accent);font-size:.55em;vertical-align:.5em}
+.stat span{display:block;margin-top:12px;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}}
+
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,26px)}
+.work{border:1px solid var(--line2);background:var(--panel);position:relative;transition:border-color .4s,transform .6s var(--ease)}
+.work:hover{border-color:rgba(242,239,233,.3);transform:translateY(-6px)}
+.work .wc{position:relative;aspect-ratio:4/3.4;overflow:hidden;border-bottom:1px solid var(--line2);background:radial-gradient(70% 60% at 50% 42%,#101010,#050505 90%)}
+.work .wc canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.92;transition:opacity .5s,transform .8s var(--ease)}
+.work:hover .wc canvas{opacity:1;transform:scale(1.045)}
+.work .wc::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 80px rgba(0,0,0,.75);pointer-events:none}
+.work .scan-id{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--mut);z-index:2}
+.work .scan-live{position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--accent2)}
+.work .scan-live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+.work .wb{padding:20px 20px 22px}
+.work .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;color:var(--mut);border:1px solid var(--line2);padding:4px 8px;border-radius:999px}
+.work h3{font-size:19px;letter-spacing:-.01em;text-transform:uppercase}
+.work p{color:var(--mut);font-size:13px;margin-top:8px}
+.work .wm{display:flex;justify-content:space-between;margin-top:16px;padding-top:14px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--dim)}
+@media(max-width:900px){.works{grid-template-columns:1fr}}
+
+.lab{background:var(--bg2);border-block:1px solid var(--line2)}
+.lab .sec-head{margin-bottom:34px}
+.tabs{display:flex;border:1px solid var(--line2);width:max-content;max-width:100%;overflow:auto}
+.tab{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--mut);padding:15px 22px;border-right:1px solid var(--line2);display:flex;gap:10px;align-items:center;transition:.35s;white-space:nowrap}
+.tab:last-child{border-right:0}
+.tab b{color:var(--accent);font-weight:400}
+.tab.on{background:var(--ink);color:#050505}
+.tab.on b{color:#050505}
+.stagebox{position:relative;border:1px solid var(--line2);background:#040404;aspect-ratio:16/8.2;min-height:380px;overflow:hidden}
+.stagebox .pane{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .5s}
+.stagebox .pane.on{opacity:1;pointer-events:auto}
+.stagebox canvas{position:absolute;inset:0;width:100%;height:100%}
+.pimgs{position:absolute;inset:0;background:#0b0b0b;cursor:pointer}
+.pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(1.045);transition:opacity .7s var(--ease),transform 1.5s var(--ease);will-change:opacity,transform}
+.pimg.on{opacity:1;transform:scale(1)}
+.viewbar{position:absolute;left:16px;bottom:52px;display:flex;gap:6px;z-index:4;flex-wrap:wrap;max-width:70%}
+.vchip{font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--mut);border:1px solid var(--line);padding:8px 12px;border-radius:999px;transition:.3s;background:rgba(5,5,5,.55);cursor:pointer}
+.vchip:hover{color:var(--ink);border-color:var(--ink)}
+.vchip.on{background:var(--ink);color:#050505;border-color:var(--ink)}
+.loader-overlay{position:absolute;inset:0;background:#040404;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:10;transition:opacity .5s ease}
+.loader-overlay.off{opacity:0;pointer-events:none}
+.spinner{width:40px;height:40px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:1rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hud{position:absolute;left:16px;bottom:14px;display:flex;gap:18px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--dim);z-index:4}
+.hud b{color:var(--mut);font-weight:400}
+.hud .live{color:var(--accent)}
+.zoomers{position:absolute;right:16px;bottom:12px;display:flex;gap:6px;z-index:4}
+.zoomers button{width:34px;height:34px;border:1px solid var(--line);border-radius:50%;font-family:var(--mono);font-size:13px;color:var(--mut);display:grid;place-items:center;transition:.3s;background:rgba(5,5,5,.5)}
+.zoomers button:hover{color:var(--ink);border-color:var(--ink)}
+.draghint{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--dim);display:flex;gap:16px;align-items:center;z-index:4}
+.draghint svg{width:14px;height:14px;stroke:var(--accent);animation:sway 2.6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+.lab-note{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px}
+.lab-note .sn{border-top:1px solid var(--line2);padding-top:14px;font-size:13px;color:var(--mut)}
+.lab-note .sn b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--ink);margin-bottom:8px;font-weight:400}
+@media(max-width:900px){.lab-note{grid-template-columns:1fr}.stagebox{aspect-ratio:auto;height:min(72vw,460px)}}
+
+.importance .big{font-size:clamp(30px,5vw,68px);line-height:1.08;letter-spacing:-.02em;font-weight:500;max-width:22ch}
+.importance .big em{font-style:normal;color:transparent;-webkit-text-stroke:1px var(--accent2)}
+.importance .big u{text-decoration:none;color:var(--accent)}
+.importance-row{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(30px,5vw,90px);align-items:end}
+.importance-row p{color:var(--mut);font-size:15px;max-width:46ch}
+.importance-row p b{color:var(--ink);font-weight:500}
+@media(max-width:900px){.importance-row{grid-template-columns:1fr}}
+
+.contact{border-top:1px solid var(--line2)}
+.mail{display:inline-block;font-size:clamp(26px,5.6vw,84px);font-weight:700;letter-spacing:-.03em;position:relative;line-height:1.05;word-break:break-word}
+.mail::after{content:"";position:absolute;left:0;bottom:-6px;height:3px;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ease)}
+.mail:hover::after{transform:scaleX(1);transform-origin:left}
+.contact-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(36px,6vw,110px);margin-top:clamp(40px,5vw,70px)}
+.c-meta{display:grid;gap:0;align-content:start}
+.c-meta .row{display:flex;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line2);font-size:13px}
+.c-meta .row b{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;color:var(--dim);font-weight:400;padding-top:3px}
+.c-meta .row span{color:var(--ink);text-align:right}
+form .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form label{display:block;margin-bottom:16px}
+form .lab{font-family:var(--mono);font-size:9px;letter-spacing:.2em;color:var(--dim);display:block;margin-bottom:8px}
+form input,form textarea{width:100%;background:transparent;border:1px solid var(--line2);color:var(--ink);padding:14px 16px;font:inherit;font-size:14px;transition:border-color .3s;border-radius:0;appearance:none}
+form input:focus,form textarea:focus{outline:0;border-color:var(--accent)}
+form textarea{min-height:120px;resize:vertical}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr}form .frow{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line2);padding:56px 0 0;overflow:hidden}
+.f-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;padding-bottom:44px}
+.f-col{display:grid;gap:9px;font-size:13px;color:var(--mut)}
+.f-col b{font-family:var(--mono);font-size:9px;letter-spacing:.22em;color:var(--dim);font-weight:400;margin-bottom:6px}
+.f-col a{transition:color .3s;width:max-content}
+.f-col a:hover{color:var(--accent)}
+.f-word{font-size:clamp(52px,10.6vw,170px);line-height:.94;font-weight:700;text-transform:uppercase;letter-spacing:-.02em;color:transparent;-webkit-text-stroke:1px rgba(242,239,233,.22);white-space:nowrap;text-align:center;transform:translateY(12%);user-select:none}
+.f-word span{color:var(--accent);-webkit-text-stroke:0}
+.f-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;align-items:center;border-top:1px solid var(--line2);padding:18px 0;font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--dim)}
+#totop{transition:color .3s}#totop:hover{color:var(--accent)}
+canvas.dead{background:var(--panel)}
+canvas.dead::after{content:"WEBGL INDISPONIBLE";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.2em;color:var(--dim)}
+</style>
 </head>
-<body>
+<body class="locked">
 
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-icon"></div>
-                <span class="logo-text">Tunisian Asset</span>
-            </a>
+<div class="grain"></div>
+<div class="vignette"></div>
+<div id="pbar"></div>
+<div class="cur-dot"></div>
+<div class="cur-ring"><span>DRAG</span></div>
 
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="#value" data-i18n="nav_value">Valeur</a></li>
-                    <li><a href="#showcase" data-i18n="nav_showcase">Réalisations</a></li>
-                    <li><a href="#interactive-3d" data-i18n="nav_3d">Studio 3D</a></li>
-                    <li><a href="#importance" data-i18n="nav_importance">Vision</a></li>
-                </ul>
+<!-- PRELOADER -->
+<div id="loader">
+  <div class="curtain t"></div><div class="curtain b"></div>
+  <div class="l-in">
+    <div class="l-top"><span>TUNISIAN ASSET®</span><span>N 36.8065° — E 10.1815°</span></div>
+    <div class="l-num"><span id="lnum">00</span><i>%</i></div>
+    <div class="l-bar"><b id="lbar"></b></div>
+    <div class="l-status" id="lstatus">…</div>
+  </div>
+</div>
 
-                <!-- Language Switcher -->
-                <div class="lang-switcher">
-                    <div class="lang-current" id="langToggle">
-                        <span id="currentLangLabel">FR</span> ▼
-                    </div>
-                    <div class="lang-dropdown" id="langDropdown">
-                        <button class="active-lang" onclick="switchLanguage('fr')">Français (FR)</button>
-                        <button onclick="switchLanguage('en')">English (EN)</button>
-                    </div>
-                </div>
-
-                <a href="#contact" class="nav-cta btn" data-i18n="nav_cta">Contact</a>
-            </div>
-        </div>
+<!-- NAVIGATION -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="#top" data-cursor>
+      <span class="dotmark"></span>
+      <span>TUNISIAN ASSET<small data-i18n="brand_sub">STUDIO 3D — TUNIS</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#value" data-i18n="nav_value">Valeur</a>
+      <a href="#showcase" data-i18n="nav_showcase">Réalisations</a>
+      <a href="#interactive-3d" data-i18n="nav_3d">Studio 3D</a>
+      <a href="#importance" data-i18n="nav_importance">Vision</a>
+      <a href="#contact" data-i18n="nav_cta">Contact</a>
     </nav>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Langue">
+        <button id="fr" class="on">FR</button><button id="en">EN</button>
+      </div>
+      <a class="btn" href="#contact" data-magnet data-i18n-html="nav_cta_btn">Démarrer un projet <i>↗</i></a>
+      <button class="burger" id="burger" aria-label="Menu"><b></b><b></b></button>
+    </div>
+  </div>
+</header>
+<div id="mmenu">
+  <nav>
+    <a href="#value" data-i18n="nav_value">Valeur</a>
+    <a href="#showcase" data-i18n="nav_showcase">Réalisations</a>
+    <a href="#interactive-3d" data-i18n="nav_3d">Studio 3D</a>
+    <a href="#importance" data-i18n="nav_importance">Vision</a>
+    <a href="#contact" data-i18n="nav_cta">Contact</a>
+  </nav>
+</div>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-watermark">TUNISIAN</div>
-        
-        <div class="hero-left">
-            <div class="hero-badge mono">
-                <span>●</span> <span data-i18n="hero_badge">Studio 3D Modélisation // 2026</span>
-            </div>
-            
-            <h1 data-i18n-html="hero_title">
-                L'excellence 3D pour vos <span>collections de mobilier</span>.
-            </h1>
-            
-            <p class="hero-subtitle" data-i18n="hero_subtitle">
-                Nous transformons vos produits physiques en assets 3D photoréalistes, visuels interactifs et livrables techniques pour les marques de design exigeantes.
-            </p>
-            
-            <div class="hero-cta-group">
-                <a href="#interactive-3d" class="btn btn-primary" data-i18n="hero_btn_primary">Explorer le Studio 3D</a>
-                <a href="#showcase" class="btn btn-outline" data-i18n="hero_btn_secondary">Voir Portfolio</a>
-            </div>
+<main id="top">
 
-            <div class="vertical-metadata mono">
-                <span>CRAFTED IN TUNISIA</span>
-                <span>LAT: 36.8065° N</span>
-            </div>
+<!-- HERO — the chair below is a live point relief computed from 1.png..4.png -->
+<section class="hero" id="hero">
+  <div class="stage" data-cursor>
+    <canvas id="cv-hero"></canvas>
+    <div class="tags" id="hero-tags"></div>
+  </div>
+  <div class="inner wrap">
+    <div class="kicker rv" data-i18n="hero_badge">Studio 3D Modélisation // 2026</div>
+    <h1 data-split>
+      <span class="hl">Tunisian</span>
+      <span class="hl ol">Asset<sup>®</sup></span>
+    </h1>
+    <div class="hero-grid">
+      <p class="hero-sub rv" style="--d:.5s" data-i18n-html="hero_subtitle">Nous transformons vos produits physiques en <b>assets 3D photoréalistes</b>, visuels interactifs et livrables techniques pour les marques de design exigeantes.</p>
+      <div class="hero-ctas rv" style="--d:.65s">
+        <a class="btn solid" href="#interactive-3d" data-magnet data-i18n-html="hero_btn_primary">Explorer le Studio 3D <i>↗</i></a>
+        <a class="btn" href="#showcase" data-magnet data-i18n="hero_btn_secondary">Voir Portfolio</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-specs">
+    <span data-i18n="spec_country">CONÇU EN TUNISIE</span>
+    <span>LAT: 36.8065° N — LON: 10.1815° E</span>
+    <span>SPEC: ARCH-3D-2026</span>
+  </div>
+  <div class="hero-meta">
+    <span id="ph-status" data-i18n="ph_status">ANALYSE DE LA PROFONDEUR…</span>
+    <span data-i18n="hero_render">RENDU : WEBGL · TEMPS RÉEL</span>
+    <span><span id="pts-hero">—</span> <span data-i18n="hero_pts">POINTS</span> · <span id="fps">60</span> FPS</span>
+  </div>
+  <div class="scroll-cue"><span data-i18n="scroll_cue">DÉFILER</span><div class="line"></div></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true"><div class="mq-track" id="mq"></div></div>
+
+<!-- VALUE -->
+<section id="value" class="sec">
+  <div class="wrap">
+    <div class="idx rv">/ 01 — <span data-i18n="value_label">VALEUR AJOUTÉE</span></div>
+    <div class="sec-head">
+      <h2 data-split data-i18n="value_title">Pourquoi numériser votre catalogue ?</h2>
+      <p class="lead rv" style="--d:.2s" data-i18n="value_subtitle">Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.</p>
+    </div>
+    <div class="val-grid">
+      <article class="val-card rv">
+        <div class="val-num">( 01 )</div>
+        <svg class="val-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="9"/><circle cx="24" cy="24" r="1.6" fill="currentColor"/><path d="M24 7v6M41 24h-6M24 41v-6M7 24h6"/></svg>
+        <h3 data-i18n="value_1_title">Photoréalisme Absolu</h3>
+        <p data-i18n="value_1_desc">Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.</p>
+        <div class="val-foot"><span>4K — 8K PBR</span><span data-i18n="value_1_foot">FIBRE → PIXEL</span></div>
+      </article>
+      <article class="val-card rv" style="--d:.12s">
+        <div class="val-num">( 02 )</div>
+        <svg class="val-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 26l14-16 4 10 14 6-14 16-4-10z" stroke-linejoin="round"/><circle cx="26" cy="20" r="1.6" fill="currentColor"/></svg>
+        <h3 data-i18n="value_2_title">Intégration WebGL / AR</h3>
+        <p data-i18n="value_2_desc">Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.</p>
+        <div class="val-foot"><span>60 FPS</span><span>USDZ / GLB</span></div>
+      </article>
+      <article class="val-card rv" style="--d:.24s">
+        <div class="val-num">( 03 )</div>
+        <svg class="val-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M10 38V16l14-8 14 8v22" stroke-linejoin="round"/><path d="M4 38h40M18 38V26h12v12"/><path d="M10 16h28" stroke-dasharray="3 3"/></svg>
+        <h3 data-i18n="value_3_title">Conformité CAD &amp; DWG</h3>
+        <p data-i18n="value_3_desc">Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.</p>
+        <div class="val-foot"><span>± 0.1 MM</span><span>DWG / STEP</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="wrap">
+  <div class="stats">
+    <div class="stat rv"><b><span data-count="128">0</span><i>+</i></b><span data-i18n="stat_1">Actifs 3D livrés</span></div>
+    <div class="stat rv" style="--d:.1s"><b><span data-count="0.1" data-dec="1">0</span><i>MM</i></b><span data-i18n="stat_2">Précision de scan</span></div>
+    <div class="stat rv" style="--d:.2s"><b><span data-count="48">0</span><i>H</i></b><span data-i18n="stat_3">Délai moyen</span></div>
+    <div class="stat rv" style="--d:.3s"><b><span data-count="60">0</span><i>FPS</i></b><span data-i18n="stat_4">Temps réel garanti</span></div>
+  </div>
+</div>
+
+<!-- SHOWCASE -->
+<section id="showcase" class="sec">
+  <div class="wrap">
+    <div class="idx rv">/ 02 — <span data-i18n="showcase_label">RÉALISATIONS</span></div>
+    <div class="sec-head">
+      <h2 data-split data-i18n="showcase_title">Galerie de Produits Numérisés</h2>
+      <p class="lead rv" style="--d:.2s" data-i18n="showcase_subtitle">Chaque pièce ci-dessous est un nuage de points calculé en direct dans votre navigateur.</p>
+    </div>
+    <div class="works">
+      <article class="work rv">
+        <div class="wc"><canvas id="cv-w1"></canvas><span class="scan-id">TA—001 / LOUNGE VELVET</span><span class="scan-live" data-i18n="scan_live">SCAN</span></div>
+        <div class="wb">
+          <div class="chips"><span class="chip">3D + PBR</span><span class="chip">GLB</span><span class="chip">34K PTS</span></div>
+          <h3 data-i18n="showcase_1_title">Fauteuil Lounge Velvet</h3>
+          <p data-i18n="showcase_1_desc">Velours émeraude, structure noyer. Scan complet avec coutures et capitonnage.</p>
+          <div class="wm"><span>TA—001</span><span>2026</span></div>
         </div>
-
-        <div class="hero-right">
-            <div class="accent-circle"></div>
-            <div class="hero-right-content">
-                <div class="mono" style="margin-bottom: 1rem; color: var(--accent);">SPEC: ARCH-3D-2026</div>
-                <div class="hero-right-title">MOBILIER<br>DESIGN</div>
-            </div>
-
-            <div class="dashed-scroll-ring" onclick="document.getElementById('value').scrollIntoView({behavior: 'smooth'})"></div>
+      </article>
+      <article class="work rv" style="--d:.12s">
+        <div class="wc"><canvas id="cv-w2"></canvas><span class="scan-id">TA—002 / CHÊNE MASSIF</span><span class="scan-live" data-i18n="scan_live">SCAN</span></div>
+        <div class="wb">
+          <div class="chips"><span class="chip">AR-READY</span><span class="chip">USDZ</span><span class="chip">16K PTS</span></div>
+          <h3 data-i18n="showcase_2_title">Table En Chêne Massif</h3>
+          <p data-i18n="showcase_2_desc">Chêne tunisien, assemblages traditionnels. Prête pour l'essayage en réalité augmentée.</p>
+          <div class="wm"><span>TA—002</span><span>2026</span></div>
         </div>
-    </section>
-
-    <!-- VALUE SECTION -->
-    <section id="value" class="value-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">VALEUR AJOUTÉE</span>
-                <h2 data-i18n="value_title">Pourquoi numériser votre catalogue ?</h2>
-                <p data-i18n="value_subtitle">Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.</p>
-            </div>
-
-            <div class="value-grid">
-                <div class="value-card">
-                    <span class="value-num">// 01</span>
-                    <h3 data-i18n="value_1_title">Photoréalisme Absolu</h3>
-                    <p data-i18n="value_1_desc">Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.</p>
-                </div>
-
-                <div class="value-card">
-                    <span class="value-num">// 02</span>
-                    <h3 data-i18n="value_2_title">Intégration WebGL / AR</h3>
-                    <p data-i18n="value_2_desc">Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.</p>
-                </div>
-
-                <div class="value-card">
-                    <span class="value-num">// 03</span>
-                    <h3 data-i18n="value_3_title">Conformité CAD & DWG</h3>
-                    <p data-i18n="value_3_desc">Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.</p>
-                </div>
-            </div>
+      </article>
+      <article class="work rv" style="--d:.24s">
+        <div class="wc"><canvas id="cv-w3"></canvas><span class="scan-id">TA—003 / LUMINAIRE</span><span class="scan-live" data-i18n="scan_live">SCAN</span></div>
+        <div class="wb">
+          <div class="chips"><span class="chip">STUDIO LIGHT</span><span class="chip">2700K</span><span class="chip">16K PTS</span></div>
+          <h3 data-i18n="showcase_3_title">Luminaire Minimaliste</h3>
+          <p data-i18n="showcase_3_desc">Aluminium brossé, source chaude 2700 K. Rendu d'éclairage studio calibré.</p>
+          <div class="wm"><span>TA—003</span><span>2026</span></div>
         </div>
-    </section>
+      </article>
+    </div>
+  </div>
+</section>
 
-    <!-- SHOWCASE SECTION -->
-    <section id="showcase" class="showcase-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label">RÉALISATIONS</span>
-                <h2 data-i18n="showcase_title">Galerie de Produits Numérisés</h2>
-                <p data-i18n="showcase_subtitle">Aperçu de nos intégrations 3D et rendus haute définition pour les marques éditeurs.</p>
-            </div>
-
-            <div class="showcase-grid">
-                <div class="showcase-item">
-                    <div class="showcase-img-holder">
-                        <img src="assets/product-real.jpg" alt="Mobilier Design" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'mono\' style=\'color:#666;\'>[ IMAGE_PRODUCT_1 ]</div>'">
-                    </div>
-                    <div class="showcase-caption">
-                        <h4>Fauteuil Lounge Velvet</h4>
-                        <p class="mono" style="color: var(--primary);">Modélisation 3D & PBR</p>
-                    </div>
-                </div>
-
-                <div class="showcase-item">
-                    <div class="showcase-img-holder">
-                        <div class="mono" style="color:#666;">[ IMAGE_PRODUCT_2 ]</div>
-                    </div>
-                    <div class="showcase-caption">
-                        <h4>Table En Chêne Massif</h4>
-                        <p class="mono" style="color: var(--primary);">Asset AR-Ready</p>
-                    </div>
-                </div>
-
-                <div class="showcase-item">
-                    <div class="showcase-img-holder">
-                        <div class="mono" style="color:#666;">[ IMAGE_PRODUCT_3 ]</div>
-                    </div>
-                    <div class="showcase-caption">
-                        <h4>Luminaire Minimaliste</h4>
-                        <p class="mono" style="color: var(--primary);">Studio Lighting Render</p>
-                    </div>
-                </div>
-            </div>
+<!-- INTERACTIVE 3D LAB -->
+<section id="interactive-3d" class="sec lab">
+  <div class="wrap">
+    <div class="idx rv">/ 03 — <span data-i18n="lab_label">STUDIO DÉMO INTERACTIF</span></div>
+    <div class="sec-head">
+      <h2 data-split data-i18n="lab_title">Triple Représentation Produit</h2>
+      <p class="lead rv" style="--d:.2s" data-i18n="lab_subtitle">Découvrez l'interaction synchronisée entre le produit réel, son modèle 3D temps réel et son schéma technique 2D.</p>
+    </div>
+    <div class="tabs rv" role="tablist">
+      <button class="tab on" data-pane="p1" data-cursor><b>01</b><span data-i18n="lab_t1">PRODUIT RÉEL</span></button>
+      <button class="tab" data-pane="p2" data-cursor><b>02</b><span data-i18n="lab_t2">MODÈLE 3D INTERACTIF</span></button>
+      <button class="tab" data-pane="p3" data-cursor><b>03</b><span data-i18n="lab_t3">DESSIN TECHNIQUE 2D</span></button>
+    </div>
+    <div class="stagebox rv">
+      <div class="pane on" id="p1">
+        <div class="pimgs" id="pimgs" data-cursor>
+          <img class="pimg on" src="1.png" alt="Vue face">
+          <img class="pimg" src="2.png" alt="Vue dessus">
+          <img class="pimg" src="3.png" alt="Vue profil">
+          <img class="pimg" src="4.png" alt="Détail">
         </div>
-    </section>
-
-    <!-- INTERACTIVE 3D DEMO LAB -->
-    <section id="interactive-3d" class="product-lab-section">
-        <div class="container">
-            <div class="section-header">
-                <span class="section-label" style="color: var(--accent);">STUDIO DEMO INTERACTIF</span>
-                <h2>Triple Représentation Produit</h2>
-                <p>Découvrez l'interaction synchronisée entre le produit réel, son modèle 3D temps réel et son schéma technique 2D.</p>
-            </div>
-
-            <div class="lab-grid">
-                
-                <!-- 1. Physical Product Photo -->
-                <div class="lab-card">
-                    <div class="lab-card-header">
-                        <span class="lab-card-title">01. Produit Réel</span>
-                        <span class="mono" style="color: #666;">PHOTO</span>
-                    </div>
-                    <div class="viewport-container">
-                        <img src="assets/product-real.jpg" alt="Produit Réel" class="real-product-img" onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\'mono\' style=\'color:#888; text-align:center;\'>[ VISUEL PRODUIT RÉEL ]<br><br><small>Placez votre image dans assets/product-real.jpg</small></div>'">
-                    </div>
-                    <div class="lab-card-footer">
-                        Rendu photographique haute résolution servant de référence esthétique et matérielle.
-                    </div>
-                </div>
-
-                <!-- 2. Interactive Asynchronous 3D Viewport -->
-                <div class="lab-card" style="border-color: rgba(200, 56, 26, 0.4);">
-                    <div class="lab-card-header">
-                        <span class="lab-card-title" style="color: var(--primary-light);">02. Modèle 3D Interactif</span>
-                        <span class="mono" style="color: var(--primary);">WEBGL 3D</span>
-                    </div>
-                    <div class="viewport-container" id="3d-viewport-wrapper">
-                        <!-- Loading Indicator Placeholder -->
-                        <div class="loader-overlay" id="3d-loader">
-                            <div class="spinner"></div>
-                            <div class="mono" style="font-size: 0.75rem; color: #AAA;">CHARGEMENT 3D ASYNCHRONE...</div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-bar-fill" id="progress-fill"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- WebGL Canvas Mount -->
-                        <canvas id="webgl-canvas"></canvas>
-                    </div>
-                    <div class="lab-card-footer">
-                        Modèle 3D chargé de manière asynchrone sans bloquer l'affichage initial du site.
-                        <div class="controls-hint-3d">
-                            <span>◄ Rotation: Clic Gauche</span>
-                            <span>▲ Zoom: Molette</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 2D Technical Blueprint Drawing -->
-                <div class="lab-card">
-                    <div class="lab-card-header">
-                        <span class="lab-card-title">03. Dessin Technique 2D</span>
-                        <span class="mono" style="color: #666;">CAD / DWG</span>
-                    </div>
-                    <div class="viewport-container cad-viewport">
-                        <svg class="cad-svg-drawing" viewBox="0 0 200 200">
-                            <rect x="40" y="40" width="120" height="120" stroke-dasharray="3,3" />
-                            <circle cx="100" cy="100" r="50" />
-                            <line x1="20" y1="100" x2="180" y2="100" />
-                            <line x1="100" y1="20" x2="100" y2="180" />
-                            <line x1="40" y1="25" x2="160" y2="25" stroke="#E05436" />
-                            <polyline points="45,20 40,25 45,30" stroke="#E05436" />
-                            <polyline points="155,20 160,25 155,30" stroke="#E05436" />
-                            <text x="85" y="20" fill="#E05436" font-size="8" font-family="monospace">850 mm</text>
-                        </svg>
-                    </div>
-                    <div class="lab-card-footer">
-                        Représentation vectorielle conforme aux standards d'architecture d'intérieur.
-                    </div>
-                </div>
-
-            </div>
+        <div class="viewbar" id="viewbar"></div>
+      </div>
+      <div class="pane" id="p2">
+        <canvas id="cv-cloud"></canvas>
+        <div class="tags" id="cloud-tags"></div>
+        <div class="loader-overlay" id="p2loader">
+          <div class="spinner"></div>
+          <div class="mono" style="font-size:10px;letter-spacing:.2em;color:#8f8c83" data-i18n="lab_loading">CHARGEMENT 3D ASYNCHRONE…</div>
         </div>
-    </section>
-
-    <!-- VISION SECTION -->
-    <section id="importance" class="importance-section">
-        <div class="container">
-            <div class="importance-content">
-                <div class="importance-text">
-                    <span class="section-label">NOTRE VISION</span>
-                    <h2 data-i18n="importance_title">Le pont entre conception physique et univers virtuel.</h2>
-                    <p data-i18n="importance_p1">Dans un marché du meuble de plus en plus numérisé, la précision visuelle est le facteur clé de décision d'achat pour les architectes et clients finaux.</p>
-                    <p data-i18n="importance_p2">Nous combinons l'artisanat du design tunisien avec les technologies de rendu 3D temps réel les plus avancées.</p>
-                    <a href="#contact" class="btn btn-primary" style="margin-top: 1rem;" data-i18n="importance_btn">Travailler ensemble</a>
-                </div>
-
-                <div class="importance-visual">
-                    <div class="geo-shape" style="width: 200px; height: 200px; border-radius: 50%;"></div>
-                    <div class="geo-shape" style="width: 140px; height: 140px; background: var(--text-dark); animation-delay: -2s;"></div>
-                </div>
-            </div>
+        <div class="draghint">
+          <span style="display:flex;gap:8px;align-items:center"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg><span data-i18n="lab_hint_drag">ROTATION : GLISSER</span></span>
+          <span data-i18n="lab_hint_zoom">ZOOM : MOLETTE</span>
         </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-brand">
-                <h3>Tunisian Asset</h3>
-                <p>Création d'assets 3D premium, visuels interactifs et intégrations WebGL pour l'industrie du mobilier.</p>
-            </div>
-
-            <div class="footer-links">
-                <h4>NAVIGATION</h4>
-                <ul>
-                    <li><a href="#value">Valeur</a></li>
-                    <li><a href="#showcase">Réalisations</a></li>
-                    <li><a href="#interactive-3d">Studio 3D</a></li>
-                    <li><a href="#importance">Vision</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>CONTACT</h4>
-                <ul>
-                    <li><a href="mailto:contact@tunisianasset.com">contact@tunisianasset.com</a></li>
-                    <li><a href="#">Tunis, Tunisie</a></li>
-                    <li><a href="#">+216 71 000 000</a></li>
-                </ul>
-            </div>
+        <div class="zoomers"><button id="zin" aria-label="Zoom avant">＋</button><button id="zout" aria-label="Zoom arrière">－</button></div>
+        <div class="hud">
+          <span><b data-i18n="hud_mode">MODE</b> <span id="hud-mode">PRODUIT RÉEL</span></span>
+          <span><b>PTS</b> <span id="hud-pts">—</span></span>
+          <span><b>ROT</b> <span id="hud-rot">000°</span></span>
+          <span class="live" data-i18n-html="hud_live">● LIVE</span>
         </div>
+      </div>
+      <div class="pane" id="p3"><div class="cadwrap" id="cad"></div></div>
+    </div>
+    <div class="lab-note">
+      <div class="sn rv"><b>( A ) <span data-i18n="lab_t1">PRODUIT RÉEL</span></b><span data-i18n="lab_n1">Les rendus officiels du fauteuil, vue par vue. Un clic enchaîne la vue suivante en fondu.</span></div>
+      <div class="sn rv" style="--d:.1s"><b>( B ) <span data-i18n="lab_t2">MODÈLE 3D INTERACTIF</span></b><span data-i18n="lab_n2">Modèle 3D chargé de manière asynchrone sans bloquer l'affichage initial du site. Tournez-le, zoomez, inspectez chaque vertex.</span></div>
+      <div class="sn rv" style="--d:.2s"><b>( C ) <span data-i18n="lab_t3">DESSIN TECHNIQUE 2D</span></b><span data-i18n="lab_n3">Représentation vectorielle conforme aux standards d'architecture d'intérieur, cotes millimétriques.</span></div>
+    </div>
+  </div>
+</section>
 
-        <div class="footer-bottom">
-            <span>&copy; 2026 Tunisian Asset. Tous droits réservés.</span>
-            <span class="mono">DESIGNED WITH HIGH-PERFORMANCE ASYNC 3D</span>
+<!-- IMPORTANCE / VISION -->
+<section id="importance" class="sec importance">
+  <div class="wrap">
+    <div class="idx rv">/ 04 — <span data-i18n="nav_importance">Vision</span></div>
+    <div class="importance-row">
+      <h2 class="big" data-split data-i18n-html="importance_title">La <em>précision visuelle</em> vend vos collections avant même le <u>premier rendez-vous</u>.</h2>
+      <div>
+        <p class="rv" data-i18n-html="importance_p1">Dans un marché du meuble de plus en plus numérisé, <b>la précision visuelle</b> est le facteur clé de décision d'achat pour les architectes et clients finaux.</p>
+        <p class="rv" style="--d:.15s;margin-top:18px" data-i18n-html="importance_p2">Nous combinons <b>l'artisanat du design tunisien</b> avec les technologies de rendu 3D temps réel les plus avancées.</p>
+        <a class="btn rv" style="--d:.25s;margin-top:30px" href="#contact" data-magnet data-i18n-html="importance_btn">Travailler ensemble <i>↗</i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec contact">
+  <div class="wrap">
+    <div class="idx rv">/ 05 — <span data-i18n="nav_cta">Contact</span></div>
+    <h2 class="rv" style="font-size:clamp(30px,4.6vw,60px);text-transform:uppercase;letter-spacing:-.02em;line-height:1;margin-bottom:34px" data-i18n="contact_title">Travaillons ensemble.</h2>
+    <a class="mail rv" style="--d:.1s" href="mailto:contact@tunisianasset.com" data-cursor>contact@tunisianasset.com</a>
+    <div class="contact-grid">
+      <div class="c-meta rv">
+        <div class="row"><b data-i18n="c_studio">STUDIO</b><span>Tunis, Tunisie — <span data-i18n="c_studio_val">sur rendez-vous</span></span></div>
+        <div class="row"><b>EMAIL</b><span><a href="mailto:contact@tunisianasset.com" data-cursor>contact@tunisianasset.com</a></span></div>
+        <div class="row"><b data-i18n="c_coords">COORDONNÉES</b><span>36.8065° N / 10.1815° E</span></div>
+        <div class="row"><b data-i18n="c_time">HEURE LOCALE</b><span class="mono" id="clock">—:—:—</span></div>
+        <div class="row"><b data-i18n="c_response">DÉLAI DE RÉPONSE</b><span>&lt; 24 H</span></div>
+      </div>
+      <form id="cform" class="rv" style="--d:.15s">
+        <div class="frow">
+          <label><span class="lab" data-i18n="f_name">NOM / SOCIÉTÉ</span><input name="nom" required autocomplete="name"></label>
+          <label><span class="lab">EMAIL</span><input name="email" type="email" required autocomplete="email"></label>
         </div>
-    </footer>
+        <label><span class="lab" data-i18n="f_project">VOTRE PROJET</span><textarea name="msg" required placeholder="10 fauteuils, 3 tables, 1 collection complète — catalogue AR pour septembre."></textarea></label>
+        <button class="btn solid" type="submit" data-magnet data-i18n-html="f_send">Envoyer la demande <i>↗</i></button>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <!-- INTERACTION & ASYNCHRONOUS 3D ENGINE -->
-    <script>
-        /* i18n Dictionary */
-        const translations = {
-            fr: {
-                nav_value: "Valeur",
-                nav_showcase: "Réalisations",
-                nav_3d: "Studio 3D",
-                nav_importance: "Vision",
-                nav_cta: "Contact",
-                hero_badge: "Studio 3D Modélisation // 2026",
-                hero_title: "L'excellence 3D pour vos <span>collections de mobilier</span>.",
-                hero_subtitle: "Nous transformons vos produits physiques en assets 3D photoréalistes, visuels interactifs et livrables techniques pour les marques de design exigeantes.",
-                hero_btn_primary: "Explorer le Studio 3D",
-                hero_btn_secondary: "Voir Portfolio",
-                value_title: "Pourquoi numériser votre catalogue ?",
-                value_subtitle: "Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.",
-                value_1_title: "Photoréalisme Absolu",
-                value_1_desc: "Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.",
-                value_2_title: "Intégration WebGL / AR",
-                value_2_desc: "Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.",
-                value_3_title: "Conformité CAD & DWG",
-                value_3_desc: "Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.",
-                showcase_title: "Galerie de Produits Numérisés",
-                showcase_subtitle: "Aperçu de nos intégrations 3D et rendus haute définition pour les marques éditeurs.",
-                importance_title: "Le pont entre conception physique et univers virtuel.",
-                importance_p1: "Dans un marché du meuble de plus en plus numérisé, la précision visuelle est le facteur clé de décision d'achat pour les architectes et clients finaux.",
-                importance_p2: "Nous combinons l'artisanat du design tunisien avec les technologies de rendu 3D temps réel les plus avancées.",
-                importance_btn: "Travailler ensemble"
-            },
-            en: {
-                nav_value: "Value",
-                nav_showcase: "Portfolio",
-                nav_3d: "3D Studio",
-                nav_importance: "Vision",
-                nav_cta: "Contact",
-                hero_badge: "3D Modeling Studio // 2026",
-                hero_title: "3D Excellence for your <span>furniture collections</span>.",
-                hero_subtitle: "We convert physical furniture products into photorealistic 3D assets, interactive visuals, and technical deliverables for premium design brands.",
-                hero_btn_primary: "Explore 3D Studio",
-                hero_btn_secondary: "View Portfolio",
-                value_title: "Why digitize your catalog?",
-                value_subtitle: "A modern approach to product presentation that elevates engagement and streamlines visual production.",
-                value_1_title: "Absolute Photorealism",
-                value_1_desc: "High-precision PBR texturing capturing fine details of fabrics, polished wood, and brushed metals.",
-                value_2_title: "WebGL / AR Integration",
-                value_2_desc: "Optimized models for fluid web browser rendering and Augmented Reality try-out modules.",
-                value_3_title: "CAD & DWG Compliance",
-                value_3_desc: "Millimeter accuracy matching your manufacturing blueprints and architectural technical sheets.",
-                showcase_title: "Digitized Product Gallery",
-                showcase_subtitle: "A glance at our 3D integrations and high-definition renders for furniture editors.",
-                importance_title: "Bridging physical design and virtual worlds.",
-                importance_p1: "In a digital-first furniture market, visual accuracy is the deciding purchase factor for architects and clients.",
-                importance_p2: "We combine Tunisian craftsmanship with cutting-edge real-time 3D rendering technologies.",
-                importance_btn: "Work Together"
-            }
-        };
+</main>
 
-        const langToggle = document.getElementById('langToggle');
-        const langDropdown = document.getElementById('langDropdown');
-        const currentLangLabel = document.getElementById('currentLangLabel');
+<!-- FOOTER -->
+<footer>
+  <div class="wrap f-top">
+    <div class="f-col"><b>TUNISIAN ASSET®</b><span data-i18n="f_tagline">L'excellence 3D pour vos collections de mobilier.</span></div>
+    <div class="f-col"><b data-i18n="f_plan">PLAN</b>
+      <a href="#value" data-i18n="nav_value">Valeur</a>
+      <a href="#showcase" data-i18n="nav_showcase">Réalisations</a>
+      <a href="#interactive-3d" data-i18n="nav_3d">Studio 3D</a>
+      <a href="#importance" data-i18n="nav_importance">Vision</a>
+    </div>
+    <div class="f-col"><b data-i18n="f_studio">STUDIO</b>
+      <a href="mailto:contact@tunisianasset.com">contact@tunisianasset.com</a>
+      <a href="mailto:contact@tunisianasset.com">contact@tunisianasset.com</a><span>Tunis, Tunisie</span>
+    </div>
+    <div class="f-col"><b data-i18n="f_legal">LÉGAL</b>
+      <span>© 2026 Tunisian Asset</span><span data-i18n="f_rights">Tous droits réservés</span>
+    </div>
+  </div>
+  <div class="f-word" aria-hidden="true">TUNISIAN <span>ASSET</span></div>
+  <div class="wrap f-bot">
+    <span data-i18n="f_made">DESIGNED WITH HIGH-PERFORMANCE ASYNC 3D</span>
+    <span>N 36.8065° — E 10.1815° · <span id="clock2">—:—</span></span>
+    <a href="#top" id="totop" data-cursor data-i18n="f_top">RETOUR EN HAUT ↑</a>
+  </div>
+</footer>
 
-        langToggle.addEventListener('click', () => langDropdown.classList.toggle('active'));
+<script>
+(function(){
+'use strict';
+/* ============================================================ 0. utils */
+const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelectorAll(s)];
+const lerp=(a,b,t)=>a+(b-a)*t, clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE=matchMedia('(pointer: fine)').matches;
+const fmtSigned=v=>(v<0?'\u2212':'+')+Math.abs(v).toFixed(2);
+const fmtInt=n=>n.toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
+let LANG='fr';
 
-        function switchLanguage(lang) {
-            currentLangLabel.textContent = lang.toUpperCase();
-            langDropdown.classList.remove('active');
+/* ============================================================ 1. minimal mat4 */
+const M4={
+  ident:()=>new Float32Array([1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1]),
+  persp(fov,asp,n,f){const t=1/Math.tan(fov/2),o=new Float32Array(16);
+    o[0]=t/asp;o[5]=t;o[10]=(f+n)/(n-f);o[11]=-1;o[14]=2*f*n/(n-f);return o;},
+  mul(a,b){const o=new Float32Array(16);
+    for(let c=0;c<4;c++)for(let r=0;r<4;r++){let s=0;for(let k=0;k<4;k++)s+=a[k*4+r]*b[c*4+k];o[c*4+r]=s;}return o;},
+  T(x,y,z){const o=M4.ident();o[12]=x;o[13]=y;o[14]=z;return o;},
+  RX(a){const o=M4.ident(),c=Math.cos(a),s=Math.sin(a);o[5]=c;o[6]=s;o[9]=-s;o[10]=c;return o;},
+  RY(a){const o=M4.ident(),c=Math.cos(a),s=Math.sin(a);o[0]=c;o[2]=-s;o[8]=s;o[10]=c;return o;},
+  xform(m,p){return[m[0]*p[0]+m[4]*p[1]+m[8]*p[2]+m[12],
+                    m[1]*p[0]+m[5]*p[1]+m[9]*p[2]+m[13],
+                    m[2]*p[0]+m[6]*p[1]+m[10]*p[2]+m[14]];}
+};
 
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.textContent = translations[lang][key];
-            });
+/* ============================================================ 2. geometry samplers */
+/* one grain = 18 floats: target3, source3, colTo3, colFrom3, normal3, seed, size, depth */
+function Sampler(count){
+  this.n=0; this.data=new Float32Array(count*18); this.cap=count;
+  const Z3=[0,0,0];
+  this.push=function(p,nx,ny,nz,col,size,scatter,near){
+    if(this.n>=this.cap)return; const i=this.n*18, d=this.data;
+    const sc=scatter||Z3, nr=(near==null)?0.5+Math.random()*0.5:near;
+    d[i]=p[0];d[i+1]=p[1];d[i+2]=p[2];
+    d[i+3]=sc[0];d[i+4]=sc[1];d[i+5]=sc[2];
+    d[i+6]=col[0];d[i+7]=col[1];d[i+8]=col[2];
+    d[i+9]=col[0];d[i+10]=col[1];d[i+11]=col[2];
+    d[i+12]=nx;d[i+13]=ny;d[i+14]=nz;
+    d[i+15]=Math.random();
+    d[i+16]=size;
+    d[i+17]=nr;
+    this.n++;
+  };
+  this.scatterAll=(cx,cy,cz,rMin,rMax)=>{
+    for(let k=0;k<this.n;k++){const i=k*18;
+      const u=Math.random()*2-1, th=Math.random()*Math.PI*2, r=rMin+Math.random()*(rMax-rMin);
+      const s=Math.sqrt(1-u*u);
+      this.data[i+3]=cx+Math.cos(th)*s*r; this.data[i+4]=cy+u*r; this.data[i+5]=cz+Math.sin(th)*s*r;
+    }};
+}
+const jitter=(v,a)=>v*(1-a+Math.random()*a*2);
+function col(base,vAmp){return[jitter(base[0],vAmp),jitter(base[1],vAmp),jitter(base[2],vAmp)];}
+const cFn=(base,amp)=>()=>col(base,amp);
 
-            document.querySelectorAll('[data-i18n-html]').forEach(el => {
-                const key = el.getAttribute('data-i18n-html');
-                if (translations[lang][key]) el.innerHTML = translations[lang][key];
-            });
+function rBox(S,cx,cy,cz,w,h,d,r,rotX,cFn,n){
+  const hx=w/2,hy=h/2,hz=d/2,cs=Math.cos(rotX),sn=Math.sin(rotX);
+  const areas=[[hx*hy*2,'x'],[hx*hz*2,'y'],[hy*hz*2,'z']];
+  const tot=areas.reduce((s,a)=>s+a[0],0);
+  for(let k=0;k<n;k++){
+    let t=Math.random()*tot,f=areas[0];
+    for(const a of areas){ if(t<a[0]){f=a;break;} t-=a[0]; }
+    let p;
+    if(f[1]==='x'){p=[Math.random()<.5?-hx:hx,(Math.random()*2-1)*hy,(Math.random()*2-1)*hz];}
+    else if(f[1]==='y'){p=[(Math.random()*2-1)*hx,Math.random()<.5?-hy:hy,(Math.random()*2-1)*hz];}
+    else{p=[(Math.random()*2-1)*hx,(Math.random()*2-1)*hy,Math.random()<.5?-hz:hz];}
+    const ix=Math.max(-(hx-r),Math.min(hx-r,p[0])),iy=Math.max(-(hy-r),Math.min(hy-r,p[1])),iz=Math.max(-(hz-r),Math.min(hz-r,p[2]));
+    let dx=p[0]-ix,dy=p[1]-iy,dz=p[2]-iz; const dl=Math.hypot(dx,dy,dz)||1; dx/=dl;dy/=dl;dz/=dl;
+    let x=ix+dx*r,y=iy+dy*r,z=iz+dz*r, nx=dx,ny=dy,nz=dz;
+    if(rotX){const ty=cs*y-sn*z,tz=sn*y+cs*z;y=ty;z=tz;
+      const tny=cs*ny-sn*nz,tnz=sn*ny+cs*nz;ny=tny;nz=tnz;}
+    S.push([cx+x,cy+y,cz+z],nx,ny,nz,cFn(),jitter(.0042,.2),null);
+  }
+}
+function cap(S,x0,y0,z0,x1,y1,z1,r0,r1,cFn,n){
+  const ax=x1-x0,ay=y1-y0,az=z1-z0; const L=Math.hypot(ax,ay,az)||1;
+  let ux=ax/L,uy=ay/L,uz=az/L;
+  let px=0,py=0,pz=1; if(Math.abs(uz)>.9){px=1;py=0;pz=0;}
+  let vx=uy*pz-uz*py,vy=uz*px-ux*pz,vz=ux*py-uy*px; const vl=Math.hypot(vx,vy,vz)||1;vx/=vl;vy/=vl;vz/=vl;
+  const wx=uy*vz-uz*vy,wy=uz*vx-ux*vz,wz=ux*vy-uy*vx;
+  for(let k=0;k<n;k++){
+    const t=Math.random(),th=Math.random()*Math.PI*2,r=jitter(lerp(r0,r1,t),.08);
+    const cx=lerp(x0,x1,t),cy=lerp(y0,y1,t),cz=lerp(z0,z1,t);
+    const cth=Math.cos(th)*r,sth=Math.sin(th)*r;
+    const nx=vx*cth+wx*sth,ny=vy*cth+wy*sth,nz=vz*cth+wz*sth;
+    S.push([cx+nx,cy+ny,cz+nz],nx,ny,nz,cFn(),jitter(.0036,.2),null);
+  }
+}
+function cone(S,cx,y0,y1,r0,r1,cFn,n,inner){
+  for(let k=0;k<n;k++){
+    const t=Math.random(),th=Math.random()*Math.PI*2;
+    const y=lerp(y0,y1,t),r=lerp(r0,r1,t)*jitter(1,.03)*(inner?.985:1);
+    const x=Math.cos(th)*r,z=Math.sin(th)*r;
+    const slope=(r1-r0)/(y1-y0);
+    let nx=Math.cos(th),ny=-slope,nz=Math.sin(th); const nl=Math.hypot(nx,ny,nz);nx/=nl;ny/=nl;nz/=nl;
+    if(inner){nx=-nx;ny=-ny;nz=-nz;}
+    S.push([cx+x,y,z],nx,ny,nz,cFn(),jitter(.004,.2),null);
+  }
+}
+function sphere(S,cx,cy,cz,r,cFn,n,size){
+  for(let k=0;k<n;k++){
+    const u=Math.random()*2-1,th=Math.random()*Math.PI*2,s=Math.sqrt(1-u*u);
+    const nx=Math.cos(th)*s,ny=u,nz=Math.sin(th)*s;
+    S.push([cx+nx*r,cy+ny*r,cz+nz*r],nx,ny,nz,cFn(),jitter(size,.2),null);
+  }
+}
+function spray(S,cx,cy,cz,rad,n,cFn,size){
+  for(let k=0;k<n;k++){
+    const u=Math.random()*2-1,th=Math.random()*Math.PI*2;
+    const s=Math.sqrt(1-u*u),r=rad*Math.pow(Math.random(),.4);
+    const p=[cx+Math.cos(th)*s*r,cy+u*r*.8,cz+Math.sin(th)*s*r];
+    S.push(p,0,1,0,cFn(),size*(0.4+Math.random()*.9),null);
+  }
+}
+const PAL={
+  wood:[0.50,0.32,0.175], woodDark:[0.42,0.26,0.14],
+  ivory:[0.94,0.915,0.85], velvet:[0.10,0.32,0.22],
+  oak:[0.62,0.42,0.22], graphite:[0.30,0.30,0.31]
+};
+function buildChair(cushionBase,woodBase,count){
+  const S=new Sampler(count);
+  const W=cFn(woodBase,.09), C=cFn(cushionBase,.03);
+  cap(S,-.345,0,-.27,-.365,.845,-.235,.021,.015,W,3200);
+  cap(S, .345,0,-.27, .365,.845,-.235,.021,.015,W,3200);
+  cap(S,-.335,0,.33,-.36,.565,.28,.021,.016,W,2600);
+  cap(S, .335,0,.33, .36,.565,.28,.021,.016,W,2600);
+  cap(S,-.365,.575,.30,-.375,.61,-.225,.019,.019,W,3000);
+  cap(S, .365,.575,.30, .375,.61,-.225,.019,.019,W,3000);
+  cap(S,-.35,.40,.28,-.35,.405,-.24,.015,.015,W,1600);
+  cap(S, .35,.40,.28, .35,.405,-.24,.015,.015,W,1600);
+  cap(S,-.35,.40,.27,.35,.40,.27,.014,.014,W,1100);
+  cap(S,-.35,.405,-.235,.35,.405,-.235,.014,.014,W,1100);
+  cap(S,-.34,.16,.30,-.345,.16,-.25,.012,.012,W,1100);
+  cap(S, .34,.16,.30, .345,.16,-.25,.012,.012,W,1100);
+  cap(S,-.34,.16,.02,.34,.16,.02,.012,.012,W,900);
+  rBox(S,0,.435,.03,.64,.13,.58,.05,0,C,Math.round(count*.28));
+  rBox(S,0,.625,-.135,.60,.44,.13,.05,-0.19,C,Math.round(count*.31));
+  spray(S,-.5,.9,-.15,.20,Math.round(count*.05),cFn(cushionBase,.04),.0026);
+  S.scatterAll(0,.5,0,1.35,2.6);
+  return S;
+}
+function buildTable(){
+  const S=new Sampler(16000);
+  const W=cFn(PAL.oak,.10);
+  rBox(S,0,.72,0,1.35,.07,.78,.02,0,W,7600);
+  cap(S,-.56,0,-.30,-.53,.685,-.27,.030,.024,W,1050);
+  cap(S, .56,0,-.30, .53,.685,-.27,.030,.024,W,1050);
+  cap(S,-.56,0, .30,-.53,.685, .27,.030,.024,W,1050);
+  cap(S, .56,0, .30, .53,.685, .27,.030,.024,W,1050);
+  cap(S,-.51,.64,-.28,-.51,.64,.28,.018,.018,W,620);
+  cap(S, .51,.64,-.28, .51,.64,.28,.018,.018,W,620);
+  cap(S,-.51,.64,-.28,.51,.64,-.28,.018,.018,W,520);
+  cap(S,-.51,.64,.28,.51,.64,.28,.018,.018,W,520);
+  spray(S,.0,.82,-.1,.24,1600,cFn(PAL.oak,.07),.0026);
+  S.scatterAll(0,.4,0,1.3,2.4);
+  return S;
+}
+function buildLamp(){
+  const S=new Sampler(16000);
+  const G=cFn(PAL.graphite,.09), HOT=cFn([1.5,1.25,.85],.07), WARM=cFn([1.1,.85,.5],.12);
+  cap(S,0,1.05,0,0,.60,0,.004,.004,G,750);
+  cone(S,0,.585,.335,.035,.235,G,6400,false);
+  cone(S,0,.58,.345,.032,.225,cFn([.85,.62,.30],.10),2500,true);
+  sphere(S,0,.40,0,.030,HOT,1950,.008);
+  for(let k=0;k<2500;k++){
+    const t=Math.random(),th=Math.random()*Math.PI*2;
+    const y=.36-t*.30, r=.05+t*.26;
+    S.push([Math.cos(th)*r*jitter(1,.25),y,Math.sin(th)*r*jitter(1,.25)],0,1,0,WARM(),jitter(.0034,.3),null);
+  }
+  spray(S,.0,.55,.0,.16,1250,cFn([1.2,1.0,.7],.15),.0026);
+  S.scatterAll(0,.45,0,1.3,2.4);
+  return S;
+}
+
+/* ============================================================ 3. WebGL engine */
+const VS=`
+attribute vec3 aTarget;attribute vec3 aScatter;attribute vec3 aColor;attribute vec3 aColor0;
+attribute vec3 aNormal;attribute float aSeed;attribute float aSize;attribute float aNear;
+uniform mat4 uProj,uView;uniform float uTime,uProgress,uScale,uMelt,uArc,uIntro,uAlpha;
+varying vec3 vColor;varying float vAlpha;
+void main(){
+  float delay=mix(aSeed*0.45,(1.0-aNear)*0.55+0.15*aSeed,uMelt);
+  float t=clamp(uProgress*1.7-delay,0.0,1.0);
+  t=1.0-pow(1.0-t,3.0);
+  vec3 p=mix(aScatter,aTarget,t);
+  float hump=sin(3.14159*t);
+  vec3 rv=normalize(vec3(sin(aSeed*91.7),cos(aSeed*57.3),sin(aSeed*23.1))+vec3(0.001));
+  p+=rv*hump*uArc*(0.05+0.22*aSeed)*(0.4+length(aTarget-aScatter));
+  p+=vec3(sin(uTime*0.7+aSeed*53.0),cos(uTime*0.6+aSeed*71.0),sin(uTime*0.5+aSeed*37.0))
+     *(0.005*(1.0-t*0.5)+0.0011);
+  vec4 mv=uView*vec4(p,1.0);
+  gl_Position=uProj*mv;
+  gl_PointSize=clamp(aSize*uScale/max(0.001,-mv.z),0.6,9.0);
+  float shade=0.62+0.38*max(0.0,dot(normalize(aNormal),normalize(vec3(0.45,0.8,0.55))));
+  vec3 col=mix(aColor0,aColor,t);
+  vColor=col*shade*(1.0+1.1*hump*uArc);
+  vAlpha=mix(1.0-0.85*hump,(0.10+0.90*t),uIntro)*(0.30+0.70*min(1.0,shade))*uAlpha;
+}`;
+const FS=`
+precision mediump float;varying vec3 vColor;varying float vAlpha;
+void main(){
+  float d=length(gl_PointCoord-vec2(0.5));
+  float a=smoothstep(0.5,0.10,d);
+  gl_FragColor=vec4(vColor,a*vAlpha);
+}`;
+const LVS=`attribute vec3 aPos;uniform mat4 uProj,uView;void main(){gl_Position=uProj*uView*vec4(aPos,1.0);}`;
+const LFS=`precision mediump float;uniform vec4 uCol;void main(){gl_FragColor=uCol;}`;
+function makeProgram(gl,vs,fs){
+  const c=(t,s)=>{const sh=gl.createShader(t);gl.shaderSource(sh,s);gl.compileShader(sh);
+    if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))console.warn(gl.getShaderInfoLog(sh));return sh;};
+  const p=gl.createProgram();
+  gl.attachShader(p,c(gl.VERTEX_SHADER,vs));gl.attachShader(p,c(gl.FRAGMENT_SHADER,fs));
+  gl.linkProgram(p);
+  return p;
+}
+class Cloud{
+  constructor(canvas,sampler,opts={}){
+    this.cv=canvas; this.opts=opts; this.w=0;this.h=0;this.dpr=1;
+    this.progress=0; this.tProgress=REDUCED?1:0;
+    this.intro=1; this.alpha=opts.alpha||1;
+    this.rotY=opts.rotY||0; this.rotX=opts.rotX||0;
+    this.userY=0; this.userX=0; this.mY=0; this.mX=0;
+    this.dist=opts.dist||2.3; this.tDist=this.dist;
+    this.fov=opts.fov||0.58; this.center=opts.center||[0,.44,0];
+    this.shift=opts.shift||0; this.visible=false;
+    this.labels=[]; this.glOK=true;
+    try{
+      const gl=canvas.getContext('webgl',{antialias:false,alpha:false,powerPreference:'high-performance'});
+      if(!gl)throw 0;
+      this.gl=gl;
+      this.pPoints=makeProgram(gl,VS,FS);
+      this.pLine=makeProgram(gl,LVS,LFS);
+      this.buf=gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER,this.buf);
+      gl.bufferData(gl.ARRAY_BUFFER,sampler.data,gl.STATIC_DRAW);
+      this.n=sampler.n;
+      this.lbuf=gl.createBuffer();
+      this.larr=new Float32Array(0);
+      this.a={};
+      for(const nm of ['aTarget','aScatter','aColor','aColor0','aNormal','aSeed','aSize','aNear'])
+        this.a[nm]=gl.getAttribLocation(this.pPoints,nm);
+      this.u={};
+      for(const nm of ['uProj','uView','uTime','uProgress','uScale','uMelt','uArc','uIntro','uAlpha'])
+        this.u[nm]=gl.getUniformLocation(this.pPoints,nm);
+      this.lu={uProj:gl.getUniformLocation(this.pLine,'uProj'),uView:gl.getUniformLocation(this.pLine,'uView'),uCol:gl.getUniformLocation(this.pLine,'uCol')};
+      this.aPos=gl.getAttribLocation(this.pLine,'aPos');
+      gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.disable(gl.DEPTH_TEST);
+      gl.clearColor(0,0,0,1);
+    }catch(e){this.glOK=false;canvas.classList.add('dead');}
+    this.ro=new ResizeObserver(()=>this.resize());
+    this.ro.observe(canvas.parentElement);
+    this.resize();
+  }
+  upload(sampler){
+    if(!this.glOK)return;
+    const gl=this.gl;
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.buf);
+    gl.bufferData(gl.ARRAY_BUFFER,sampler.data,gl.DYNAMIC_DRAW);
+    this.n=sampler.n;
+  }
+  resize(){
+    const par=this.cv.parentElement; if(!par)return;
+    const w=par.clientWidth,h=par.clientHeight;
+    if(w<10||h<10)return;
+    this.dpr=Math.min(devicePixelRatio||1,2);
+    this.w=w;this.h=h;
+    this.cv.width=Math.round(w*this.dpr);this.cv.height=Math.round(h*this.dpr);
+    if(!this.glOK)return;
+    this.gl.viewport(0,0,this.cv.width,this.cv.height);
+    this.proj=M4.persp(this.fov,w/h,.1,20);
+    this.uScale=this.cv.height/(2*Math.tan(this.fov/2));
+  }
+  view(){
+    const shift=this.w>860?this.shift:0;
+    return M4.mul(M4.T(shift,-this.center[1],-this.dist),
+                  M4.mul(M4.RX(this.rotX),M4.RY(this.rotY)));
+  }
+  addLabel(p,d,pre){
+    const el=document.createElement('div');el.className='tag';
+    el.textContent=`${pre} ${fmtSigned(p[0])} ${fmtSigned(p[1])} ${fmtSigned(p[2])}`;
+    this.opts.tagRoot.appendChild(el);
+    this.labels.push({p,d,el,tail:Math.sign(d[0]||1)*0.05});
+  }
+  render(t){
+    if(!isFinite(this.rotY))this.rotY=0; if(!isFinite(this.rotX))this.rotX=0;
+    if(!isFinite(this.dist))this.dist=this.opts.dist||2.3;
+    if(!this.glOK||this.w<10)return;
+    if(this.opts.pane&&!this.cv.parentElement.classList.contains('on'))return;
+    const gl=this.gl;
+    this.progress=lerp(this.progress,this.tProgress,REDUCED?1:.035);
+    this.dist=lerp(this.dist,this.tDist,.08);
+    const o=this.opts;
+    const auto=o.auto?Math.sin(t*o.auto.s)*o.auto.a+(o.auto.v?t*o.auto.v:0):0;
+    this.rotY=lerp(this.rotY,auto+this.userY+this.mY,.07);
+    this.rotX=lerp(this.rotX,(o.baseTilt||0)+this.userX+this.mX,.07);
+    const view=this.view();
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(this.pPoints);
+    gl.bindBuffer(gl.ARRAY_BUFFER,this.buf);
+    const ST=72;
+    for(const nm in this.a){const loc=this.a[nm];if(loc<0)continue;
+      const off={aTarget:0,aScatter:12,aColor:24,aColor0:36,aNormal:48,aSeed:60,aSize:64,aNear:68}[nm];
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc,(nm==='aSeed'||nm==='aSize'||nm==='aNear')?1:3,gl.FLOAT,false,ST,off);}
+    gl.uniformMatrix4fv(this.u.uProj,false,this.proj);
+    gl.uniformMatrix4fv(this.u.uView,false,view);
+    gl.uniform1f(this.u.uTime,t*.001);
+    gl.uniform1f(this.u.uProgress,this.progress);
+    gl.uniform1f(this.u.uScale,this.uScale);
+    gl.uniform1f(this.u.uMelt,this.opts.melt?1:0);
+    gl.uniform1f(this.u.uArc,this.opts.arc?1:0);
+    gl.uniform1f(this.u.uIntro,this.intro);
+    gl.uniform1f(this.u.uAlpha,this.alpha);
+    gl.drawArrays(gl.POINTS,0,this.n);
+    if(this.labels.length&&this.progress>.55){
+      const segs=this.labels.length*4;
+      if(this.larr.length!==segs*3)this.larr=new Float32Array(segs*3);
+      let li=0;
+      for(const L of this.labels){
+        const e=[L.p[0]+L.d[0]*.17,L.p[1]+L.d[1]*.17,L.p[2]+L.d[2]*.17];
+        const e2=[e[0]+L.tail,e[1],e[2]];
+        for(const pt of [L.p,e,e,e2]){this.larr[li++]=pt[0];this.larr[li++]=pt[1];this.larr[li++]=pt[2];}
+      }
+      gl.useProgram(this.pLine);
+      gl.uniformMatrix4fv(this.lu.uProj,false,this.proj);
+      gl.uniformMatrix4fv(this.lu.uView,false,view);
+      gl.uniform4f(this.lu.uCol,1,1,1,.34);
+      gl.bindBuffer(gl.ARRAY_BUFFER,this.lbuf);
+      gl.bufferData(gl.ARRAY_BUFFER,this.larr,gl.DYNAMIC_DRAW);
+      gl.enableVertexAttribArray(this.aPos);
+      gl.vertexAttribPointer(this.aPos,3,gl.FLOAT,false,12,0);
+      gl.drawArrays(gl.LINES,0,segs);
+      const vis=clamp((this.progress-.55)*3,0,1);
+      for(const L of this.labels){
+        const e=[L.p[0]+L.d[0]*.17+L.tail,L.p[1]+L.d[1]*.17,L.p[2]+L.d[2]*.17];
+        const v=M4.xform(view,e);
+        const cw=-v[2]; if(cw<=0){L.el.style.opacity=0;continue;}
+        const nx=(this.proj[0]*v[0])/cw, ny=(this.proj[5]*v[1])/cw;
+        const sx=(nx*.5+.5)*this.w, sy=(1-(ny*.5+.5))*this.h;
+        L.el.style.transform=`translate(${sx.toFixed(1)}px,${sy.toFixed(1)}px) translate(-50%,-50%)`;
+        L.el.style.opacity=(vis*(this.opts.tagFade??1)).toFixed(2);
+      }
+    }else if(this.labels.length){
+      for(const L of this.labels)L.el.style.opacity=0;
+    }
+  }
+}
+
+/* ============================================================ 4. scenes */
+/* The hero chair is a live point relief: the local FastDepth AI turns the
+   official renders (1.png..4.png) into dense colored grains, and every click
+   flies the whole swarm to the next view. */
+const VIEWS=[
+  {file:'0.png',fr:'PERSPECTIVE',en:'PERSPECTIVE'},
+  {file:'1.png',fr:'VUE FACE',en:'FRONT'},
+  {file:'2.png',fr:'VUE DESSUS',en:'TOP'},
+  {file:'3.png',fr:'VUE PROFIL',en:'SIDE'},
+  {file:'4.png',fr:'DÉTAIL',en:'DETAIL'}
+];
+const IMG_N=(innerWidth<760?34000:84000);
+const cloud=new Cloud($('#cv-hero'),new Sampler(1),{
+  shift:.40,dist:2.45,fov:.56,center:[0,0,0],alpha:.58,arc:true,melt:true,
+  auto:{s:.00013,a:.05},baseTilt:.02,
+  tagRoot:$('#hero-tags')
+});
+cloud.tProgress=1;
+$('#pts-hero').textContent='—';
+
+const w1=new Cloud($('#cv-w1'),buildChair(PAL.velvet,PAL.woodDark,34000),{fov:.62,auto:{s:.00035,a:2.4}});
+const w2=new Cloud($('#cv-w2'),buildTable(),{fov:.62,center:[0,.38,0],auto:{s:.00035,a:2.4}});
+const w3=new Cloud($('#cv-w3'),buildLamp(),{fov:.62,center:[0,.5,0],auto:{s:.00035,a:2.4}});
+const sCloud=new Cloud($('#cv-cloud'),buildChair(PAL.ivory,PAL.wood,46000),{fov:.56,center:[0,.42,0],auto:{s:0,a:0},baseTilt:.04,tagRoot:$('#cloud-tags'),assemble:'manual'});
+[['TS',[.30,.84,-.16],[.55,.65,0]],['LG',[-.34,.01,.32],[-.8,-.5,0]],['PF',[.37,.83,-.24],[.8,.4,0]]]
+ .forEach(([pre,p,dir])=>sCloud.addLabel(p,dir,pre));
+
+const SCENES=[cloud,w1,w2,w3,sCloud];
+let photoStarted=false,photoStart=null;
+
+/* visibility + deferred assembly — rect-based (works everywhere) */
+const io=new IntersectionObserver(es=>{
+  for(const e of es){
+    const c=SCENES.find(s=>s.cv===e.target);
+    if(c&&e.isIntersecting&&c.tProgress<1&&c.opts.assemble!=='manual')c.tProgress=1;
+  }
+},{rootMargin:'80px'});
+SCENES.forEach(c=>io.observe(c.cv));
+setInterval(()=>{
+  const vh=innerHeight;
+  for(const c of SCENES){
+    let vis=false;
+    if(c.w>10){const r=c.cv.getBoundingClientRect();vis=r.bottom>-120&&r.top<vh+120;}
+    c.visible=vis;
+    if(vis&&c.tProgress<1&&c.opts.assemble!=='manual')c.tProgress=1;
+  }
+  if(photoStarted===false&&photoStart&&cloud.visible){photoStarted=true;photoStart();}
+},250);
+
+let lastT=0,fpsEMA=60;
+function loop(t){
+  const dt=t-lastT; lastT=t;
+  if(dt>0&&dt<200)fpsEMA=lerp(fpsEMA,1000/dt,.05);
+  try{for(const c of SCENES)if(c.visible)c.render(t);}catch(err){console.warn(err);}
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+window.__photoKick=()=>{if(!photoStarted&&photoStart){photoStarted=true;photoStart();}};
+
+/* ============================================================ 5. hero parallax + AI photogram engine */
+let mx=0,my=0;
+if(FINE)addEventListener('pointermove',e=>{
+  if(!isFinite(e.clientX)||!isFinite(e.clientY))return;
+  mx=(e.clientX/innerWidth)*2-1; my=(e.clientY/innerHeight)*2-1;
+},{passive:true});
+setInterval(()=>{cloud.mY=mx*.10;cloud.mX=my*.05;},40);
+
+/* FastDepth (local ONNX runtime, no server) estimates depth from each chair
+   render; pixels become dense colored grains; clicking the hero flies the
+   whole swarm to the next view — near layers leave first, arcs mid-air. */
+(function(){
+  const viewData=[],prepared={},inflight={};
+  let worker=null,workerReady=false,current=-1,busy=false,pending=0;
+  function setStatus(k,extra){const el=$('#ph-status');if(el)el.textContent=T()[k].replace('{ko}',extra||'');}
+
+  function loadImg(file){return new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=file;});}
+
+  function computeCrop(img,idx){
+    const W=img.naturalWidth,H=img.naturalHeight;
+    const sw=240,sh=Math.max(40,Math.round(sw*H/W));
+    const sc=document.createElement('canvas');sc.width=sw;sc.height=sh;
+    const sx=sc.getContext('2d',{willReadFrequently:true});sx.drawImage(img,0,0,sw,sh);
+    const sd=sx.getImageData(0,0,sw,sh).data;
+    let x0=sw,x1=0,y0=sh,y1=0;
+    /* banner renders carry baked-in titles: scan only the middle band there;
+       clean cutouts (creation) are scanned edge to edge */
+    const isBanner=W/H>1.6;
+    const b0=isBanner?Math.floor(sh*.085):0;
+    const b1=isBanner?Math.floor(sh*.845):sh;
+    for(let y=b0;y<b1;y++)for(let x=0;x<sw;x++){
+      const o=(y*sw+x)*4,r=sd[o]/255,g=sd[o+1]/255,b2=sd[o+2]/255;
+      const mx2=Math.max(r,g,b2),mn=Math.min(r,g,b2);
+      if(mn<.84||mx2-mn>.06){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}
+    }
+    if(x1<=x0){x0=Math.floor(sw*.3);x1=Math.floor(sw*.7);y0=Math.floor(sh*.1);y1=Math.floor(sh*.8);}
+    const pad=isBanner?.02:.012;
+    let cx0=(x0-pad)/sw,cx1=(x1+1+pad)/sw,cy0=(y0-pad)/sh,cy1=(y1+1+pad)/sh;
+    if(VIEWS[idx].detail){
+      cx0=cx0+(cx1-cx0)*.34;cx1=cx1-(cx1-cx0)*.30;
+      cy0=cy0+(cy1-cy0)*.42;cy1=cy1-(cy1-cy0)*.22;
+    }
+    return[cx0*W,cy0*H,(cx1-cx0)*W,(cy1-cy0)*H];
+  }
+
+  function prepare(idx){
+    return loadImg(VIEWS[idx].file).then(img=>{
+      const crop=computeCrop(img,idx);
+      const model=document.createElement('canvas');model.width=224;model.height=224;
+      const mc=model.getContext('2d',{willReadFrequently:true});
+      mc.drawImage(img,crop[0],crop[1],crop[2],crop[3],0,0,224,224);
+      const rgba=mc.getImageData(0,0,224,224);
+      const cw=Math.min(560,Math.max(320,Math.round(crop[2])));
+      const chh=Math.max(60,Math.round(cw*crop[3]/crop[2]));
+      const work=document.createElement('canvas');work.width=cw;work.height=chh;
+      const wc=work.getContext('2d',{willReadFrequently:true});
+      wc.drawImage(img,crop[0],crop[1],crop[2],crop[3],0,0,cw,chh);
+      return{work,rgba,crop};
+    });
+  }
+
+  function buildHomes(work,near,dw,dh){
+    const cw=work.width,chh=work.height;
+    const px=work.getContext('2d').getImageData(0,0,cw,chh).data;
+    const dc=document.createElement('canvas');dc.width=dw;dc.height=dh;
+    const dctx=dc.getContext('2d');const di=dctx.createImageData(dw,dh);
+    const isU8=(near instanceof Uint8Array);
+    for(let k=0;k<dw*dh;k++){const v=(isU8?near[k]:Math.max(0,Math.min(1,near[k]))*255),q=k*4;
+      di.data[q]=di.data[q+1]=di.data[q+2]=v;di.data[q+3]=255;}
+    dctx.putImageData(di,0,0);
+    const rc=document.createElement('canvas');rc.width=cw;rc.height=chh;
+    const rctx=rc.getContext('2d');rctx.imageSmoothingEnabled=true;rctx.drawImage(dc,0,0,cw,chh);
+    const rn=rctx.getImageData(0,0,cw,chh).data;
+    const vals=[];
+    for(let y=0;y<chh;y+=2)for(let x=0;x<cw;x+=2){const o=(y*cw+x)*4;
+      const mx2=Math.max(px[o],px[o+1],px[o+2]),mn=Math.min(px[o],px[o+1],px[o+2]);
+      if(mn<217||mx2-mn>13)vals.push(rn[o]/255);}
+    vals.sort((a,b)=>a-b);
+    const lo=vals.length?vals[(vals.length*.02)|0]:0;
+    const hi=vals.length?vals[(vals.length*.98)|0]:1;
+    const span=Math.max(.12,hi-lo);
+    const pos=new Float32Array(IMG_N*3),colA=new Float32Array(IMG_N*3),nearA=new Float32Array(IMG_N);
+    const scale=.92/chh;
+    let i=0,tries=0;
+    function place(x,y){
+      const k=y*cw+x,o=k*4;
+      const r=px[o]/255,g=px[o+1]/255,b2=px[o+2]/255;
+      let nn=(rn[o]/255-lo)/span;nn=nn<0?0:nn>1?1:nn;
+      pos[i*3]=(x-cw/2)*scale+(Math.random()-.5)*scale*.9;
+      pos[i*3+1]=(chh/2-y)*scale+(Math.random()-.5)*scale*.9;
+      pos[i*3+2]=(nn-.55)*.26+(Math.random()-.5)*.004;
+      const sh=.72+.5*nn;
+      colA[i*3]=Math.min(1.35,Math.pow(r,1.08)*1.5*sh);
+      colA[i*3+1]=Math.min(1.35,Math.pow(g,1.08)*1.5*sh);
+      colA[i*3+2]=Math.min(1.35,Math.pow(b2,1.08)*1.5*sh);
+      nearA[i]=nn;i++;
+    }
+    while(i<IMG_N&&tries<IMG_N*40){
+      tries++;
+      const x=(Math.random()*cw)|0,y=(Math.random()*chh)|0,o=(y*cw+x)*4;
+      const mx2=Math.max(px[o],px[o+1],px[o+2]),mn=Math.min(px[o],px[o+1],px[o+2]);
+      if(mn>.86&&mx2-mn<.05)continue;
+      if(mn>.80&&mx2-mn<.09&&Math.random()<.7)continue;
+      place(x,y);
+    }
+    for(let j=i;j<IMG_N;j++){const s=i?j%i:0;
+      pos[j*3]=pos[s*3]+(Math.random()-.5)*.004;
+      pos[j*3+1]=pos[s*3+1]+(Math.random()-.5)*.004;
+      pos[j*3+2]=pos[s*3+2]+(Math.random()-.5)*.004;
+      colA[j*3]=colA[s*3];colA[j*3+1]=colA[s*3+1];colA[j*3+2]=colA[s*3+2];
+      nearA[j]=nearA[s];}
+    return{pos,col:colA,near:nearA};
+  }
+
+  function makeFlight(D,from){
+    const data=new Float32Array(IMG_N*18);
+    for(let k=0;k<IMG_N;k++){const i=k*18;
+      data[i]=D.pos[k*3];data[i+1]=D.pos[k*3+1];data[i+2]=D.pos[k*3+2];
+      if(from){data[i+3]=from.pos[k*3];data[i+4]=from.pos[k*3+1];data[i+5]=from.pos[k*3+2];
+        data[i+9]=from.col[k*3];data[i+10]=from.col[k*3+1];data[i+11]=from.col[k*3+2];}
+      else{const u=Math.random()*2-1,th=Math.random()*Math.PI*2,r=1.25+Math.random()*1.1,s=Math.sqrt(1-u*u);
+        data[i+3]=Math.cos(th)*s*r;data[i+4]=u*r;data[i+5]=Math.sin(th)*s*r;
+        data[i+9]=D.col[k*3];data[i+10]=D.col[k*3+1];data[i+11]=D.col[k*3+2];}
+      data[i+6]=D.col[k*3];data[i+7]=D.col[k*3+1];data[i+8]=D.col[k*3+2];
+      data[i+12]=0;data[i+13]=0;data[i+14]=1;
+      data[i+15]=Math.random();
+      data[i+16]=.0034*(.75+Math.random()*.6);
+      data[i+17]=D.near[k];
+    }
+    return{data,n:IMG_N};
+  }
+
+  function heroTags(D){
+    const el=$('#hero-tags');el.innerHTML='';cloud.labels=[];
+    let top=null,bot=null,lx=null,rx=null;
+    for(let k=0;k<IMG_N;k++){const x=D.pos[k*3],y=D.pos[k*3+1],z=D.pos[k*3+2];
+      if(!top||y>top[1])top=[x,y,z];if(!bot||y<bot[1])bot=[x,y,z];
+      if(!lx||x<lx[0])lx=[x,y,z];if(!rx||x>rx[0])rx=[x,y,z];}
+    [[top,[.55,.7,0],'TS'],[lx,[-1,.25,0],'AR'],[bot,[.7,-.6,0],'LG'],[rx,[.9,.45,0],'PF']]
+     .forEach(([p,d,pre])=>cloud.addLabel(p,d,pre));
+  }
+
+  function flightTo(idx,first){
+    const from=(!first&&current>=0&&viewData[current])?viewData[current]:null;
+    cloud.upload(makeFlight(viewData[idx],from));
+    cloud.progress=0;cloud.tProgress=1;cloud.intro=first?1:0;
+    current=idx;busy=false;
+    setStatus('ph_ready');
+    const st=$('#ph-status');if(st)st.classList.add('rdy');
+    $('#pts-hero').textContent=fmtInt(IMG_N);
+    heroTags(viewData[idx]);
+    if(pending!==idx)tryView(pending);
+  }
+
+  function tryView(idx){
+    if(idx===current&&viewData[idx])return;
+    pending=idx;
+    if(!workerReady)return;
+    if(baked){
+      if(!viewData[idx]){
+        if(inflight[idx])return;
+        inflight[idx]=true;setStatus('ph_status');
+        prepare(idx).then(prep=>{
+          inflight[idx]=false;prepared[idx]=prep;
+          viewData[idx]=buildHomes(prep.work,baked[idx].near,224,224);
+          if(pending===idx){busy=true;flightTo(idx,current<0);}
+        }).catch(err=>{window.__bakeErr=String(err&&err.message||err)+(err&&err.stack?''+err.stack.split('\n')[1]:'');inflight[idx]=false;photoFail();});
+        return;
+      }
+      if(busy)return;
+      busy=true;
+      flightTo(idx,current<0);
+      return;
+    }
+    if(!viewData[idx]){
+      if(inflight[idx])return;
+      inflight[idx]=true;setStatus('ph_status');
+      prepare(idx).then(prep=>{
+        inflight[idx]=false;prepared[idx]=prep;
+        worker.postMessage({type:'run',id:idx,w:224,h:224,rgba:prep.rgba.data},[prep.rgba.data.buffer]);
+      }).catch(()=>{inflight[idx]=false;photoFail();});
+      return;
+    }
+    if(busy)return;
+    busy=true;
+    flightTo(idx,current<0);
+  }
+
+  function photoFail(){
+    if(current>=0)return;
+    setStatus('ph_fail');
+    const S=buildChair(PAL.ivory,PAL.wood,62000);
+    for(let k=0;k<S.n;k++){const i=k*18;
+      S.data[i]*=1.06;S.data[i+1]=(S.data[i+1]-.43)*1.06;S.data[i+2]*=1.06;}
+    S.scatterAll(0,0,0,1.3,2.2);
+    cloud.opts.melt=false;
+    cloud.upload(S);cloud.progress=0;cloud.tProgress=1;cloud.intro=1;
+  }
+
+  function initWorker(){
+    try{
+      worker=new Worker('depth/worker.js');
+      worker.onmessage=e=>{
+        const m=e.data;
+        if(m.type==='ready'){workerReady=true;setStatus('ph_status');tryView(pending);}
+        else if(m.type==='progress'){setStatus('ph_loading',fmtInt(Math.round(m.bytes/1024)));}
+        else if(m.type==='depth'){
+          const work=prepared[m.id].work;
+          if(work){window.__rawDepth=window.__rawDepth||{};window.__rawDepth[m.id]=m.near;viewData[m.id]=buildHomes(work,m.near,m.w,m.h);
+            if(pending===m.id){busy=true;flightTo(m.id,current<0);}}
         }
+        else if(m.type==='fail'||m.type==='runfail'||m.type==='modelfail')photoFail();
+      };
+      worker.onerror=photoFail;
+      worker.postMessage({type:'init',base:'depth/',cdn:false});
+    }catch(e){window.__bakeErr="initWorker "+String(e&&e.message||e);photoFail();}
+  }
+  let baked=null;
+  function parseDepths(buf){
+    const recs=[];let off=0;
+    for(let v=0;v<VIEWS.length;v++){
+      recs.push({near:new Uint8Array(buf,off,224*224)});off+=224*224;
+    }
+    return recs;
+  }
+  function initPhoto(){
+    if(location.protocol==='file:'){initWorker();return;}
+    fetch('depth/depths.bin').then(r=>{if(!r.ok)throw 0;return r.arrayBuffer();}).then(buf=>{
+      baked=parseDepths(buf);workerReady=true;setStatus('ph_status');tryView(pending);
+    }).catch(()=>initWorker());
+  }
+  photoStart=initPhoto;
 
-        /* Asynchronous 3D Loading Pipeline */
-        let scene, camera, renderer, productMesh;
-        let is3DInitialized = false;
+  /* hero click = next view */
+  $('#hero .stage').addEventListener('click',()=>tryView((current+1+VIEWS.length)%VIEWS.length));
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const viewportWrapper = document.getElementById('3d-viewport-wrapper');
+  /* lab 01: plain image crossfade switcher */
+  (function(){
+    const imgs=$$('#pimgs .pimg');let cur=0;
+    const vb=$('#viewbar');
+    const LV=VIEWS.slice(1);
+    imgs.forEach((im,i)=>{
+      const b=document.createElement('button');b.className='vchip'+(i===0?' on':'');
+      b.textContent=(LANG==='fr'?LV[i].fr:LV[i].en);
+      b.addEventListener('click',ev=>{ev.stopPropagation();show(i);});
+      vb.appendChild(b);
+    });
+    function show(i){cur=i;imgs.forEach((m,j)=>m.classList.toggle('on',j===i));
+      $$('#viewbar .vchip').forEach((b,j)=>b.classList.toggle('on',j===i));}
+    $('#pimgs').addEventListener('click',()=>show((cur+1)%imgs.length));
+  })();
+})();
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !is3DInitialized) {
-                        is3DInitialized = true;
-                        initAsync3DEngine();
-                    }
-                });
-            }, { threshold: 0.1 });
+/* ============================================================ 6. lab tabs + drag/zoom + HUD */
+const hudMode=$('#hud-mode'),hudPts=$('#hud-pts'),hudRot=$('#hud-rot');
+const panes={p1:cloud,p2:sCloud};
+hudPts.textContent='—';
+$$('.tab').forEach(tb=>tb.addEventListener('click',()=>{
+  $$('.tab').forEach(x=>x.classList.toggle('on',x===tb));
+  $$('.stagebox .pane').forEach(pn=>pn.classList.toggle('on',pn.id===tb.dataset.pane));
+  hudMode.textContent=tb.dataset.pane==='p1'?T().hud_mode_p1:T().hud_mode_p2;
+  hudPts.textContent=tb.dataset.pane==='p1'?((cloud.n>1)?fmtInt(cloud.n):'—'):fmtInt(panes.p2.n);
+  if(tb.dataset.pane==='p2'&&!sCloud._started){
+    sCloud._started=true;
+    setTimeout(()=>{$('#p2loader').classList.add('off');sCloud.tProgress=1;},700);
+  }
+}));
+const stageP2=$('#p2');
+let dragging=false,lx=0,ly=0,lastTouch=0;
+stageP2.style.touchAction='pan-y';
+stageP2.addEventListener('pointerdown',e=>{dragging=true;lx=e.clientX;ly=e.clientY;lastTouch=performance.now();stageP2.setPointerCapture(e.pointerId);document.body.classList.add('c-drag');});
+addEventListener('pointermove',e=>{if(!dragging||!isFinite(e.clientX)||!isFinite(e.clientY))return;
+  sCloud.userY+=(e.clientX-lx)*.005; sCloud.userX=clamp(sCloud.userX+(e.clientY-ly)*.003,-.5,.5);
+  lx=e.clientX;ly=e.clientY;lastTouch=performance.now();});
+addEventListener('pointerup',()=>{dragging=false;document.body.classList.remove('c-drag');});
+stageP2.addEventListener('wheel',e=>{
+  e.preventDefault();
+  sCloud.tDist=clamp(sCloud.tDist+e.deltaY*.0014,1.5,3.4);
+  lastTouch=performance.now();
+},{passive:false});
+$('#zin').addEventListener('click',()=>sCloud.tDist=clamp(sCloud.tDist-.3,1.5,3.4));
+$('#zout').addEventListener('click',()=>sCloud.tDist=clamp(sCloud.tDist+.3,1.5,3.4));
+setInterval(()=>{
+  if(sCloud.visible&&!dragging&&performance.now()-lastTouch>2600)sCloud.userY+=.004;
+  if(sCloud.visible){
+    const deg=((sCloud.rotY*57.2958)%360+360)%360;
+    hudRot.textContent=deg.toFixed(0).padStart(3,'0')+'°';
+  }
+  $('#fps').textContent=Math.min(99,Math.round(fpsEMA));
+},120);
 
-            observer.observe(viewportWrapper);
-        });
+/* ============================================================ 7. CAD drawing (SVG) */
+(function buildCAD(){
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 1000 560');
+  const G=(attrs)=>{const el=document.createElementNS(NS,attrs.t||'g');
+    for(const k in attrs){if(k!=='t')el.setAttribute(k,attrs[k]);}return el;};
+  const LN=(x1,y1,x2,y2,st)=>{const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',x1);l.setAttribute('y1',y1);l.setAttribute('x2',x2);l.setAttribute('y2',y2);
+    l.setAttribute('stroke',st||'rgba(232,236,233,.8)');l.setAttribute('stroke-width','1');svg.appendChild(l);return l;};
+  const TXT=(x,y,s,anchor,fill,size)=>{const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',x);t.setAttribute('y',y);t.setAttribute('fill',fill||'rgba(232,236,233,.75)');
+    t.setAttribute('font-family','JetBrains Mono,monospace');t.setAttribute('font-size',size||'11');
+    t.setAttribute('text-anchor',anchor||'middle');t.setAttribute('letter-spacing','.08em');
+    t.textContent=s;svg.appendChild(t);return t;};
+  const ACC='rgba(255,90,54,.9)', MUT='rgba(232,236,233,.5)';
+  const defs=document.createElementNS(NS,'defs');
+  defs.innerHTML=`<marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="rgba(232,236,233,.7)"/></marker>`;
+  svg.appendChild(defs);
+  const dimH=(x1,x2,y,label)=>{LN(x1,y-6,x1,y+6,MUT);LN(x2,y-6,x2,y+6,MUT);
+    const l=LN(x1,y,x2,y,MUT);l.setAttribute('marker-start','url(#arr)');l.setAttribute('marker-end','url(#arr)');
+    TXT((x1+x2)/2,y-7,label,'middle','rgba(232,236,233,.85)');};
+  const dimV=(y1,y2,x,label)=>{LN(x-6,y1,x+6,y1,MUT);LN(x-6,y2,x+6,y2,MUT);
+    const l=LN(x,y1,x,y2,MUT);l.setAttribute('marker-start','url(#arr)');l.setAttribute('marker-end','url(#arr)');
+    const t=TXT(x+12,(y1+y2)/2+4,label,'start','rgba(232,236,233,.85)');t.setAttribute('transform',`rotate(-90 ${x+12} ${(y1+y2)/2})`);};
+  svg.appendChild(G({t:'rect',x:12,y:12,width:976,height:536,fill:'none',stroke:'rgba(232,236,233,.25)'}));
+  LN(60,430,940,430); for(let x=60;x<940;x+=26)LN(x,430,x-9,439,MUT);
+  const woodS='rgba(232,236,233,.85)';
+  LN(115,430,125,270); LN(352,430,368,134);
+  LN(104,220,368,213,woodS); LN(140,220,140,252); LN(118,392,352,386,MUT);
+  svg.appendChild(G({t:'rect',x:104,y:250,width:226,height:20,rx:8,fill:'none',stroke:woodS}));
+  const bc=LN(300,252,356,146,woodS);bc.setAttribute('stroke-width','20');bc.setAttribute('stroke-linecap','round');bc.setAttribute('opacity','.9');
+  const bci=LN(300,252,356,146,'rgba(5,5,5,.9)');bci.setAttribute('stroke-width','16');bci.setAttribute('stroke-linecap','round');
+  const hid=LN(120,300,360,298,MUT);hid.setAttribute('stroke-dasharray','5 5');
+  dimH(90,402,470,'820'); dimV(134,430,446,'780'); dimV(270,430,70,'420');
+  LN(368,134,446,134,MUT); LN(90,430,90,476,MUT); LN(402,430,402,476,MUT);
+  TXT(246,500,'VUE DE CÔTÉ — ÉCH 1:10','middle',MUT,'10');
+  const fx=560;
+  LN(fx+14,430,fx+22,270); LN(fx+310,430,fx+302,270);
+  LN(fx+2,134,fx+2,220,woodS); LN(fx+322,134,fx+322,220,woodS);
+  LN(fx,218,fx+130,218,woodS); LN(fx+192,218,fx+324,218,woodS);
+  svg.appendChild(G({t:'rect',x:fx+36,y:146,width:252,height:104,rx:10,fill:'none',stroke:woodS}));
+  svg.appendChild(G({t:'rect',x:fx+18,y:250,width:290,height:20,rx:8,fill:'none',stroke:woodS}));
+  const hid2=LN(fx+2,220,fx+2,430,MUT);hid2.setAttribute('stroke-dasharray','5 5');
+  const hid3=LN(fx+322,220,fx+322,430,MUT);hid3.setAttribute('stroke-dasharray','5 5');
+  dimH(fx,fx+324,470,'850');
+  TXT(fx+162,500,'VUE DE FACE','middle',MUT,'10');
+  svg.appendChild(G({t:'rect',x:640,y:492,width:352,height:56,fill:'none',stroke:'rgba(232,236,233,.4)'}));
+  LN(640,510,992,510,MUT);
+  TXT(652,505,'TUNISIAN ASSET — FAUTEUIL LOUNGE N°01','start',ACC,'9.5');
+  TXT(652,525,'ÉCH 1:10 · UNITÉS: MM · MATIÈRE: NOYER + MOUSSE HR','start',MUT,'8.5');
+  TXT(652,541,'DESSINÉ: TA-STUDIO · 2026 · PLAN: TA-C-0001','start',MUT,'8.5');
+  $('#cad').appendChild(svg);
+})();
 
-        function initAsync3DEngine() {
-            updateLoadingProgress(30);
+/* ============================================================ 8. i18n */
+const translations={
+  fr:{
+    brand_sub:"STUDIO 3D — TUNIS",
+    nav_value:"Valeur",nav_showcase:"Réalisations",nav_3d:"Studio 3D",nav_importance:"Vision",nav_cta:"Contact",
+    nav_cta_btn:"Démarrer un projet <i>↗</i>",
+    hero_badge:"Studio 3D Modélisation // 2026",
+    hero_subtitle:"Nous transformons vos produits physiques en <b>assets 3D photoréalistes</b>, visuels interactifs et livrables techniques pour les marques de design exigeantes.",
+    hero_btn_primary:"Explorer le Studio 3D <i>↗</i>",
+    hero_btn_secondary:"Voir Portfolio",
+    spec_country:"CONÇU EN TUNISIE",
+    hero_render:"RENDU : WEBGL · TEMPS RÉEL",hero_pts:"POINTS",
+    scroll_cue:"DÉFILER",
+    ph_status:"ANALYSE DE LA PROFONDEUR…",
+    ph_loading:"MODÈLE IA… {ko} KO",
+    ph_ready:"PRÊT — CLIQUEZ POUR MÉTAMORPHOSER LA VUE",
+    ph_fail:"IA LOCALE INDISPONIBLE — RENDU PROCÉDURAL",
+    ph_hint:"CLIC — MÉTAMORPHOSER LA VUE",
+    value_label:"VALEUR AJOUTÉE",
+    value_title:"Pourquoi numériser votre catalogue ?",
+    value_subtitle:"Une approche moderne de la présentation produit pour multiplier l'engagement et simplifier la production visuelle.",
+    value_1_title:"Photoréalisme Absolu",
+    value_1_desc:"Texturage PBR de haute précision capturant les moindres détails des tissus, bois vernis et métaux brossés.",
+    value_1_foot:"FIBRE → PIXEL",
+    value_2_title:"Intégration WebGL / AR",
+    value_2_desc:"Modèles optimisés pour une fluidité temps réel sur navigateur web et modules d'essayage en Réalité Augmentée.",
+    value_3_title:"Conformité CAD & DWG",
+    value_3_desc:"Correspondance millimétrique parfaite avec vos plans de fabrication et fiches techniques architecturales.",
+    stat_1:"Actifs 3D livrés",stat_2:"Précision de scan",stat_3:"Délai moyen",stat_4:"Temps réel garanti",
+    scan_live:"SCAN",
+    showcase_label:"RÉALISATIONS",
+    showcase_title:"Galerie de Produits Numérisés",
+    showcase_subtitle:"Chaque pièce ci-dessous est un nuage de points calculé en direct dans votre navigateur.",
+    showcase_1_title:"Fauteuil Lounge Velvet",
+    showcase_1_desc:"Velours émeraude, structure noyer. Scan complet avec coutures et capitonnage.",
+    showcase_2_title:"Table En Chêne Massif",
+    showcase_2_desc:"Chêne tunisien, assemblages traditionnels. Prête pour l'essayage en réalité augmentée.",
+    showcase_3_title:"Luminaire Minimaliste",
+    showcase_3_desc:"Aluminium brossé, source chaude 2700 K. Rendu d'éclairage studio calibré.",
+    lab_label:"STUDIO DÉMO INTERACTIF",
+    lab_title:"Triple Représentation Produit",
+    lab_subtitle:"Découvrez l'interaction synchronisée entre le produit réel, son modèle 3D temps réel et son schéma technique 2D.",
+    lab_t1:"PRODUIT RÉEL",lab_t2:"MODÈLE 3D INTERACTIF",lab_t3:"DESSIN TECHNIQUE 2D",
+    lab_loading:"CHARGEMENT 3D ASYNCHRONE…",
+    lab_hint_drag:"ROTATION : GLISSER",lab_hint_zoom:"ZOOM : MOLETTE",
+    lab_n1:"Les rendus officiels du fauteuil, vue par vue. Un clic enchaîne la vue suivante en fondu.",
+    lab_n2:"Modèle 3D chargé de manière asynchrone sans bloquer l'affichage initial du site. Tournez-le, zoomez, inspectez chaque vertex.",
+    lab_n3:"Représentation vectorielle conforme aux standards d'architecture d'intérieur, cotes millimétriques.",
+    hud_mode:"MODE",hud_mode_p1:"PRODUIT RÉEL",hud_mode_p2:"NUAGE DE POINTS",hud_live:"● LIVE",
+    importance_title:"La <em>précision visuelle</em> vend vos collections avant même le <u>premier rendez-vous</u>.",
+    importance_p1:"Dans un marché du meuble de plus en plus numérisé, <b>la précision visuelle</b> est le facteur clé de décision d'achat pour les architectes et clients finaux.",
+    importance_p2:"Nous combinons <b>l'artisanat du design tunisien</b> avec les technologies de rendu 3D temps réel les plus avancées.",
+    importance_btn:"Travailler ensemble <i>↗</i>",
+    contact_title:"Travaillons ensemble.",
+    c_studio:"STUDIO",c_studio_val:"sur rendez-vous",c_coords:"COORDONNÉES",c_time:"HEURE LOCALE",c_response:"DÉLAI DE RÉPONSE",
+    f_name:"NOM / SOCIÉTÉ",f_project:"VOTRE PROJET",f_send:"Envoyer la demande <i>↗</i>",
+    f_tagline:"L'excellence 3D pour vos collections de mobilier.",
+    f_plan:"PLAN",f_studio:"STUDIO",f_legal:"LÉGAL",f_rights:"Tous droits réservés",
+    f_made:"DESIGNED WITH HIGH-PERFORMANCE ASYNC 3D",f_top:"RETOUR EN HAUT ↑",
+    ld_1:"CALIBRATION DE LA CAMÉRA…",ld_2:"ÉCHANTILLONNAGE DES SURFACES…",ld_3:"COMPILATION DES SHADERS…",
+    ld_4:"NUAGE DE POINTS : "+fmtInt(IMG_N)+" VERTICES",ld_ready:"PRÊT — ASSEMBLAGE DU NUAGE",
+    mq:["MODÉLISATION 3D","TEXTURES PBR","WEBGL TEMPS RÉEL","RÉALITÉ AUGMENTÉE","CONFORMITÉ CAD & DWG","SCAN MILLIMÉTRIQUE","PHOTORÉALISME"]
+  },
+  en:{
+    brand_sub:"3D STUDIO — TUNIS",
+    nav_value:"Value",nav_showcase:"Portfolio",nav_3d:"3D Studio",nav_importance:"Vision",nav_cta:"Contact",
+    nav_cta_btn:"Start a project <i>↗</i>",
+    hero_badge:"3D Modeling Studio // 2026",
+    hero_subtitle:"We convert physical furniture products into <b>photorealistic 3D assets</b>, interactive visuals and technical deliverables for premium design brands.",
+    hero_btn_primary:"Explore 3D Studio <i>↗</i>",
+    hero_btn_secondary:"View Portfolio",
+    spec_country:"CRAFTED IN TUNISIA",
+    hero_render:"RENDER: WEBGL · REAL-TIME",hero_pts:"POINTS",
+    scroll_cue:"SCROLL",
+    ph_status:"ANALYZING DEPTH…",
+    ph_loading:"AI MODEL… {ko} KB",
+    ph_ready:"READY — CLICK TO MORPH THE VIEW",
+    ph_fail:"LOCAL AI UNAVAILABLE — PROCEDURAL RENDER",
+    ph_hint:"CLICK — MORPH THE VIEW",
+    value_label:"ADDED VALUE",
+    value_title:"Why digitize your catalog?",
+    value_subtitle:"A modern approach to product presentation that elevates engagement and streamlines visual production.",
+    value_1_title:"Absolute Photorealism",
+    value_1_desc:"High-precision PBR texturing capturing fine details of fabrics, polished wood and brushed metals.",
+    value_1_foot:"FIBER → PIXEL",
+    value_2_title:"WebGL / AR Integration",
+    value_2_desc:"Optimized models for fluid web browser rendering and Augmented Reality try-out modules.",
+    value_3_title:"CAD & DWG Compliance",
+    value_3_desc:"Millimeter accuracy matching your manufacturing blueprints and architectural technical sheets.",
+    stat_1:"3D assets delivered",stat_2:"Scan accuracy",stat_3:"Average turnaround",stat_4:"Guaranteed real-time",
+    scan_live:"SCAN",
+    showcase_label:"SELECTED WORK",
+    showcase_title:"Digitized Product Gallery",
+    showcase_subtitle:"Each piece below is a point cloud computed live in your browser.",
+    showcase_1_title:"Velvet Lounge Chair",
+    showcase_1_desc:"Emerald velvet, walnut frame. Full scan with seams and tufting.",
+    showcase_2_title:"Solid Oak Table",
+    showcase_2_desc:"Tunisian oak, traditional joinery. Ready for AR try-on.",
+    showcase_3_title:"Minimalist Luminaire",
+    showcase_3_desc:"Brushed aluminum, warm 2700 K source. Calibrated studio lighting render.",
+    lab_label:"INTERACTIVE STUDIO DEMO",
+    lab_title:"Triple Product Representation",
+    lab_subtitle:"Discover the synchronized interaction between the real product, its real-time 3D model and its 2D technical drawing.",
+    lab_t1:"REAL PRODUCT",lab_t2:"INTERACTIVE 3D MODEL",lab_t3:"2D TECHNICAL DRAWING",
+    lab_loading:"ASYNC 3D LOADING…",
+    lab_hint_drag:"ROTATE: DRAG",lab_hint_zoom:"ZOOM: SCROLL",
+    lab_n1:"The official chair renders, view by view. Each click crossfades to the next one.",
+    lab_n2:"3D model loaded asynchronously without blocking the initial display. Rotate it, zoom, inspect every vertex.",
+    lab_n3:"Vector representation compliant with interior architecture standards, millimeter dimensions.",
+    hud_mode:"MODE",hud_mode_p1:"REAL PRODUCT",hud_mode_p2:"POINT CLOUD",hud_live:"● LIVE",
+    importance_title:"<em>Visual precision</em> sells your collections before the <u>first meeting</u> even happens.",
+    importance_p1:"In a digital-first furniture market, <b>visual accuracy</b> is the deciding purchase factor for architects and end clients.",
+    importance_p2:"We combine <b>Tunisian craftsmanship</b> with the most advanced real-time 3D rendering technologies.",
+    importance_btn:"Work together <i>↗</i>",
+    contact_title:"Let's work together.",
+    c_studio:"STUDIO",c_studio_val:"by appointment",c_coords:"COORDS",c_time:"LOCAL TIME",c_response:"RESPONSE TIME",
+    f_name:"NAME / COMPANY",f_project:"YOUR PROJECT",f_send:"Send the request <i>↗</i>",
+    f_tagline:"3D excellence for your furniture collections.",
+    f_plan:"MAP",f_studio:"STUDIO",f_legal:"LEGAL",f_rights:"All rights reserved",
+    f_made:"DESIGNED WITH HIGH-PERFORMANCE ASYNC 3D",f_top:"BACK TO TOP ↑",
+    ld_1:"CALIBRATING CAMERA…",ld_2:"SAMPLING SURFACES…",ld_3:"COMPILING SHADERS…",
+    ld_4:"POINT CLOUD: "+fmtInt(IMG_N)+" VERTICES",ld_ready:"READY — ASSEMBLING CLOUD",
+    mq:["3D MODELING","PBR TEXTURES","REAL-TIME WEBGL","AUGMENTED REALITY","CAD & DWG COMPLIANCE","MILLIMETER SCANNING","PHOTOREALISM"]
+  }
+};
+const T=()=>translations[LANG];
+function splitWords(el){
+  const nodes=[...el.childNodes]; el.textContent='';
+  let i=0;
+  const wrap=(content,isEl)=>{
+    const w=document.createElement('span');w.className='w';
+    const wi=document.createElement('span');wi.className='wi';
+    wi.style.setProperty('--wd',(i++*.05)+'s');
+    if(isEl)wi.appendChild(content);else wi.textContent=content;
+    w.appendChild(wi);return w;
+  };
+  for(const n of nodes){
+    if(n.nodeType===3){
+      n.textContent.split(/(\s+)/).forEach(tok=>{
+        if(!tok)return;
+        if(/^\s+$/.test(tok))el.appendChild(document.createTextNode(' '));
+        else el.appendChild(wrap(tok,false));
+      });
+    }else el.appendChild(wrap(n,true));
+  }
+}
+function applyLang(lang){
+  LANG=lang;
+  $$('[data-i18n]').forEach(el=>{
+    const v=T()[el.getAttribute('data-i18n')];
+    if(v==null)return;
+    if(el.hasAttribute('data-split')){
+      const hadIn=el.classList.contains('in');
+      el.innerHTML=v; splitWords(el);
+      if(hadIn)el.classList.add('in');
+    }else if(/<\w+/.test(v)&&el.hasAttribute('data-i18n-html'))el.innerHTML=v;
+    else el.textContent=v;
+  });
+  buildMarquee();
+  {const LV=VIEWS.slice(1);$$('.vchip').forEach((b,i)=>{if(LV[i])b.textContent=(LANG==='fr'?LV[i].fr:LV[i].en);});}
+  document.documentElement.lang=lang;
+  $('#fr').classList.toggle('on',lang==='fr');
+  $('#en').classList.toggle('on',lang==='en');
+}
+function buildMarquee(){
+  $('#mq').innerHTML=[0,1].map(()=>`<span>${T().mq.join('</span><span>')}</span>`).join('');
+}
+$('#fr').addEventListener('click',()=>applyLang('fr'));
+$('#en').addEventListener('click',()=>applyLang('en'));
 
-            loadScript('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js')
-                .then(() => {
-                    updateLoadingProgress(70);
-                    build3DScene();
-                })
-                .catch(err => {
-                    console.warn("Failed to load Three.js via CDN. Displaying 3D Fallback.", err);
-                    show3DFallback();
-                });
-        }
+/* ============================================================ 9. reveals + counters */
+$$('[data-split]').forEach(splitWords);
+buildMarquee();
+const pend=[];
+function pump(){
+  for(let i=pend.length-1;i>=0;i--){
+    const p=pend[i],r=p.el.getBoundingClientRect();
+    if(r.top<innerHeight-p.off&&r.bottom>-40){pend.splice(i,1);p.cb();}
+  }
+}
+addEventListener('scroll',pump,{passive:true});
+setInterval(pump,350);
+$$('.rv').forEach(el=>pend.push({el,off:60,cb:()=>{
+  el.classList.add('in');
+  $$('[data-count]',el).forEach(runCounter);
+  if(el.matches('[data-count]'))runCounter(el);
+}}));
+$$('.sec-head h2[data-split], .importance .big, .hero h1').forEach(el=>pend.push({el,off:90,cb:()=>el.classList.add('in')}));
+function runCounter(el){
+  if(el._done)return;el._done=true;
+  const target=parseFloat(el.dataset.count),dec=parseInt(el.dataset.dec||'0');
+  const t0=performance.now(),dur=REDUCED?1:1600;
+  const tick=t=>{const p=clamp((t-t0)/dur,0,1),e=1-Math.pow(1-p,3);
+    el.textContent=(target*e).toFixed(dec);
+    if(p<1)requestAnimationFrame(tick);};
+  requestAnimationFrame(tick);
+}
 
-        function loadScript(src) {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = src;
-                script.onload = resolve;
-                script.onerror = reject;
-                document.head.appendChild(script);
-            });
-        }
+/* ============================================================ 10. header / scroll */
+const hdr=$('#hdr'),pbar=$('#pbar');
+addEventListener('scroll',()=>{
+  const y=scrollY;
+  hdr.classList.toggle('scrolled',y>40);
+  const dh=document.documentElement.scrollHeight-innerHeight;
+  pbar.style.width=(dh>0?(y/dh*100):0)+'%';
+  if(y<innerHeight){
+    $('.hero .inner').style.transform=`translateY(${y*.28}px)`;
+    $('.hero .inner').style.opacity=Math.max(0,1-y/(innerHeight*.7));
+    $('.hero .stage').style.opacity=Math.max(0,1-y/(innerHeight*1.05));
+  }
+},{passive:true});
+$('#burger').addEventListener('click',()=>document.body.classList.toggle('menu-open'));
+$$('#mmenu a').forEach(a=>a.addEventListener('click',()=>document.body.classList.remove('menu-open')));
 
-        function updateLoadingProgress(percent) {
-            const fill = document.getElementById('progress-fill');
-            if (fill) fill.style.width = percent + '%';
-        }
+/* ============================================================ 11. cursor + magnetic */
+if(FINE){
+  const dot=$('.cur-dot'),ring=$('.cur-ring');
+  let rx=innerWidth/2,ry=innerHeight/2,tx=rx,ty=ry;
+  addEventListener('pointermove',e=>{if(!isFinite(e.clientX)||!isFinite(e.clientY))return;
+    tx=e.clientX;ty=e.clientY;
+    dot.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;
+    const hot=e.target.closest('a,button,[data-cursor],input,textarea,.work');
+    document.body.classList.toggle('c-hover',!!hot&&!e.target.closest('#p2'));
+  },{passive:true});
+  (function cur(){rx=lerp(rx,tx,.16);ry=lerp(ry,ty,.16);
+    ring.style.transform=`translate(${rx.toFixed(1)}px,${ry.toFixed(1)}px) translate(-50%,-50%)`;
+    requestAnimationFrame(cur);})();
+}
+$$('[data-magnet]').forEach(el=>{
+  el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
+    el.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.28}px)`;});
+  el.addEventListener('mouseleave',()=>{el.style.transition='transform .5s cubic-bezier(.16,1,.3,1)';
+    el.style.transform='';setTimeout(()=>el.style.transition='',500);});
+});
 
-        function build3DScene() {
-            const container = document.getElementById('3d-viewport-wrapper');
-            const canvas = document.getElementById('webgl-canvas');
-            const loaderOverlay = document.getElementById('3d-loader');
+/* ============================================================ 12. clock + form */
+const fmtTunis=new Intl.DateTimeFormat('fr-FR',{timeZone:'Africa/Tunis',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+function tickClock(){const s=fmtTunis.format(new Date());const c1=$('#clock'),c2=$('#clock2');
+  if(c1)c1.textContent=s;if(c2)c2.textContent=s.slice(0,5);}
+tickClock();setInterval(tickClock,1000);
+$('#cform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target);
+  const sub=encodeURIComponent('Demande de projet — '+f.get('nom'));
+  const body=encodeURIComponent(f.get('msg')+'\n\n— '+f.get('nom')+' <'+f.get('email')+'>');
+  location.href=`mailto:contact@tunisianasset.com?subject=${sub}&body=${body}`;
+});
 
-            const width = container.clientWidth;
-            const height = container.clientHeight;
-
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x101010);
-
-            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-            camera.position.set(3, 2, 4);
-
-            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-            scene.add(ambientLight);
-
-            const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            dirLight.position.set(5, 10, 7);
-            scene.add(dirLight);
-
-            const pointLight = new THREE.PointLight(0xC8381A, 2, 10);
-            pointLight.position.set(-3, -2, -2);
-            scene.add(pointLight);
-
-            const group = new THREE.Group();
-
-            const seatGeo = new THREE.BoxGeometry(1.6, 0.3, 1.6);
-            const fabricMat = new THREE.MeshStandardMaterial({ 
-                color: 0x6B1D1D, 
-                roughness: 0.6,
-                metalness: 0.1 
-            });
-            const seat = new THREE.Mesh(seatGeo, fabricMat);
-            group.add(seat);
-
-            const backGeo = new THREE.BoxGeometry(1.6, 1.2, 0.2);
-            const back = new THREE.Mesh(backGeo, fabricMat);
-            back.position.set(0, 0.75, -0.7);
-            group.add(back);
-
-            const legGeo = new THREE.CylinderGeometry(0.04, 0.02, 1);
-            const legMat = new THREE.MeshStandardMaterial({ color: 0xD4A574, metalness: 0.8, roughness: 0.2 });
-
-            const legPositions = [
-                [-0.7, -0.55, 0.7],
-                [0.7, -0.55, 0.7],
-                [-0.7, -0.55, -0.7],
-                [0.7, -0.55, -0.7]
-            ];
-
-            legPositions.forEach(pos => {
-                const leg = new THREE.Mesh(legGeo, legMat);
-                leg.position.set(...pos);
-                group.add(leg);
-            });
-
-            productMesh = group;
-            scene.add(productMesh);
-
-            updateLoadingProgress(100);
-
-            setTimeout(() => {
-                if (loaderOverlay) loaderOverlay.style.opacity = '0';
-                setTimeout(() => { if (loaderOverlay) loaderOverlay.style.display = 'none'; }, 500);
-            }, 300);
-
-            let isDragging = false;
-            let previousMousePosition = { x: 0, y: 0 };
-
-            canvas.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                previousMousePosition = { x: e.clientX, y: e.clientY };
-            });
-
-            canvas.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                const deltaX = e.clientX - previousMousePosition.x;
-                const deltaY = e.clientY - previousMousePosition.y;
-
-                productMesh.rotation.y += deltaX * 0.01;
-                productMesh.rotation.x += deltaY * 0.01;
-
-                previousMousePosition = { x: e.clientX, y: e.clientY };
-            });
-
-            window.addEventListener('mouseup', () => { isDragging = false; });
-
-            window.addEventListener('resize', () => {
-                if (!renderer) return;
-                const newW = container.clientWidth;
-                const newH = container.clientHeight;
-                camera.aspect = newW / newH;
-                camera.updateProjectionMatrix();
-                renderer.setSize(newW, newH);
-            });
-
-            animate();
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-            if (productMesh) {
-                productMesh.rotation.y += 0.003;
-            }
-            renderer.render(scene, camera);
-        }
-
-        function show3DFallback() {
-            const loaderOverlay = document.getElementById('3d-loader');
-            if (loaderOverlay) {
-                loaderOverlay.innerHTML = `
-                    <div class="mono" style="color:var(--accent); text-align:center; padding: 1rem;">
-                        [ RENDERER 2D FALLBACK ]<br><br>
-                        <small>Aperçu 3D non disponible sur cet appareil.<br>Consultez la fiche CAD 2D.</small>
-                    </div>
-                `;
-            }
-        }
-    </script>
+/* ============================================================ 13. preloader */
+const loader=$('#loader'),lnum=$('#lnum'),lbar=$('#lbar'),lstat=$('#lstatus');
+const MSGS=['ld_1','ld_2','ld_3','ld_4'];
+let mi=0; const msgTimer=setInterval(()=>{mi=Math.min(mi+1,MSGS.length-1);lstat.textContent=T()[MSGS[mi]];},420);
+lstat.textContent=T()['ld_1'];
+const t0=performance.now(),DUR=REDUCED?250:1700;
+(function ltick(t){
+  const p=clamp((t-t0)/DUR,0,1),e=1-Math.pow(1-p,2.4);
+  lnum.textContent=Math.round(e*100).toString().padStart(2,'0');
+  lbar.style.transform=`scaleX(${e})`;
+  if(p<1){requestAnimationFrame(ltick);return;}
+  clearInterval(msgTimer);
+  lstat.textContent=T()['ld_ready'];
+  loader.classList.add('done');
+  document.body.classList.remove('locked');
+  setTimeout(()=>{cloud.tProgress=1;loader.classList.add('gone');},260);
+  $$('.hero .kicker,.hero .rv').forEach(el=>el.classList.add('in'));
+  $$('.hero h1').forEach(el=>el.classList.add('in'));
+})(t0);
+})();
+</script>
 </body>
 </html>
